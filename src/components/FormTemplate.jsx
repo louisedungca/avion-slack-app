@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Form } from 'react-router-dom';
 
-function FormTemplate({ formInput, btnProps, onSubmit }) {
+function FormTemplate({ formInput, btnProps, onSubmit, resetForm=true }) {
   const [formData, setFormData] = useState({});
+  const formRef = useRef();
+
+  useEffect(() => {
+    if (resetForm) {
+      formReset();
+    }
+  }, [resetForm]);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -12,6 +19,15 @@ function FormTemplate({ formInput, btnProps, onSubmit }) {
   function handleSubmit(e) {
     e.preventDefault();
     onSubmit(formData);
+    
+    if (resetForm) {
+      formReset();
+    }
+  };
+
+  const formReset = () => {
+    setFormData({});
+    formRef.current.reset();
   };
 
   return (
@@ -19,6 +35,7 @@ function FormTemplate({ formInput, btnProps, onSubmit }) {
       method='post'
       className='form-content'
       autoComplete='on'
+      ref={formRef}
       onSubmit={handleSubmit}      
     >
       {formInput.map((field) => (

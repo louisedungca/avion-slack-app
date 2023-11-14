@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useRef, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { baseUrl } from '../../utils/';
 import c from '../../components/';
 
@@ -78,28 +78,29 @@ function LoginPage() {
 
     } catch (error) {
       console.error(error);
-    }
+    } 
+
   }
 
   return (
     <section className='login-page'>
       <div className='page-leftbox'>
-        <h1>Welcome back!</h1>
+        <h1>Glad you're back!</h1>
 
         <div className='form-wrapper'>
           <c.FormTemplate 
             formInput={formInput} 
             btnProps={btnProps}
+            resetForm = {false}
             onSubmit={handleLogin}
           />
         </div>
 
         <small className='error-text'>{loginError}</small>
-      
-        <div className='afterform-text'>          
+        
+        <Link to={'/signup'} className='afterform-text'>
           <p>No account yet? Sign up here.</p>
-          <p>Forgot password?</p>
-        </div>
+        </Link>        
       </div>    
       <div className="page-rightbox"></div>  
     </section>

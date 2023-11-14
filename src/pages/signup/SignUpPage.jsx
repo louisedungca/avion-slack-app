@@ -1,5 +1,6 @@
 import React from 'react';
 import c from '../../components/';
+import { Link } from 'react-router-dom';
 
 function SignUpPage() {
   const formInput = [
@@ -34,10 +35,11 @@ function SignUpPage() {
           />
         </div>
 
-        <div className='afterform-text'>          
-          <p>Already have an account? Sign in.</p>
-          <p>Forgot password?</p>
-        </div>
+        <small className='error-text'>DEMO ERROR</small>
+
+        <Link to={'/login'} className='afterform-text'>
+          <p>Already have an account? Sign in here.</p>
+        </Link> 
       </div>  
     </section>
   )

@@ -102,6 +102,7 @@
   font-weight: 800;
   letter-spacing: 0.12rem;
   text-transform: uppercase;
+  font-size: clamp(0.7rem, 0.6077rem + 0.3077vw, 1rem);
   background: #F3AA20;
   border-radius: 1rem;
   border: none;
@@ -147,6 +148,13 @@
   flex-direction: column;
   gap: 0.3rem;
   padding: 0 0.8rem;
+  text-decoration: none;
+  color: #58094F;
+  font-size: clamp(0.7rem, 0.6077rem + 0.3077vw, 1rem);
+}
+.login-page .page-leftbox .afterform-text:hover {
+  text-decoration: underline;
+  opacity: 0.75;
 }
 .login-page .page-rightbox {
   width: 100%;
@@ -195,11 +203,25 @@
   color: #58094F;
   font-size: clamp(2.5rem, 2.3711rem + 2.0619vw, 5rem);
 }
+.signup-page .page-rightbox .error-text {
+  width: 65%;
+  text-align: center;
+  color: red;
+  font-weight: 600;
+  padding: 0 0.5rem;
+}
 .signup-page .page-rightbox .afterform-text {
-  margin-top: 0.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
+  padding: 0 0.8rem;
+  text-decoration: none;
+  color: #58094F;
+  font-size: clamp(0.7rem, 0.6077rem + 0.3077vw, 1rem);
+}
+.signup-page .page-rightbox .afterform-text:hover {
+  text-decoration: underline;
+  opacity: 0.75;
 }
 .signup-page .page-leftbox {
   width: 100%;
