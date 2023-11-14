@@ -1,4 +1,9 @@
 @use './sass/roots';
 @use './sass/reset';
+
+// General Pages
+@use './sass/general/errorpage';
+
+// Login and Signup
 @use './sass/loginandsignup/loginpage';
 @use './sass/loginandsignup/signuppage';

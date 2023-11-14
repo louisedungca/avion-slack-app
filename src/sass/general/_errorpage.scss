@@ -1,0 +1,72 @@
+@use '../roots' as *;
+
+.error-page{
+  border: 2px dotted pink;
+  background: $white;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+
+  &::before {
+    content: '';
+    width: 480px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    position: fixed;
+    background: $accent;
+    top: -25%;
+    left: -5%;
+    opacity: 0.75;
+  }
+
+  &::after {
+    content: '';
+    width: 750px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    position: fixed;
+    background: $primaryColor;
+    bottom: -30%;
+    right: -20%;
+    opacity: 0.75;
+    background-size: cover;
+  }
+
+  h1, h2 {
+    color: $primaryColor;
+  }
+
+  .btns-wrapper {
+    display: flex;
+    gap: 0.5rem;
+
+    button {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;      
+      color: $primaryColor;
+      font-weight: 800;
+      letter-spacing: 0.12rem;
+      text-transform: uppercase;
+      background: $accent;
+      border-radius: 1rem;
+      border: none;
+      outline: none;
+      height: 2.2rem;
+      width: 80px;
+      padding: 1rem;
+      transition: 0.3s all ease-in-out;
+
+      &:hover {
+        background: $secondaryColor;
+        color: $white;
+        opacity: 0.8;
+      }
+    }
+  }
+}
