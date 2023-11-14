@@ -1,0 +1,15 @@
+@use './roots' as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: $fontMain;
+}
+
+.App {
+  border: 2px dotted palevioletred;
+  width: 100%;
+  max-width: 100vw;
+  height: 100vh;
+}

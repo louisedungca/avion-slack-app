@@ -1,0 +1,165 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900;1000&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
+}
+
+.App {
+  border: 2px dotted palevioletred;
+  width: 100%;
+  max-width: 100vw;
+  height: 100vh;
+}
+
+.form-wrapper {
+  width: 100%;
+}
+.form-wrapper .form-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 65%;
+  padding: 0.2rem 0.5rem;
+}
+.form-wrapper .form-content input {
+  height: 2rem;
+  border-radius: 0.8rem;
+  padding: 1rem;
+  outline: none;
+  border: 1.5px dotted #841E62;
+}
+.form-wrapper .form-content .btn-main {
+  cursor: pointer;
+  color: #58094F;
+  font-weight: 800;
+  letter-spacing: 0.12rem;
+  text-transform: uppercase;
+  background: #F3AA20;
+  border-radius: 1rem;
+  border: none;
+  outline: none;
+  margin-top: 0.5rem;
+  height: 2.2rem;
+  transition: 0.3s all ease-in-out;
+}
+.form-wrapper .form-content .btn-main:hover {
+  background: #841E62;
+  color: #fffff0;
+  opacity: 0.8;
+}
+
+.login-page {
+  width: 100%;
+  height: 100vh;
+  color: #58094F;
+  background: #fffff0;
+  display: flex;
+}
+.login-page .page-leftbox {
+  width: 100%;
+  padding-left: 10rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+.login-page .page-leftbox h1 {
+  color: #58094F;
+  font-size: clamp(2.5rem, 2.3711rem + 2.0619vw, 5rem);
+}
+.login-page .page-leftbox .error-text {
+  width: 65%;
+  text-align: center;
+  color: red;
+  font-weight: 600;
+  padding: 0 0.5rem;
+}
+.login-page .page-leftbox .afterform-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0 0.8rem;
+}
+.login-page .page-rightbox {
+  width: 100%;
+  height: 100%;
+}
+.login-page .page-rightbox::before {
+  content: "";
+  width: 480px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  position: fixed;
+  background: #F3AA20;
+  bottom: -25%;
+  right: 15%;
+  opacity: 0.75;
+}
+.login-page .page-rightbox::after {
+  content: "";
+  width: 750px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  position: fixed;
+  background: #58094F;
+  bottom: -30%;
+  right: -20%;
+  opacity: 0.75;
+  background-size: cover;
+}
+
+.signup-page {
+  width: 100%;
+  height: 100vh;
+  color: #58094F;
+  background: #fffff0;
+  display: flex;
+}
+.signup-page .page-rightbox {
+  width: 100%;
+  padding-left: 8rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+.signup-page .page-rightbox h1 {
+  color: #58094F;
+  font-size: clamp(2.5rem, 2.3711rem + 2.0619vw, 5rem);
+}
+.signup-page .page-rightbox .afterform-text {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.signup-page .page-leftbox {
+  width: 100%;
+  height: 100%;
+}
+.signup-page .page-leftbox::before {
+  content: "";
+  width: 480px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  position: fixed;
+  background: #F3AA20;
+  top: -25%;
+  left: 15%;
+  opacity: 0.75;
+}
+.signup-page .page-leftbox::after {
+  content: "";
+  width: 750px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  position: fixed;
+  background: #58094F;
+  top: -30%;
+  left: -20%;
+  opacity: 0.75;
+  background-size: cover;
+}
