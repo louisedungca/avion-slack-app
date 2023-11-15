@@ -11,7 +11,7 @@ function LoginPage() {
   const navigate = useNavigate();
 
   const onSubmit = async (formData) => {
-    const { userEmail, userPassword } = formData;
+    const { userEmail, userPassword } = formData; 
 
     try {
       const url = `${baseUrl}/api/v1/auth/sign_in`;

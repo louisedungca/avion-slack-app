@@ -1,25 +1,20 @@
-import React from 'react';
-import c from '../../components/';
+import React, { useEffect } from 'react';
+import { inputFieldTemplate, signupInput } from '../../components/';
 import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 function SignUpPage() {
-  const formInput = [
-    { type: 'text', name: 'firstName', placeholder: 'First Name' },
-    { type: 'text', name: 'lastName', placeholder: 'Last Name' },
-    { type: 'email', name: 'userEmail', placeholder: 'Email' },
-    { type: 'password', name: 'userPassword', placeholder: 'Password' },
-    { type: 'password', name: 'confirmPassword', placeholder: 'Confirm Password' },
-  ];
-
-  const btnProps = {
-    name: 'formAction',
-    value: 'createAccount',
-    text: 'Sign Up',
-  };
+  const { register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset} = useForm();
 
   const handleRegistration = (formData) => {
     console.log('Registered data:', formData);
   };
+
+  useEffect(() => {
+    if(isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful])
 
   return (
     <section className='signup-page'>
@@ -28,11 +23,17 @@ function SignUpPage() {
         <h1>Hello, hello!</h1>
 
         <div className='form-wrapper'>
-          <c.FormTemplate 
-            formInput={formInput} 
-            btnProps={btnProps}
-            onSubmit={handleRegistration}
-          />
+          <form onSubmit={handleSubmit(handleRegistration)} className='form-content'>
+              
+            {signupInput.map(input => inputFieldTemplate(input, register, errors))}
+
+            <button
+            type="submit"
+            className='btn-main'
+            >
+              Create Account
+            </button>
+          </form>
         </div>
 
         <small className='error-text'>DEMO ERROR</small>
