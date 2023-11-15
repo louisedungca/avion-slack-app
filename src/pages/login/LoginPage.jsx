@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { inputFieldTemplate, loginInput } from '../../components';
@@ -6,15 +6,23 @@ import { baseUrl } from '../../utils';
 
 
 function LoginPage() {
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  const [loginError, setLoginError] = useState('');
+  const { register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset } = useForm();
+  const [error, setError] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if(isSubmitSuccessful) {
+      reset({ 
+        userPassword: '', 
+      });
+    }
+  }, [isSubmitSuccessful])
 
   const onSubmit = async (formData) => {
     const { userEmail, userPassword } = formData; 
 
     try {
-      const url = `${baseUrl}/api/v1/auth/sign_in`;
+      const url = `${baseUrl}/api/v1/auth/sign_in`; 
 
       const response = await fetch(url, {
         method: 'POST',
@@ -35,7 +43,7 @@ function LoginPage() {
           throw new Error('Page not found.');
         }
         if (response.status === 401) {
-          setLoginError('Invalid username or password.');
+          setError('Invalid username or password.');
         }
 
         throw new Error(errorResponse.message);
@@ -68,7 +76,7 @@ function LoginPage() {
           </form>
         </div>
 
-        <small className='error-text'>{loginError}</small>
+        <small className='error-text'>{error}</small>
 
         <Link to={'/signup'} className='afterform-text'>
           <p>No account yet? Sign up here.</p>

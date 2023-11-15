@@ -218,6 +218,7 @@
   padding: 0 0.5rem;
 }
 .signup-page .page-rightbox .afterform-text {
+  width: max-content;
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
