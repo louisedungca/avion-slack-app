@@ -1,8 +1,3 @@
-import Navbar from "./Navbar";
-
 export * from './formInput';
-export default {
-
-  Navbar,
-}
+export { default as Navbar } from './Navbar';
 

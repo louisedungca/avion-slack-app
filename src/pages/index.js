@@ -1,24 +1,23 @@
-// General
-import ErrorPage from './general/ErrorPage';
-import WelcomePage from './general/WelcomePage';
+// general
+export { default as ErrorPage } from './general/ErrorPage';
+export { default as WelcomePage } from './general/WelcomePage';
 
-// Dashboard
-import Dashboard from './dashboard/Dashboard';
-import Profile from './dashboard/Profile';
+// dashboard
+export { default as Dashboard } from './dashboard/Dashboard';
+export { default as Profile } from './dashboard/Profile';
 
-//Login
-import LoginPage from './login/LoginPage';
-
-// Signup
-import SignUpPage from './signup/SignUpPage';
+// login and signup
+export { default as LoginPage } from './login/LoginPage';
+export { default as SignUpPage } from './signup/SignUpPage';
 
 
-// EXPORTS
-export default {
-  ErrorPage,
-  WelcomePage,
-  Dashboard,
-  Profile,
-  LoginPage,
-  SignUpPage, 
-};
+
+
+// export * from './general/ErrorPage';
+// export * from './general/WelcomePage';
+
+// export * from './dashboard/Dashboard';
+// export * from './dashboard/Profile';
+
+// export * from './login/LoginPage';
+// export * from './signup/SignUpPage';
