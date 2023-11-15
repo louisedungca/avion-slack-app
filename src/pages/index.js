@@ -8,7 +8,6 @@ import Profile from './dashboard/Profile';
 
 //Login
 import LoginPage from './login/LoginPage';
-import LoginForm from './login/LoginForm';
 
 // Signup
 import SignUpPage from './signup/SignUpPage';
@@ -21,6 +20,5 @@ export default {
   Dashboard,
   Profile,
   LoginPage,
-  LoginForm,
-  SignUpPage,  
+  SignUpPage, 
 };

@@ -1,42 +1,20 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { baseUrl } from '../../utils/';
-import c from '../../components/';
+import { useForm } from 'react-hook-form';
+import { inputFieldTemplate, loginInput } from '../../components';
+import { baseUrl } from '../../utils';
 
 
 function LoginPage() {
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const [loginError, setLoginError] = useState('');
   const navigate = useNavigate();
 
-  const formInput = [
-    { type: 'email', name: 'userEmail', placeholder: 'Email' },
-    { type: 'password', name: 'userPassword', placeholder: 'Password' },
-  ];
-
-  const btnProps = {
-    name: 'formAction',
-    value: 'loginUser',
-    text: 'Login',
-  };
-
-  async function handleLogin(formData) {
+  const onSubmit = async (formData) => {
     const { userEmail, userPassword } = formData;
-    console.log('formData:', formData);
 
     try {
       const url = `${baseUrl}/api/v1/auth/sign_in`;
-
-      console.log('Fetch Request:', {
-        method: 'POST',
-        url: url,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: userEmail,
-          password: userPassword,
-        }),
-      });
 
       const response = await fetch(url, {
         method: 'POST',
@@ -49,19 +27,9 @@ function LoginPage() {
         }),
       });
 
-      console.log('Fetch Response:', {
-        status: response.status,
-        statusText: response.statusText,
-      });
-
-      // log headers object
-      response.headers.forEach((value, key) => {
-        console.log(`${key}: ${value}`);
-      });
-
       if (!response.ok) {
-        const errorResponse = await response.json(); 
-        console.error('Error Response:', errorResponse); 
+        const errorResponse = await response.json();
+        console.error('Error Response:', errorResponse);
 
         if (response.status === 404) {
           throw new Error('Page not found.');
@@ -70,7 +38,7 @@ function LoginPage() {
           setLoginError('Invalid username or password.');
         }
 
-        throw new Error(errorResponse.message); 
+        throw new Error(errorResponse.message);
       }
 
       const data = await response.json();
@@ -78,9 +46,8 @@ function LoginPage() {
 
     } catch (error) {
       console.error(error);
-    } 
-
-  }
+    }
+  };
 
   return (
     <section className='login-page'>
@@ -88,21 +55,26 @@ function LoginPage() {
         <h1>Glad you're back!</h1>
 
         <div className='form-wrapper'>
-          <c.FormTemplate 
-            formInput={formInput} 
-            btnProps={btnProps}
-            resetForm = {false}
-            onSubmit={handleLogin}
-          />
+          <form onSubmit={handleSubmit(onSubmit)} className='form-content'>
+            
+            {loginInput.map(input => inputFieldTemplate(input, register, errors))}
+
+            <button
+             type="submit"
+             className='btn-main'
+            >
+              Login
+            </button>
+          </form>
         </div>
 
         <small className='error-text'>{loginError}</small>
-        
+
         <Link to={'/signup'} className='afterform-text'>
           <p>No account yet? Sign up here.</p>
-        </Link>        
-      </div>    
-      <div className="page-rightbox"></div>  
+        </Link>
+      </div>
+      <div className="page-rightbox"></div>
     </section>
   );
 }
