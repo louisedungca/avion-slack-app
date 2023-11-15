@@ -20,20 +20,33 @@ function LoginPage() {
 
   const onSubmit = async (formData) => {
     const { userEmail, userPassword } = formData; 
+    const requestBody = {
+      email: userEmail,
+      password: userPassword,
+    };
 
     try {
       const url = `${baseUrl}/api/v1/auth/sign_in`; 
+      
+       // Log request 
+      console.log('Request URL:', url);
+      console.log('Request Body:', requestBody);
 
       const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          email: userEmail,
-          password: userPassword,
-        }),
+        body: JSON.stringify(requestBody),
       });
+
+      // Log response 
+      console.log('Response Status:', response.status);
+      // Log response headers
+      const headersArray = Array.from(response.headers.entries());
+      const headersObject = Object.fromEntries(headersArray);
+      console.log('Response Headers:', headersObject);
+      
 
       if (!response.ok) {
         const errorResponse = await response.json();
@@ -45,11 +58,11 @@ function LoginPage() {
         if (response.status === 401) {
           setError('Invalid username or password.');
         }
-
         throw new Error(errorResponse.message);
       }
 
-      const data = await response.json();
+      const responseBody = await response.json();
+      console.log('Response Body:', responseBody)
       navigate('/c');
 
     } catch (error) {

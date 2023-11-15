@@ -5,36 +5,39 @@ import { inputFieldTemplate, signupInput } from '../../components/';
 import { baseUrl } from '../../utils';
 
 function SignUpPage() {
-  const { register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset} = useForm();
+  const { register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset } = useForm();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    if(isSubmitSuccessful) {
-      reset({ 
-        userPassword: '', 
-        confirmPassword: '',
-      });
-    }
-  }, [isSubmitSuccessful])
+  const fetchData = async (formData) => {
+    const { userEmail, userPassword, confirmPassword } = formData;
+    const requestBody = {
+      email: userEmail,
+      password: userPassword,
+      password_confirmation: confirmPassword,
+    };
 
-  const onSubmit = async (formData) => {
     try {
       setLoading(true);
+
       const url = `${baseUrl}/api/v1/auth/`;
+
+      // Log request
+      console.log('Request URL:', url);
+      console.log('Request Body:', requestBody);
 
       const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          email: formData.userEmail,
-          password: formData.userPassword,
-          password_confirmation: formData.confirmPassword,
-        }),
+        body: JSON.stringify(requestBody),
       });
+
+      // Log response
+      console.log('Response Status:', response.status);
+      console.log('Response Headers:', [{ ...response.headers }]);
 
       if (!response.ok) {
         const errorResponse = await response.json();
@@ -46,12 +49,13 @@ function SignUpPage() {
         if (response.status === 422) {
           setError('Account exists. Choose another email to create a new account.');
         }
-
         throw new Error(errorResponse.message);
       }
 
-      const data = await response.json();
-      navigate('/login');
+      const responseBody = await response.json();
+      console.log(responseBody)
+      navigate('/c');
+      
     } catch (error) {
       console.error(error);
     } finally {
@@ -59,21 +63,27 @@ function SignUpPage() {
     }
   };
 
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset({ userPassword: '', confirmPassword: '' });
+    }
+  }, [isSubmitSuccessful, reset]);
+
+  const onSubmit = (formData) => {
+    fetchData(formData);
+  };
+
   return (
     <section className='signup-page'>
-      <div className='page-leftbox'></div>    
+      <div className='page-leftbox'></div>
       <div className="page-rightbox">
         <h1>Hello, hello!</h1>
 
         <div className='form-wrapper'>
           <form onSubmit={handleSubmit(onSubmit)} className='form-content'>
-              
-            {signupInput.map(input => inputFieldTemplate(input, register, errors))}
+            {signupInput.map((input) => inputFieldTemplate(input, register, errors))}
 
-            <button
-            type="submit"
-            className='btn-main'
-            >
+            <button type="submit" className='btn-main'>
               Create Account
             </button>
           </form>
@@ -83,10 +93,10 @@ function SignUpPage() {
 
         <Link to={'/login'} className='afterform-text'>
           <p>Already have an account? Sign in here.</p>
-        </Link> 
-      </div>  
+        </Link>
+      </div>
     </section>
-  )
+  );
 }
 
-export default SignUpPage
+export default SignUpPage;

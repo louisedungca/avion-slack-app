@@ -43,28 +43,28 @@ export const loginInput = [
 
 // signup form inputs
 export const signupInput = [
-  { 
-    type: 'text', 
-    name: 'firstName', 
-    placeholder: 'First Name', 
-    validation: { 
-      pattern: {
-        value: /^[A-Za-z]+$/,
-        message: 'First name must contain only letters',
-      }
-    }
-  },
-  { 
-    type: 'text', 
-    name: 'lastName', 
-    placeholder: 'Last Name', 
-    validation: { 
-      pattern: {
-        value: /^[A-Za-z]+$/,
-        message: 'Last name must contain only letters',
-      }
-    }
-  },
+  // { 
+  //   type: 'text', 
+  //   name: 'firstName', 
+  //   placeholder: 'First Name', 
+  //   validation: { 
+  //     pattern: {
+  //       value: /^[A-Za-z]+$/,
+  //       message: 'First name must contain only letters',
+  //     }
+  //   }
+  // },
+  // { 
+  //   type: 'text', 
+  //   name: 'lastName', 
+  //   placeholder: 'Last Name', 
+  //   validation: { 
+  //     pattern: {
+  //       value: /^[A-Za-z]+$/,
+  //       message: 'Last name must contain only letters',
+  //     }
+  //   }
+  // },
   { 
     type: 'email', 
     name: 'userEmail', 
