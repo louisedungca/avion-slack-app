@@ -10,6 +10,7 @@ import { useAuth } from '../../hooks';
 function LoginPage() {
   const { register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset } = useForm();
   const url = `${baseUrl}/api/v1/auth/sign_in`; 
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -20,12 +21,12 @@ function LoginPage() {
       email: userEmail,
       password: userPassword,
     };
-
     // Log request 
     console.log('Request URL:', url);
     console.log('Request Body:', requestBody);
 
     try {   
+      setLoading(true);
       const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -60,6 +61,8 @@ function LoginPage() {
       }
     } catch (error) {
       console.error(error);
+    }finally {
+      setLoading(false);
     }
   };
 
