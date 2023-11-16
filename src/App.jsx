@@ -39,8 +39,8 @@ function App() {
                     element={<p.Chats />} 
                   />
                 <Route
-                  path="profile"
-                  element={<p.Profile />} 
+                  path="channels"
+                  element={<p.Channel />} 
                 />
                 <Route
                   path="people"
