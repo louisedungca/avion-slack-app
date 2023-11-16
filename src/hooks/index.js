@@ -1,2 +1,2 @@
 export * from './useAuth';
-export * from './useFetch';
+export {default as useFetch } from './useFetch';

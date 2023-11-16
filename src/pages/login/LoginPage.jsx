@@ -42,7 +42,7 @@ function LoginPage() {
       console.log('Response Headers:', headersObject);
       
       if (response.status === 404) {
-        throw new Error('Page not found.');
+        throw new Error("This page doesn't exist.");
       } else if (response.status === 401) {
         setError('Invalid username or password.');
       } else if (!response.ok) {      

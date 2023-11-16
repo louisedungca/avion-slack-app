@@ -1,32 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function useFetch(url, options) {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(url, options);
+  const fetchData = async () => {
+    try {
+      const response = await fetch(url, options);
 
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-
-        const result = await response.json();
-        setData(result);        
-      } catch (error) {
-        setError(error);
-      } finally {
-        setIsLoading(false);
+      if (!response.ok) {
+        const errorResponse = await response.json();
+        throw new Error(errorResponse.message);
       }
-    };
 
+      const result = await response.json();
+      setData(result);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchData();
-  }, [url, options.method]); 
-  
-  return [ data, error, isLoading ];
+  }, [url, options]);
+
+  return { data, error, isLoading, fetchData };
 }
 
 export default useFetch
