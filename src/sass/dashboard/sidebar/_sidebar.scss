@@ -1,6 +1,6 @@
 @use '../../roots' as *;
 
-aside {
+aside, .aside-chats {
   border: 2px dotted whitesmoke;
   width: max(120px, 25vw);
   height: 100%;
