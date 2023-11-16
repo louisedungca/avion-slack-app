@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { inputFieldTemplate, loginInput } from '../../components';
-import { baseUrl } from '../../utils';
+import { baseUrl, setLocalStorage } from '../../utils';
 
 
 function LoginPage() {
   const { register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset } = useForm();
+  const url = `${baseUrl}/api/v1/auth/sign_in`; 
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -25,13 +26,11 @@ function LoginPage() {
       password: userPassword,
     };
 
-    try {
-      const url = `${baseUrl}/api/v1/auth/sign_in`; 
-      
-       // Log request 
-      console.log('Request URL:', url);
-      console.log('Request Body:', requestBody);
+    // Log request 
+    console.log('Request URL:', url);
+    console.log('Request Body:', requestBody);
 
+    try {   
       const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -47,24 +46,19 @@ function LoginPage() {
       const headersObject = Object.fromEntries(headersArray);
       console.log('Response Headers:', headersObject);
       
-
-      if (!response.ok) {
-        const errorResponse = await response.json();
-        console.error('Error Response:', errorResponse);
-
-        if (response.status === 404) {
-          throw new Error('Page not found.');
-        }
-        if (response.status === 401) {
-          setError('Invalid username or password.');
-        }
+      if (response.status === 404) {
+        throw new Error('Page not found.');
+      } else if (response.status === 401) {
+        setError('Invalid username or password.');
+      } else if (!response.ok) {       
         throw new Error(errorResponse.message);
+      } else {
+        const responseBody = await response.json();
+        console.log('Response Body:', responseBody);  
+        setLocalStorage('headers', headersObject);
+
+        navigate('/c');     
       }
-
-      const responseBody = await response.json();
-      console.log('Response Body:', responseBody)
-      navigate('/c');
-
     } catch (error) {
       console.error(error);
     }

@@ -1,6 +1,9 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter, Route } from 'react-router-dom';
+import React from 'react';
 import * as l from './layout';
 import * as p from './pages';
+import * as c from './components';
+import * as h from './hooks';
 import './App.css';
 
 function App() {
@@ -12,7 +15,7 @@ function App() {
     },
     {
       path: 'signup',
-      element: <p.SignUpPage />, 
+      element: <p.SignUpPage />,
       errorElement: <p.ErrorPage />,
     },
     {
@@ -21,27 +24,29 @@ function App() {
       errorElement: <p.ErrorPage />,
     },
     {
-      path: 'c',
-      element: <l.MainPage />,
-      errorElement: <p.ErrorPage />,
-      children: [
-        {
-          index: true,
-          element: <p.Dashboard />,
-          errorElement: <p.ErrorPage />,
-        },
-        {
-          path: 'profile',
-          element: <p.Profile />,
-          errorElement: <p.ErrorPage />,
-        },
-      ],
-    },
-    
-    
+      path: 'c/*',
+      element: (
+        <c.PrivateRoute> 
+            <Route path="/" element={<l.MainPage />}>
+              <Route 
+                index 
+                element={<p.Dashboard />}
+              />
+              <Route
+                path="profile"
+                element={<p.Profile />} 
+              />
+            </Route>   
+        </c.PrivateRoute>
+      )
+    }
   ]);
 
-  return <RouterProvider router={router} />
+  return (
+    <h.AuthProvider>
+      <RouterProvider router={router} />
+    </h.AuthProvider>
+  );
 }
 
-export default App
+export default App;
