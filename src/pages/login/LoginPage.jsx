@@ -1,25 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+
 import { inputFieldTemplate, loginInput } from '../../components';
 import { baseUrl, setLocalStorage } from '../../utils';
+import { useAuth } from '../../hooks';
 
 
 function LoginPage() {
   const { register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset } = useForm();
   const url = `${baseUrl}/api/v1/auth/sign_in`; 
   const [error, setError] = useState('');
+  const { login } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if(isSubmitSuccessful) {
-      reset({ 
-        userPassword: '', 
-      });
-    }
-  }, [isSubmitSuccessful])
-
-  const onSubmit = async (formData) => {
+  const fetchData = async (formData) => {
     const { userEmail, userPassword } = formData; 
     const requestBody = {
       email: userEmail,
@@ -50,18 +45,34 @@ function LoginPage() {
         throw new Error('Page not found.');
       } else if (response.status === 401) {
         setError('Invalid username or password.');
-      } else if (!response.ok) {       
+      } else if (!response.ok) {      
+        const errorResponse = await response.json(); 
         throw new Error(errorResponse.message);
       } else {
-        const responseBody = await response.json();
-        console.log('Response Body:', responseBody);  
+        const userData = await response.json();
+        const token = headersObject['access-token'];
+        console.log('Response Body:', userData);  
         setLocalStorage('headers', headersObject);
-
+        
+        login(userData, token);
+        console.log('Access-token:', token);
         navigate('/c');     
       }
     } catch (error) {
       console.error(error);
     }
+  };
+
+  useEffect(() => {
+    if(isSubmitSuccessful) {
+      reset({ 
+        userPassword: '', 
+      });
+    }
+  }, [isSubmitSuccessful]);
+
+  const onSubmit = (formData) => {
+    fetchData(formData);
   };
 
   return (

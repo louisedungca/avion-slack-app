@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import { getLocalStorage, setLocalStorage } from '../utils';
+import { getLocalStorage } from '../utils';
 
 export const AuthContext = createContext();
 
@@ -10,21 +10,19 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [authUser, setAuthUser] = useState(null);
 
-  // Check if the access token is present in local storage
   const headers = getLocalStorage('headers') || [];
   const token = headers['access-token'];
   const [isLoggedIn, setIsLoggedIn] = useState(!!token);
 
-  const login = (user, token) => {
-    setAuthUser(user);
+  const login = (userData, token) => {
+    setAuthUser(userData);
     setIsLoggedIn(true);
-    setLocalStorage('access-token', token);
   };
 
   const logout = () => {
     setAuthUser(null);
     setIsLoggedIn(false);
-    localStorage.removeItem('access-token');
+    localStorage.removeItem('headers');
   };
 
   const value = {

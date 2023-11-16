@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+
 import { inputFieldTemplate, signupInput } from '../../components/';
-import { baseUrl } from '../../utils';
+import { baseUrl, setLocalStorage } from '../../utils';
+import { useAuth } from '../../hooks';
 
 function SignUpPage() {
   const { register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset } = useForm();
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const url = `${baseUrl}/api/v1/auth/`;
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   const fetchData = async (formData) => {
     const { userEmail, userPassword, confirmPassword } = formData;
@@ -18,15 +22,12 @@ function SignUpPage() {
       password_confirmation: confirmPassword,
     };
 
-    try {
-      setLoading(true);
-
-      const url = `${baseUrl}/api/v1/auth/`;
-
       // Log request
       console.log('Request URL:', url);
       console.log('Request Body:', requestBody);
 
+    try {
+      setLoading(true);
       const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -37,25 +38,29 @@ function SignUpPage() {
 
       // Log response
       console.log('Response Status:', response.status);
-      console.log('Response Headers:', [{ ...response.headers }]);
+      // Log response headers
+      const headersArray = Array.from(response.headers.entries());
+      const headersObject = Object.fromEntries(headersArray);
+      console.log('Response Headers:', headersObject);
 
-      if (!response.ok) {
+      if (response.status === 404) {
+        throw new Error('Page not found.');
+      } else if (response.status === 422) {
+        setError('Account exists. Choose another email to create a new account.');
+      } else if (!response.ok) {
         const errorResponse = await response.json();
         console.error('Error Response:', errorResponse);
-
-        if (response.status === 404) {
-          throw new Error('Page not found.');
-        }
-        if (response.status === 422) {
-          setError('Account exists. Choose another email to create a new account.');
-        }
         throw new Error(errorResponse.message);
-      }
-
-      const responseBody = await response.json();
-      console.log(responseBody)
-      navigate('/c');
-      
+      } else {
+        const responseBody = await response.json();
+        setLocalStorage('headers', headersObject);
+        console.log(responseBody)
+  
+        login(userData, token);
+        console.log('Access-token:', token);
+  
+        navigate('/c');
+      }      
     } catch (error) {
       console.error(error);
     } finally {
