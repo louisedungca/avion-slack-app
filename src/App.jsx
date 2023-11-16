@@ -38,6 +38,14 @@ function App() {
                 path="profile"
                 element={<p.Profile />} 
               />
+              <Route
+                path="chats"
+                element={<p.Chats />} 
+              />
+              <Route
+                path="people"
+                element={<p.People />} 
+              />
             </Route>   
         </c.PrivateRoute>
       )

@@ -2,9 +2,9 @@ import React from 'react'
 
 function Dashboard() {
   return (
-    <div>
+    <section className='dashboard'>
       This is the dashboard.
-    </div>
+    </section>
   )
 }
 

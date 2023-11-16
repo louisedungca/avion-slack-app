@@ -7,3 +7,9 @@
 // Login and Signup
 @use './sass/loginandsignup/loginpage';
 @use './sass/loginandsignup/signuppage';
+
+// Dashboard
+@use './sass/dashboard/sidebar/navbar';
+@use './sass/dashboard/sidebar/sidebar';
+@use './sass/dashboard/dashboard';
+@use './sass/dashboard/mesgthread';

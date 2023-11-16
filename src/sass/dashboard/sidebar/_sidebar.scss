@@ -1,0 +1,8 @@
+@use '../../roots' as *;
+
+aside {
+  border: 2px dotted whitesmoke;
+  width: max(120px, 25vw);
+  height: 100%;
+  padding: 1rem;
+}
