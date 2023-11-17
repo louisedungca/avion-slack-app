@@ -1,22 +1,10 @@
-import React, { useEffect } from 'react';
-import { useFetchUsers } from '../../../hooks';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, useOutletContext } from 'react-router-dom';
 import { UserCircleIcon } from '@heroicons/react/24/solid';
 
 function People() {
-  const { users, error, isLoading, fetchData } = useFetchUsers();
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
+  const users = useOutletContext();
+  console.log('from Main:', users);
 
   return (
     <aside className='aside-people'>

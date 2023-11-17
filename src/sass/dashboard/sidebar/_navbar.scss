@@ -1,14 +1,13 @@
 @use '../../roots' as *;
 
 .navbar{
-  // border: 2px dotted pink;
   width: 50px;
   height: 80%;
   background: $accent;
   padding: 0.45rem;
   border-radius: 0.8rem;
-  // border-top-left-radius: 1rem;
-  // border-bottom-left-radius: 1rem;
+  position: fixed;
+  box-shadow: $boxShadow1;
 
   .side-item-wrapper {
     display: flex;
@@ -27,5 +26,5 @@
       color: $primaryColor;
     }
   }
-  
 }
+

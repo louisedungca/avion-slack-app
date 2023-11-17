@@ -1,9 +1,10 @@
 import React from 'react';
 
-function Dashboard() {
+function Dashboard({ users }) {
   return (
-    <section className='dashboard'>
-    </section>
+    <aside className='aside-dashboard'>
+      This is the dashboard sidebar.
+    </aside>
   )
 }
 

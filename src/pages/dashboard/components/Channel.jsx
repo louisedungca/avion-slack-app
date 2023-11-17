@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 
-function Channel() {
+function Channel({ users }) {
   return (
-    <div>
-      This is the channel page.
-    </div>
+    <aside className='aside-channel'>
+      This is the channel sidebar.
+    </aside>
   )
 }
 

@@ -45,9 +45,9 @@ export function useFetch(url, options = {}) {
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, [url]);
+  // useEffect(() => {
+  //   fetchData();
+  // }, [url]);
 
   return { data, error, isLoading, fetchData };
 };

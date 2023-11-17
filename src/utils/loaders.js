@@ -2,7 +2,7 @@ import { redirect } from "react-router-dom";
 import { getLocalStorage } from "../utils";
 
 // for signup and login page
-export async function isLoggedInLoader() {
+export function isLoggedInLoader() {
   const headers = getLocalStorage('Headers') || [];
   const token = headers && headers['access-token'];
     if(token) {
@@ -12,7 +12,7 @@ export async function isLoggedInLoader() {
 };
 
 // to access dashboard pages
-export async function accessDashLoader() {
+export function accessDashLoader() {
   const headers = getLocalStorage('Headers') || [];
   const token = headers && headers['access-token'];
     if(!token) {

@@ -268,6 +268,8 @@
   background: #F3AA20;
   padding: 0.45rem;
   border-radius: 0.8rem;
+  position: fixed;
+  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 }
 .navbar .side-item-wrapper {
   display: flex;
@@ -286,7 +288,6 @@
 }
 
 aside, .aside-chats {
-  border: 2px dotted whitesmoke;
   width: max(120px, 25vw);
   height: 100%;
   padding: 1rem;
@@ -306,6 +307,7 @@ aside, .aside-chats {
   flex-direction: column;
   gap: 0.5rem;
   max-height: 85vh;
+  padding: 0.5rem;
   overflow-y: scroll;
 }
 .user-container .user-wrapper {
@@ -315,6 +317,7 @@ aside, .aside-chats {
   padding: 0.5rem;
   background: linear-gradient(65deg, rgba(255, 255, 240, 0.65), #fffff0);
   border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 }
 .user-container .user-wrapper .user-icon {
   width: 40px;
@@ -329,15 +332,23 @@ aside, .aside-chats {
 .mainpage {
   width: 100%;
   height: 100vh;
-  background: #841E62;
+  background: rgba(255, 255, 240, 0.8);
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 0.5rem;
+  padding: 0.5rem;
 }
 
 .dashboard {
+  background: #841E62;
+  border-radius: 2.8rem;
+  width: 100%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 1.5rem;
+  padding: 0.5rem 0.5rem 0.5rem 2rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 }
 
 .msg-thread {
@@ -346,4 +357,55 @@ aside, .aside-chats {
   background: #fffff0;
   border-radius: 2.5rem;
   padding: 1.5rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.mainpage-skeleton {
+  background: #fffff0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.navbar-skeleton {
+  width: 50px;
+  height: 80%;
+  padding: 0.45rem;
+  border-radius: 0.8rem;
+  background: #fffff0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+  position: fixed;
+}
+
+.dashboard-skeleton {
+  background: #f6f6e8;
+  border-radius: 2.8rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 1.5rem;
+  padding: 0.5rem 0.5rem 0.5rem 2rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+}
+
+.aside-skeleton {
+  width: max(120px, 25vw);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+}
+
+.mesgbox-skeleton {
+  width: 100%;
+  height: 100%;
+  background: #fffff0;
+  border-radius: 2.5rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 }
