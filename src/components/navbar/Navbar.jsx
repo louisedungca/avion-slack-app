@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { NavbarData } from '../../components';
-import { ArrowLeftOnRectangleIcon, UserCircleIcon } from '@heroicons/react/24/solid';
+import { ArrowLeftOnRectangleIcon, UserCircleIcon, UserIcon } from '@heroicons/react/24/solid';
 
 function Navbar() {
   return (
@@ -31,7 +31,7 @@ function Navbar() {
             {/* <div className="img-wrapper">
               <img src={profile} alt="profile picture" className="client-navbar-img" />
             </div> */}
-            <i className="navbar-icons"><UserCircleIcon /></i>
+            <i className="navbar-icons"><UserIcon /></i>
           </NavLink>
 
           <Link
