@@ -3,9 +3,9 @@ import { useAuth } from '../hooks';
 import { Navigate, Routes } from 'react-router-dom';
 
 function PrivateRoute({ children }) {
-  const { isLoggedIn } = useAuth();
+  const { user } = useAuth();
 
-  return isLoggedIn ? (
+  return user ? (
     <Routes>{children}</Routes>
   ) : (
     <Navigate to={'/login'} replace />

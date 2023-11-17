@@ -6,6 +6,7 @@ import * as l from './layout';
 import * as p from './pages';
 import * as c from './components';
 import * as h from './hooks';
+import * as u from './utils';
 
 
 function App() {
@@ -19,11 +20,13 @@ function App() {
       path: 'signup',
       element: <p.SignUpPage />,
       errorElement: <p.ErrorPage />,
+      loader: u.isLoggedInLoader,
     },
     {
       path: 'login',
       element: <p.LoginPage />,
       errorElement: <p.ErrorPage />,
+      loader: u.isLoggedInLoader,
     },
     {
       path: 'c/*',

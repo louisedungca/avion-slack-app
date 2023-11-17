@@ -1,70 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useNavigate, } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import { inputFieldTemplate, loginInput } from '../../components';
-import { baseUrl, setLocalStorage } from '../../utils';
 import { useAuth } from '../../hooks';
 
 
 function LoginPage() {
   const { register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset } = useForm();
-  const url = `${baseUrl}/api/v1/auth/sign_in`; 
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  const { login } = useAuth();
+  const auth = useAuth();
   const navigate = useNavigate();
-
-  const fetchData = async (formData) => {
-    const { userEmail, userPassword } = formData; 
-    const requestBody = {
-      email: userEmail,
-      password: userPassword,
-    };
-    // Log request 
-    console.log('Request URL:', url);
-    console.log('Request Body:', requestBody);
-
-    try {   
-      setLoading(true);
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
-      });
-
-      // Log response 
-      console.log('Response Status:', response.status);
-      // Log response headers
-      const headersArray = Array.from(response.headers.entries());
-      const headersObject = Object.fromEntries(headersArray);
-      console.log('Response Headers:', headersObject);
-      
-      if (response.status === 404) {
-        throw new Error("This page doesn't exist.");
-      } else if (response.status === 401) {
-        setError('Invalid username or password.');
-      } else if (!response.ok) {      
-        const errorResponse = await response.json(); 
-        throw new Error(errorResponse.message);
-      } else {
-        const userData = await response.json();
-        const token = headersObject['access-token'];
-        console.log('Response Body:', userData);  
-        setLocalStorage('headers', headersObject);
-        
-        login(userData, token);
-        console.log('Access-token:', token);
-        navigate('/c');     
-      }
-    } catch (error) {
-      console.error(error);
-    }finally {
-      setLoading(false);
-    }
-  };
 
   useEffect(() => {
     if(isSubmitSuccessful) {
@@ -74,8 +19,13 @@ function LoginPage() {
     }
   }, [isSubmitSuccessful]);
 
-  const onSubmit = (formData) => {
-    fetchData(formData);
+  async function onSubmit(formData) {
+    try {
+      await auth.login(formData);
+      navigate('/c');
+    } catch (error) {
+      console.error('Login error:', error);
+    }
   };
 
   return (
@@ -97,7 +47,7 @@ function LoginPage() {
           </form>
         </div>
 
-        <small className='error-text'>{error}</small>
+        <small className='error-text'>{auth.error}</small>
 
         <Link to={'/signup'} className='afterform-text'>
           <p>No account yet? Sign up here.</p>
