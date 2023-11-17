@@ -1,8 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { baseUrl, getLocalStorage, setLocalStorage } from "../utils";
+import { getLocalStorage, loginUrl, setLocalStorage, signupUrl } from "../utils";
 
-const signupUrl = `${baseUrl}/api/v1/auth/`;
-const loginUrl = `${baseUrl}/api/v1/auth/sign_in`;
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
