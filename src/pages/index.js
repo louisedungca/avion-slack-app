@@ -1,26 +1,15 @@
-// General
-import ErrorPage from './general/ErrorPage';
-import WelcomePage from './general/WelcomePage';
+// general
+export { default as ErrorPage } from './general/ErrorPage';
+export { default as WelcomePage } from './general/WelcomePage';
 
-// Dashboard
-import Dashboard from './dashboard/Dashboard';
-import Profile from './dashboard/Profile';
+// dashboard
+export { default as Dashboard } from './dashboard/Dashboard';
+export { default as Profile } from './dashboard/components/Profile';
+export { default as Chats } from './dashboard/components/Chats';
+export { default as Channel } from './dashboard/components/Channel';
+export { default as People } from './dashboard/components//People';
+export { default as MsgThread } from './dashboard/components/MsgThread';
 
-//Login
-import LoginPage from './login/LoginPage';
-import LoginForm from './login/LoginForm';
-
-// Signup
-import SignUpPage from './signup/SignUpPage';
-
-
-// EXPORTS
-export default {
-  ErrorPage,
-  WelcomePage,
-  Dashboard,
-  Profile,
-  LoginPage,
-  LoginForm,
-  SignUpPage,  
-};
+// login and signup
+export { default as LoginPage } from './login/LoginPage';
+export { default as SignUpPage } from './signup/SignUpPage';

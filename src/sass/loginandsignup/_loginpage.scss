@@ -19,7 +19,7 @@
 
     h1 {
       color: $primaryColor;
-      font-size: clamp(2.5rem, 2.3711rem + 2.0619vw, 5rem);
+      font-size: $h1;
     }
 
     .error-text {
@@ -31,10 +31,19 @@
     }
 
     .afterform-text {
+      width: max-content;
       display: flex;
       flex-direction: column;
       gap: 0.3rem;
       padding: 0 0.8rem;
+      text-decoration: none;
+      color: $primaryColor;
+      font-size: $span;
+
+      &:hover {
+        text-decoration: underline;
+        opacity: 0.75;
+      }
     }
   }
 

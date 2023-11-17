@@ -1,12 +1,15 @@
 import React from 'react';
 import { Outlet } from 'react-router';
+import * as c from '../components';
+import * as p from '../pages';
 
 const MainPage = () => {
   return (
-    <div>
-      This is the main page.
+    <main className='mainpage'>
+      <c.Navbar />
       <Outlet />
-    </div>
+      <p.MsgThread />
+    </main>
   )
 }
 

@@ -1,10 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 function Dashboard() {
   return (
-    <div>
-      This is the dashboard.
-    </div>
+    <section className='dashboard'>
+    </section>
   )
 }
 

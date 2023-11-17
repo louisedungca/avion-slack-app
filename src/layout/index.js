@@ -1,5 +1,2 @@
-import MainPage from "./MainPage";
-
-export default {
-  MainPage
-}
+export { default as MainPage } from './MainPage';
+export { default as DashLayout } from './DashLayout';

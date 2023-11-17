@@ -1,8 +1,6 @@
-import FormTemplate from "./FormTemplate";
-import Navbar from "./Navbar";
+export * from './formInput';
+export * from './navbar/NavbarData';
+export { default as Navbar } from './navbar/Navbar';
+export { default as PrivateRoute } from './PrivateRoute';
 
 
-export default {
-  FormTemplate,
-  Navbar,
-}

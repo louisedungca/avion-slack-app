@@ -3,6 +3,9 @@
 // Fonts
 $fontMain: 'Nunito', sans-serif;
 
+$h1: clamp(2.5rem, 2.3711rem + 2.0619vw, 5rem);
+$span: clamp(0.7rem, 0.6077rem + 0.3077vw, 1rem);
+
 // Colors
 $primaryColor: #58094F;
 $secondaryColor: #841E62;

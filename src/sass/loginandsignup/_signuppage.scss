@@ -22,11 +22,28 @@
       font-size: clamp(2.5rem, 2.3711rem + 2.0619vw, 5rem);
     }
 
+    .error-text {
+      width: 65%;
+      text-align: center;
+      color: $warning;
+      font-weight: 600;
+      padding: 0 0.5rem;
+    }
+
     .afterform-text {
-      margin-top: 0.5rem;
+      width: max-content;
       display: flex;
       flex-direction: column;
       gap: 0.3rem;
+      padding: 0 0.8rem;
+      text-decoration: none;
+      color: $primaryColor;
+      font-size: $span;
+
+      &:hover {
+        text-decoration: underline;
+        opacity: 0.75;
+      }
     }
   }
 
