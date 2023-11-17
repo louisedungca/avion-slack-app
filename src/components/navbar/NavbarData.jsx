@@ -1,6 +1,6 @@
 import { ChatBubbleLeftRightIcon, NewspaperIcon, Squares2X2Icon, UserGroupIcon, } from '@heroicons/react/24/solid';
 import React from 'react';
-import * as p from '../pages';
+import * as p from '../../pages';
 
 export const NavbarData =  [
   {
