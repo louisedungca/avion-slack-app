@@ -9,7 +9,7 @@ function useFetch(url, options) {
     try {
       const response = await fetch(url, options);
 
-      if (!response.ok) {
+      if (!response.ok) { 
         const errorResponse = await response.json();
         throw new Error(errorResponse.message);
       }

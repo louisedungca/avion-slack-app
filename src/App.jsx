@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter, Route } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import React from 'react';
 import './App.css';
 
@@ -29,30 +29,44 @@ function App() {
       loader: u.isLoggedInLoader,
     },
     {
-      path: 'c/*',
-      element: (
-        <c.PrivateRoute> 
-            <Route path="/" element={<l.MainPage />}>
-              <Route 
-                index 
-                element={<p.Dashboard />}
-              /> 
-                <Route
-                    path='chats'
-                    element={<p.Chats />} 
-                  />
-                <Route
-                  path="channels"
-                  element={<p.Channel />} 
-                />
-                <Route
-                  path="people"
-                  element={<p.People />} 
-                />                            
-            </Route>   
-        </c.PrivateRoute>
-      )
-    }
+      path: 'c',
+      element: <l.MainPage />,
+      errorElement: <p.ErrorPage />,
+      loader: u.accessDashLoader,
+      children: [
+        {
+          index: true,
+          element: <p.Dashboard />,
+          errorElement: <p.ErrorPage />,
+          loader: u.accessDashLoader,
+        },
+        {
+          path: 'chats',
+          element: <p.Chats />,
+          errorElement: <p.ErrorPage />,
+          loader: u.accessDashLoader,
+        },
+        {
+          path: 'channels',
+          element: <p.Channel />,
+          errorElement: <p.ErrorPage />,
+          loader: u.accessDashLoader,
+        },
+        {
+          path: 'people',
+          element: <p.People />,
+          errorElement: <p.ErrorPage />,
+          loader: u.accessDashLoader,
+        },
+        {
+          path: 'profile',
+          element: <p.Profile />,
+          errorElement: <p.ErrorPage />,
+          loader: u.accessDashLoader,
+        },
+      ],
+    },
+
   ]);
 
   return (
