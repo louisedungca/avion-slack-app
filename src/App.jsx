@@ -33,12 +33,12 @@ function App() {
       errorElement: <p.ErrorPage />,
       loader: u.accessDashLoader,
       children: [
-        {
-          index: true,
-          element: <p.Dashboard />,
-          errorElement: <p.ErrorPage />,
-          loader: u.accessDashLoader,
-        },
+        // {
+        //   index: true,
+        //   element: <p.Dashboard />,
+        //   errorElement: <p.ErrorPage />,
+        //   loader: u.accessDashLoader,
+        // },
         {
           path: 'chats',
           element: <p.Chats />,

@@ -7,8 +7,7 @@ function Navbar() {
   return (
     <nav className='navbar'>
 
-      <div className="side-item-wrapper">       
-
+      <div className="side-item-wrapper">     
         <div className="upper-items">
           {NavbarData.map((item, index) => {
             return (

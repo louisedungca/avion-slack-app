@@ -5,7 +5,7 @@ function MainSkeleton() {
   return (
     <main className='mainpage-skeleton'>
       <nav className="navbar-skeleton">
-        <Skeleton width={30} height={30} count={4}/>
+        <Skeleton width={30} height={30} count={3}/>
       </nav>
       <section className="dashboard-skeleton">
         <aside className="aside-skeleton">

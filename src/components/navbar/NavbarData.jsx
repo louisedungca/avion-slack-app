@@ -3,12 +3,12 @@ import React from 'react';
 import * as p from '../../pages';
 
 export const NavbarData =  [
-  {
-    icon: <Squares2X2Icon />,
-    text: 'Dashboard',
-    link: '/c', 
-    elementLabel: <p.Dashboard />,
-  },
+  // {
+  //   icon: <Squares2X2Icon />,
+  //   text: 'Dashboard',
+  //   link: '/c', 
+  //   elementLabel: <p.Dashboard />,
+  // },
   {
     icon: <ChatBubbleLeftRightIcon />,
     text: 'Chats',
