@@ -1,7 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import React from 'react';
 import './App.css';
-
 import * as l from './layout';
 import * as p from './pages';
 import * as c from './components';
@@ -71,7 +70,7 @@ function App() {
 
   return (
     <h.AuthProvider>
-      <RouterProvider router={router} />
+      <RouterProvider router={router} />    
     </h.AuthProvider>
   );
 }

@@ -11,11 +11,11 @@ export function AuthProvider({ children }) {
       {children}
     </AuthContext.Provider>
   );
-}
+};
 
 export function useAuth() {
   return useContext(AuthContext);
-}
+};
 
 function useProvideAuth() {
   const [user, setUser] = useState(null);
@@ -43,29 +43,40 @@ function useProvideAuth() {
       handleAuth(data);
     } catch (error) {
       setError(error.message || 'An error occurred while fetching data.');
-    }
-  }
+    };
+  };
 
   async function login(formData) {
     const { userEmail, userPassword } = formData;
-    await handleRequest(loginUrl, { method: 'POST', body: { email: userEmail, password: userPassword }});
-  }
+    await handleRequest(loginUrl, { 
+      method: 'POST', 
+      body: { 
+        email: userEmail, 
+        password: userPassword 
+      }});
+  };
 
   async function signup(formData) {
     const { userEmail, userPassword, confirmPassword } = formData;
-    await handleRequest(signupUrl, { method: 'POST', body: { email: userEmail, password: userPassword, password_confirmation: confirmPassword }});
-  }
+    await handleRequest(signupUrl, { 
+      method: 'POST', 
+      body: { 
+        email: userEmail, 
+        password: userPassword, 
+        password_confirmation: confirmPassword 
+      }});
+  };
 
   function handleAuth(data) {
     setUser(data.data);
     setLocalStorage('UserData', data.data);
-  }
+  };
 
   function logout() {
     setUser(null);
     localStorage.removeItem('UserData');
     localStorage.removeItem('Headers');
-  }
+  };
 
   useEffect(() => {
     const currentUser = getLocalStorage('UserData');
@@ -78,6 +89,4 @@ function useProvideAuth() {
   }, []);
 
   return { user, error, login, signup, logout };
-}
-
-
+};

@@ -1,21 +1,22 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import AsyncSelect from "react-select/async";
+import { useData } from '../../../hooks';
 
 function MsgThread(props) {
-  const { users, searchFocus, setSearchFocus } = props;
-  const searchRef = useRef(null);
+  const { users } = props;
   console.log('from Main to MsgBox:', users);
+
+  const { selectedUser, setSelectedUser } = useData();
+
+  // cb
+  function handleUserSelect(user) {
+    setSelectedUser(user);
+  };
 
   const options = users.map((user) => ({
     value: user.id,
     label: user.uid,
   }));
-
-  useEffect(() => {
-    if(searchFocus && searchRef.current) {
-      searchRef.current.focus();
-    };
-  }, [searchFocus]);
 
   function loadOptions(searchValue, callback) {
     const filteredOptions = options.filter((user) =>
@@ -28,7 +29,6 @@ function MsgThread(props) {
 
   function handleSelect(selectedUser) {
     console.log('Selected User:', selectedUser);
-    setSearchFocus(false);
   };
 
   return (
@@ -38,7 +38,6 @@ function MsgThread(props) {
           placeholder='Enter email...'
           loadOptions={loadOptions} 
           onChange={handleSelect}
-          ref={searchRef}
         />
       </div>        
     </section>
