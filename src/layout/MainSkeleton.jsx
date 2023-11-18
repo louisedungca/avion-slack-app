@@ -7,7 +7,6 @@ function MainSkeleton() {
       <nav className="navbar-skeleton">
         <Skeleton width={30} height={30} count={4}/>
       </nav>
-
       <section className="dashboard-skeleton">
         <aside className="aside-skeleton">
           <Skeleton height={20} count={4}/>

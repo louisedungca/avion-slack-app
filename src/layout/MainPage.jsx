@@ -5,7 +5,6 @@ import * as c from '../components';
 import * as p from '../pages';
 import * as l from '../layout';
 
-
 const MainPage = () => {
   const { users, error, isLoading, fetchData } = useFetchUsers();
 
@@ -14,7 +13,7 @@ const MainPage = () => {
   },[]);
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return <p.ErrorPage/>
   }
 
   return (

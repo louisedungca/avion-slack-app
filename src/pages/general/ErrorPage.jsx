@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, isRouteErrorResponse, useNavigate, useRouteError } from 'react-router-dom';
+import { isRouteErrorResponse, useNavigate, useRouteError } from 'react-router-dom';
 import { ArrowUturnLeftIcon, HomeIcon } from '@heroicons/react/24/solid';
 
 const Error = () => {
