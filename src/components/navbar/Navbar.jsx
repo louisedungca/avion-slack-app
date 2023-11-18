@@ -28,9 +28,6 @@ function Navbar() {
             to={'profile'}
             className={'lower-item usericon'}
           >
-            {/* <div className="img-wrapper">
-              <img src={profile} alt="profile picture" className="client-navbar-img" />
-            </div> */}
             <i className="navbar-icons"><UserIcon /></i>
           </NavLink>
 

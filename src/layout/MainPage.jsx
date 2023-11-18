@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router';
 import { useFetchUsers } from '../hooks';
 import * as c from '../components';
@@ -7,6 +7,7 @@ import * as l from '../layout';
 
 const MainPage = () => {
   const { users, error, isLoading, fetchData } = useFetchUsers();
+  const [searchFocus, setSearchFocus] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -25,8 +26,12 @@ const MainPage = () => {
           <>
             <c.Navbar />
             <section className='dashboard'>
-              <Outlet context={users} />
-              <p.MsgThread />
+              <Outlet context={{ users, searchFocus, setSearchFocus }} />
+              <p.MsgThread 
+                users={users} 
+                searchFocus={searchFocus}
+                setSearchFocus={setSearchFocus}
+              />
             </section>
           </>
         )

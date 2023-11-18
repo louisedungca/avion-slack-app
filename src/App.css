@@ -6,7 +6,6 @@
   font-family: "Nunito", sans-serif;
   text-decoration: none;
   list-style: none;
-  color: #58094F;
 }
 
 .App {
@@ -294,12 +293,29 @@ aside, .aside-chats {
 }
 
 .aside-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   color: #fffff0;
   font-size: clamp(1rem, 0.9485rem + 0.8247vw, 2rem);
   font-weight: 600;
   letter-spacing: 0.2rem;
   text-transform: capitalize;
+  text-shadow: 1.2px 1.2px 3px #58094F;
   margin-bottom: 0.5rem;
+}
+.aside-title h3 {
+  font-size: clamp(1rem, 0.9485rem + 0.8247vw, 2rem);
+  font-weight: 600;
+  letter-spacing: 0.2rem;
+  text-transform: capitalize;
+  color: #fffff0;
+  text-shadow: 1.2px 1.2px 3px #58094F;
+}
+.aside-title .icon {
+  width: clamp(1rem, 0.8485rem + 0.7247vw, 1.8rem);
+  color: #fffff0;
+  text-shadow: 1.2px 1.2px 3px #58094F;
 }
 
 .user-container {
@@ -309,6 +325,21 @@ aside, .aside-chats {
   max-height: 85vh;
   padding: 0.5rem;
   overflow-y: scroll;
+}
+.user-container::-webkit-scrollbar {
+  width: 0.3rem;
+  height: 0.3rem;
+}
+.user-container::-webkit-scrollbar-track {
+  background: #58094F;
+  border-radius: 0.8rem;
+}
+.user-container::-webkit-scrollbar-thumb {
+  background: #fffff0;
+  border-radius: 0.3rem;
+}
+.user-container::-webkit-scrollbar-thumb:hover {
+  background: #F3AA20;
 }
 .user-container .user-wrapper {
   display: flex;
@@ -321,6 +352,7 @@ aside, .aside-chats {
 }
 .user-container .user-wrapper .user-icon {
   width: 40px;
+  color: #58094F;
 }
 .user-container .user-wrapper .user-uid {
   font-size: clamp(0.75rem, 0.7268rem + 0.3711vw, 1.2rem);

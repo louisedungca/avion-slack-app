@@ -8,7 +8,7 @@ function People() {
 
   return (
     <aside className='aside-people'>
-      <p className='aside-title'>People</p>
+      <h3 className='aside-title'>People</h3>
       <div className='user-container'>
         {users && users.slice(-10).map(user => (
           <Link key={user.id} className='user-wrapper'>

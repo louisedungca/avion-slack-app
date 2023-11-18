@@ -4,6 +4,8 @@
 $fontMain: 'Nunito', sans-serif;
 
 $h1: clamp(2.5rem, 2.3711rem + 2.0619vw, 5rem);
+$h2: clamp(1rem, 0.9485rem + 0.8247vw, 2rem);
+$h3: clamp(1rem, 0.8485rem + 0.7247vw, 1.8rem);
 $span: clamp(0.7rem, 0.6077rem + 0.3077vw, 1rem);
 
 // Colors
@@ -15,6 +17,7 @@ $supplementTwo: #2A445E;
 $white: #fffff0;
 $warning: red;
 
+$textShadow: 1.2px 1.2px 3px  $primaryColor;
 $boxShadow1: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 $boxShadow2: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, 
 rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, 

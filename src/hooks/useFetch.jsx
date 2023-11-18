@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { allUsersUrl, getLocalStorage, getMsgUrl } from "../utils";
 
 export function useFetch(url, options = {}) {
@@ -30,7 +30,7 @@ export function useFetch(url, options = {}) {
       });
       const result = await response.json();
 
-      console.log('Response:', response);
+      // console.log('Response:', response);
       console.log('Response data:', result);
 
       if(!response.ok) {
@@ -45,23 +45,19 @@ export function useFetch(url, options = {}) {
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, [url]);
-
   return { data, error, isLoading, fetchData };
 };
 
 export function useFetchUsers() {
-  const { data, error, isLoading, fetchData } = useFetch(allUsersUrl, { method: 'GET' });
+  const { data, error, isLoading, fetchData } = useFetch(allUsersUrl, { method: 'GET', });
   const users = data?.data || [];
 
   return { users, error, isLoading, fetchData };
 };
 
-export function useFetchMesg(uid) {
-  const { data, error, isLoading, fetchData } = useFetch(getMsgUrl, { method: 'GET' });
-  const messages = data?.data || [];
+// export function useFetchMesg(uid) {
+//   const { data, error, isLoading, fetchData } = useFetch(getMsgUrl, { method: 'GET' });
+//   const messages = data?.data || [];
 
-  return { messages, error, isLoading, fetchData };
-}
+//   return { messages, error, isLoading, fetchData };
+// }

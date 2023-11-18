@@ -7,12 +7,31 @@ aside, .aside-chats {
 }
 
 .aside-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   color: $white;
-  font-size: clamp(1rem, 0.9485rem + 0.8247vw, 2rem);
+  font-size: $h2;
   font-weight: 600;
   letter-spacing: 0.2rem;
   text-transform: capitalize;
+  text-shadow: $textShadow;
   margin-bottom: 0.5rem;
+
+  h3 {
+    font-size: $h2;
+    font-weight: 600;
+    letter-spacing: 0.2rem;
+    text-transform: capitalize;
+    color: $white;
+    text-shadow: $textShadow;
+  }
+
+  .icon {
+    width: $h3;
+    color: $white;
+    text-shadow: $textShadow;
+  }
 }
 
 .user-container {
@@ -22,6 +41,25 @@ aside, .aside-chats {
   max-height: 85vh;
   padding: 0.5rem;
   overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 0.3rem;
+    height: 0.3rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $primaryColor;
+    border-radius: 0.8rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $white;
+    border-radius: 0.3rem;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: $accent;
+  }
 
   .user-wrapper {
     display: flex;
@@ -37,6 +75,7 @@ aside, .aside-chats {
 
     .user-icon {
       width: 40px;
+      color: $primaryColor;
     }
 
     .user-uid {
