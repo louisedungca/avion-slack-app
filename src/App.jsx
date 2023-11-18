@@ -33,17 +33,25 @@ function App() {
       errorElement: <p.ErrorPage />,
       loader: u.accessDashLoader,
       children: [
-        // {
-        //   index: true,
-        //   element: <p.Dashboard />,
-        //   errorElement: <p.ErrorPage />,
-        //   loader: u.accessDashLoader,
-        // },
         {
           path: 'chats',
-          element: <p.Chats />,
+          element: <l.DashLayout />,
           errorElement: <p.ErrorPage />,
           loader: u.accessDashLoader,
+          children: [
+            {
+              index: true,
+              element: <p.Chats />,
+              errorElement: <p.ErrorPage />,
+              loader: u.accessDashLoader,
+            },
+            {
+              path: ':id',
+              element: <p.ChatBox />,
+              errorElement: <p.ErrorPage />,
+              loader: u.accessDashLoader,
+            }
+          ],
         },
         {
           path: 'channels',

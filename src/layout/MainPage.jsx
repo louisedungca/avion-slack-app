@@ -17,23 +17,21 @@ const MainPage = () => {
   }
 
   return (
-    <DataProvider>
-      <main className='mainpage'>
-        {
-          isLoading ? (
-            <l.MainSkeleton />
-          ) : (
-            <>
-              <c.Navbar />
-              <section className='dashboard'>
-                <Outlet context={users}/>
-                <p.MsgThread users={users} />
-              </section>
-            </>
-          )
-        }           
-      </main>
-    </DataProvider>    
+    <main className='mainpage'>
+      {
+        isLoading ? (
+          <l.MainSkeleton />
+        ) : (
+          <>
+            <c.Navbar />
+            <section className='dashboard'>
+              <Outlet context={users}/>
+              {/* <p.MsgThread users={users} /> */}
+            </section>
+          </>
+        )
+      }           
+    </main>
   )
 }
 

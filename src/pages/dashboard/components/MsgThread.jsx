@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-
-import ConvoBox from './ConvoBox';
+import React from 'react';
 
 function MsgThread(props) {
   const { users } = props;

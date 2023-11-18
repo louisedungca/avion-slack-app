@@ -22,7 +22,7 @@ function LoginPage() {
   async function onSubmit(formData) {
     try {
       await auth.login(formData);
-      navigate('/c');
+      navigate('/c/chats');
     } catch (error) {
       console.error('Login error:', error);
     }

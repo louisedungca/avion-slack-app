@@ -1,10 +1,12 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useOutletContext } from 'react-router-dom';
 
 function DashLayout() {
+  const users = useOutletContext();
+
   return (
-    <section>
-      <Outlet />
+    <section className='dashcontent'>
+      <Outlet context={users} />
     </section>
   )
 }

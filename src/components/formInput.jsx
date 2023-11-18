@@ -13,6 +13,32 @@ export const inputFieldTemplate = (input, register, errors) => (
   </div>
 );
 
+export const textAreaTemplate = (input, register, errors) => (
+  <div key={input.name}>
+    <textarea
+      className='textarea-input'
+      type={input.type}
+      placeholder={input.placeholder}
+      {...register(input.name, {
+        ...input.validation,
+      })} 
+    />
+    {errors[input.name] && <h6 className='input-error'>{errors[input.name].message}</h6>}
+  </div>
+);
+
+// chatbox form input
+export const chatBoxInput = [
+  { 
+    type: 'text', 
+    name: 'sendMessage', 
+    placeholder: 'Type a message', 
+    validation: { 
+      required: 'You cannot send a blank message.',
+    } 
+  },
+];
+
 // login form inputs
 export const loginInput = [
   { 

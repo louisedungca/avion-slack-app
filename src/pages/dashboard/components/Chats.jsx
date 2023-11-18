@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import AsyncSelect from "react-select/async";
 import { PencilSquareIcon } from "@heroicons/react/24/solid";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 function Chats() {
   const users = useOutletContext();
+  const navigate = useNavigate();
   const options = users.map((user) => ({
     value: user.id,
     label: user.uid,
@@ -24,6 +25,10 @@ function Chats() {
   function handleSelectedUser(selectedUser) {
     console.log('Selected User:', selectedUser);
     setSelectedUser(selectedUser);
+
+    if (selectedUser) {
+      navigate(`/c/chats/${selectedUser.value}`);
+    }
   };
 
   function handleClickNewChat() {
@@ -31,22 +36,21 @@ function Chats() {
   };
 
   return (
-    <aside className="aside-chats">
-      <div className="aside-title">
-        <h3>Chats</h3>
-        <PencilSquareIcon className="icon" onClick={handleClickNewChat}/>
-      </div>
+      <aside className="aside-chats">
+        <div className="aside-title">
+          <h3>Chats</h3>
+          <PencilSquareIcon className="icon" onClick={handleClickNewChat}/>
+        </div>
 
-      <div className="search-user">
-        <AsyncSelect 
-          placeholder='Enter email...'
-          loadOptions={loadOptions} 
-          onChange={handleSelectedUser}
-        />
-      </div>
-
-      {selectedUser ? ` Selected User: ${selectedUser.label} (ID: ${selectedUser.value})` : ''}
-    </aside>
+        <div className="search-user">
+          <AsyncSelect 
+            placeholder='Enter email...'
+            loadOptions={loadOptions} 
+            onChange={handleSelectedUser}
+          />
+        </div>
+        {selectedUser ? ` Selected User: ${selectedUser.label} (ID: ${selectedUser.value})` : ''}
+      </aside> 
   );
 }
 

@@ -1,9 +1,10 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 
 function Dashboard({ users }) {
   return (
     <aside className='aside-dashboard'>
-      This is the dashboard sidebar.
+      <Outlet />
     </aside>
   )
 }

@@ -16,7 +16,6 @@
 }
 
 .error-page {
-  border: 2px dotted pink;
   background: #fffff0;
   width: 100%;
   height: 100vh;
@@ -25,6 +24,9 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 .error-page::before {
   content: "";
@@ -51,10 +53,12 @@
 }
 .error-page h1, .error-page h2 {
   color: #58094F;
+  z-index: 7;
 }
 .error-page .btns-wrapper {
   display: flex;
   gap: 0.5rem;
+  z-index: 7;
 }
 .error-page .btns-wrapper button {
   cursor: pointer;
@@ -295,6 +299,7 @@
 }
 
 aside, .aside-chats {
+  border: 2px solid pink;
   width: max(120px, 25vw);
   height: 100%;
   padding: 1rem;
@@ -391,13 +396,97 @@ aside, .aside-chats {
   box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 }
 
-.msg-thread {
+.dashcontent {
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.chatbox {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
   background: #fffff0;
   border-radius: 2.5rem;
   padding: 1.5rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.chatbox-header {
+  border-bottom: 2px dotted #58094F;
+  width: 100%;
+  height: 8vh;
+  display: flex;
+  align-self: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+.chatbox-header .user-icon {
+  width: 45px;
+  display: flex;
+  align-self: center;
+  color: #58094F;
+}
+.chatbox-header .user-uid {
+  display: flex;
+  align-self: center;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: clamp(0.7rem, 0.6077rem + 0.3077vw, 1rem);
+  color: #58094F;
+  letter-spacing: 0.2rem;
+}
+
+.mesgthread {
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem;
+}
+
+.chatbox-form {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 0.02fr;
+  grid-template-rows: 1fr;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+.chatbox-form .textarea-input {
+  width: 100%;
+  height: 2.5rem;
+  resize: none;
+  border-radius: 0.8rem;
+  padding: 0.6rem 1rem;
+  outline: none;
+  border: 1.5px dotted #841E62;
+}
+.chatbox-form .input-error {
+  color: red;
+  padding: 0.2rem 0.5rem;
+  font-weight: 600;
+}
+.chatbox-form .sendchat-btn {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #F3AA20;
+  height: 2.5rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  color: #58094F;
+  transition: 0.3s all ease-in-out;
+}
+.chatbox-form .sendchat-btn:hover {
+  background: #841E62;
+  color: #fffff0;
+  opacity: 0.8;
 }
 
 .mainpage-skeleton {

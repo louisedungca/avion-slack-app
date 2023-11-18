@@ -6,7 +6,7 @@ export function isLoggedInLoader() {
   const headers = getLocalStorage('Headers') || [];
   const token = headers && headers['access-token'];
     if(token) {
-      return redirect("/c");
+      return redirect("/c/chats");
   }
   return null;
 };

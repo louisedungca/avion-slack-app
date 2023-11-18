@@ -1,11 +1,93 @@
 @use '../roots' as *;
 
-.msg-thread{
-  // border: 2px dotted yellowgreen;
+.chatbox{  
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
   background: $white;
   border-radius: 2.5rem;
   padding: 1.5rem;
   box-shadow: $boxShadow2;
+}
+
+.chatbox-header {
+  border-bottom: 2px dotted $primaryColor;
+  width: 100%;
+  height: 8vh;
+  display: flex;
+  align-self: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+
+  .user-icon {
+    width: 45px;
+    display: flex;
+    align-self: center;
+    color: $primaryColor;
+  }
+
+  .user-uid {
+    display: flex;
+    align-self: center;
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: $span;
+    color: $primaryColor;
+    letter-spacing: 0.2rem;
+  }
+}
+
+.mesgthread {
+  // border: 2px dotted darkblue;
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem;
+}
+
+.chatbox-form {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 0.02fr;
+  grid-template-rows: 1fr;
+  gap: 0.5rem;
+  padding: 0.5rem;
+
+  .textarea-input {
+    width: 100%;
+    height: 2.5rem;
+    resize: none;
+    border-radius: 0.8rem;
+    padding: 0.6rem 1rem;
+    outline: none;
+    border: 1.5px dotted $secondaryColor;
+  }
+
+  .input-error {
+    color: $warning;
+    padding: 0.2rem 0.5rem;
+    font-weight: 600;
+  }
+
+  .sendchat-btn {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $accent;
+    height: 2.5rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    color: $primaryColor;
+    transition: 0.3s all ease-in-out;
+
+    &:hover {
+      background: $secondaryColor;
+      color: $white;
+      opacity: 0.8;
+    }
+  }
 }
