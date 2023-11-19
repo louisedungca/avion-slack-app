@@ -16,6 +16,19 @@ export function useFetch(url, options = {}) {
       const expiry = headers && headers['expiry'];
       const uid = headers && headers['uid'];
 
+      console.log('Request data:', {
+        method: options.method,
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'access-token': token,
+          'client': client,
+          'expiry': expiry,
+          'uid': uid,
+          ...options.headers, 
+        },
+      });
+
       const response = await fetch(url, {
         ...options,
         method: options.method,

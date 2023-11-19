@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 
 import { chatBoxInput, textAreaTemplate } from '../../../components';
 import { useFetch } from '../../../hooks';
-import { getMsgUrl } from '../../../utils';
+import { formatTimestamp, getMsgUrl } from '../../../utils';
 import Chats from './Chats';
 
 
@@ -21,12 +21,12 @@ function ChatBox() {
   console.log('User:', user);
 
   const [messages, setMessages] = useState([]);
-  const { data, error, isLoading, fetchData } = useFetch(getMsgUrl(userID));
+  const { data, error, isLoading, fetchData } = useFetch(getMsgUrl(userID), { method: 'GET' });
 
   useEffect(() => {
     fetchData();
   }, [userID]);
-  
+
   useEffect(() => {
     if (data) {
       setMessages(data.data);
@@ -63,21 +63,23 @@ function ChatBox() {
         </div>
 
         <div className="mesgthread">
-        {messages && messages.length > 0 && 
-          messages.map((message) => (
-            <div 
-              key={message.id}
-              className={`message-box ${message.sender.id === userID ? 'left' : ''} ${message.receiver.id === userID ? 'right' : ''}`}
-            >
-              <div className='message'>
-                <p>{message.body}</p>  
-                <small>Receiver: {message.receiver.email} (ID: {message.receiver.id})</small>   
-                <small>Sender: {message.sender.email} (ID: {message.sender.id})
-                </small>          
-              </div>              
-            </div>
-          ))
-        }
+            {messages && messages.length > 0 && 
+            messages.map((message) => (
+              <div 
+                key={message.id}
+                className={`message-box ${message.sender.id === userID ? 'left' : ''} ${message.receiver.id === userID ? 'right' : ''}`}
+              >
+                <div className='message'>
+                  <p>{message.body}</p>  
+
+                  {/* Delete later */}
+                  <small>Receiver: {message.receiver.email} (ID: {message.receiver.id})</small>   
+                  <small>Sender: {message.sender.email} (ID: {message.sender.id})
+                  </small>               
+                </div>    
+              </div>
+            ))
+          }
         </div>
 
         <div className='form-wrapper'>
