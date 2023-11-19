@@ -445,6 +445,40 @@ aside, .aside-chats {
   width: 100%;
   height: 100%;
   padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.message-box {
+  width: 100%;
+}
+
+.message-box.left {
+  display: flex;
+  color: #58094F;
+}
+.message-box.left .message {
+  background-color: #f9e7f3;
+}
+
+.message-box.right {
+  color: #58094F;
+  display: flex;
+  justify-content: flex-end;
+}
+.message-box.right .message {
+  background-color: #771b58;
+  color: #fffff0;
+  align-items: end;
+}
+
+.message {
+  border-radius: 1rem;
+  padding: 0.3rem 1rem;
+  font-size: clamp(0.7rem, 0.6077rem + 0.3077vw, 1rem);
+  display: flex;
+  flex-direction: column;
 }
 
 .chatbox-form {

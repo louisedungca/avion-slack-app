@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { allUsersUrl, getLocalStorage, getMsgUrl } from "../utils";
+import { allUsersUrl, getLocalStorage } from "../utils";
 
 export function useFetch(url, options = {}) {
   const [data, setData] = useState([]);
@@ -54,10 +54,3 @@ export function useFetchUsers() {
 
   return { users, error, isLoading, fetchData };
 };
-
-// export function useFetchMesg(uid) {
-//   const { data, error, isLoading, fetchData } = useFetch(getMsgUrl, { method: 'GET' });
-//   const messages = data?.data || [];
-
-//   return { messages, error, isLoading, fetchData };
-// }

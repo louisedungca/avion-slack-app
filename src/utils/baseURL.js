@@ -10,7 +10,7 @@ export const loginUrl = `${baseUrl}/api/v1/auth/sign_in`;
 export const sendMsgUrl = `${baseUrl}/api/v1/messages`;
 
 // Retrieve Message
-export const getMsgUrl = `${baseUrl}/api/v1/messages?receiver_id=1&receiver_class=User`;
+export const getMsgUrl = (id) => `${baseUrl}/api/v1/messages?receiver_id=${id}&receiver_class=User`;
 
 // Create Channel with members
 export const createChannelUrl = `${baseUrl}/api/v1/channels`;
