@@ -35,13 +35,13 @@ function App() {
       children: [
         {
           path: 'chats',
-          element: <l.DashLayout />,
+          element: <l.ChatLayout />,
           errorElement: <p.ErrorPage />,
           loader: u.accessDashLoader,
           children: [
             {
               index: true,
-              element: <p.Placeholder />,
+              element: <c.Placeholder type={'chat'} />,
               errorElement: <p.ErrorPage />,
               loader: u.accessDashLoader,
             },
@@ -55,9 +55,23 @@ function App() {
         },
         {
           path: 'channels',
-          element: <p.Channel />,
+          element: <l.ChannelLayout />,
           errorElement: <p.ErrorPage />,
           loader: u.accessDashLoader,
+          children: [
+            {
+              index: true,
+              element: <c.Placeholder type={'channel'} />,
+              errorElement: <p.ErrorPage />,
+              loader: u.accessDashLoader,
+            },
+            {
+              path: ':channelID',
+              element: <p.ChatBox />,
+              errorElement: <p.ErrorPage />,
+              loader: u.accessDashLoader,
+            }
+          ],
         },
         {
           path: 'people',

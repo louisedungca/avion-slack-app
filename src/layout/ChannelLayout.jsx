@@ -1,16 +1,16 @@
 import React from 'react';
 import { Outlet, useOutletContext } from 'react-router-dom';
-import { Chats } from '../pages';
+import { Channel } from '../pages';
 
-function DashLayout() {
+function ChatLayout() {
   const users = useOutletContext();
 
   return (
     <section className='dashcontent'>
-      <Chats users={users} />
-      <Outlet context={users} />
+      <Channel users={users} />
+      <Outlet context={users}/>
     </section>
   )
 }
 
-export default DashLayout
+export default ChatLayout

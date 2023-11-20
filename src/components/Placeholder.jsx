@@ -1,11 +1,11 @@
 import React from 'react';
-import logo from '../../../assets/smileylogo.png';
+import logo from '../assets//smileylogo.png';
 
-function Placeholder() {
+function Placeholder({ type }) {
   return (
     <div className="chatbox placeholder">
       <img src={logo} alt="logo" className="logo" />
-      <h3>No chats selected</h3>
+      <h3>No {type} selected</h3>
     </div>
   )
 }

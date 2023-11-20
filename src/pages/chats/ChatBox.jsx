@@ -2,9 +2,9 @@ import { UserCircleIcon } from '@heroicons/react/24/outline';
 import { useOutletContext, useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 
-import { SendChat } from '../../../components';
-import { useFetch } from '../../../hooks';
-import { getMsgUrl } from '../../../utils';
+import { useFetch } from '../../hooks';
+import { getMsgUrl } from '../../utils';
+import { SendChat } from '../../components';
 
 
 function ChatBox() {
