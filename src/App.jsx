@@ -41,7 +41,7 @@ function App() {
           children: [
             {
               index: true,
-              element: <p.Chats />,
+              element: <p.Placeholder />,
               errorElement: <p.ErrorPage />,
               loader: u.accessDashLoader,
             },

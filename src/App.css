@@ -415,6 +415,21 @@ aside, .aside-chats {
   padding: 1.5rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
+.chatbox.placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+}
+.chatbox.placeholder .logo {
+  width: max(100px, 10%);
+  filter: drop-shadow(5px 5px 10px #771b58);
+}
+.chatbox.placeholder h3 {
+  color: #58094F;
+  letter-spacing: 0.12rem;
+}
 
 .chatbox-header {
   border-bottom: 2px dotted #58094F;

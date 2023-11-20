@@ -23,11 +23,11 @@ function Chats() {
   }
 
   function handleSelectedUser(selectedUser) {
-    console.log('Selected User:', selectedUser);
     setSelectedUser(selectedUser);
 
     if (selectedUser) {
       navigate(`/c/chats/${selectedUser.value}`);
+      console.log('Selected User:', selectedUser);
     }
   };
 
@@ -50,8 +50,8 @@ function Chats() {
           />
         </div>
         {selectedUser ? ` Selected User: ${selectedUser.label} (ID: ${selectedUser.value})` : ''}
-      </aside> 
-  );
+      </aside>      
+  );  
 }
 
 export default Chats;
