@@ -5,19 +5,18 @@ export function useFetch(url, options = {}) {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const headers = getLocalStorage('Headers');
+  const token = headers && headers['access-token'];
+  const client = headers && headers['client'];
+  const expiry = headers && headers['expiry'];
+  const uid = headers && headers['uid'];
 
   async function fetchData(requestBody) {
     try {
       setIsLoading(true);
 
-      const headers = getLocalStorage('Headers');
-      const token = headers && headers['access-token'];
-      const client = headers && headers['client'];
-      const expiry = headers && headers['expiry'];
-      const uid = headers && headers['uid'];
-
       // log req data
-      console.log('Request data:', {
+      console.log('@useFetch Request data:', {
         method: options.method,
         body: JSON.stringify(requestBody),
         url, 
