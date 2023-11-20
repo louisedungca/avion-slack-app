@@ -14,7 +14,7 @@ function ChatBox() {
   // console.log('Params ID:', id);
 
   const userID = +id;
-  const user = users.find((item) => item.id === userID);
+  const user = users.find((item) => item.id === userID) || [];
   // console.log('User:', user);
 
   const [messages, setMessages] = useState([]);
@@ -24,7 +24,7 @@ function ChatBox() {
   useEffect(() => {
       fetchMesg();
       setIsMessageSent(true);
-      
+
   }, [userID, isMessageSent]);
 
   useEffect(() => {
@@ -35,9 +35,9 @@ function ChatBox() {
   }, [mesgData]);
   
   // for checking only -- delete later
-  useEffect(() => { 
-    console.log('Messages:', messages);
-  }, [messages]);
+  // useEffect(() => { 
+  //   console.log('Messages:', messages);
+  // }, [messages]);
 
   return (
     <section className='dashcontent'>
@@ -50,7 +50,7 @@ function ChatBox() {
 
         <div className="mesgthread">
             {messages && messages.length > 0 && 
-            messages.map((message) => (
+            messages.toReversed().map((message) => (
               <div 
                 key={message.id}
                 className={`message-box ${message.sender.id === userID ? 'left' : ''} ${message.receiver.id === userID ? 'right' : ''}`}

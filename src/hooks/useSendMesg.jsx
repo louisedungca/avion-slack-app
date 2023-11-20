@@ -1,5 +1,5 @@
 import { useFetch } from './useFetch';
-import { getLocalStorage, sendMsgUrl } from '../utils';
+import { sendMsgUrl } from '../utils';
 import { useState } from 'react';
 
 export function useSendMesg(userID, receiverClass, onMessageSent) {
@@ -8,12 +8,6 @@ export function useSendMesg(userID, receiverClass, onMessageSent) {
   const { fetchData } = useFetch(sendMsgUrl, { method: 'POST' });
 
   async function sendMesg(message) {
-    const headers = getLocalStorage('Headers');
-    const token = headers && headers['access-token'];
-    const client = headers && headers['client'];
-    const expiry = headers && headers['expiry'];
-    const uid = headers && headers['uid'];
-
     const requestBody = {
       receiver_id: +userID,
       receiver_class: receiverClass,
@@ -23,16 +17,7 @@ export function useSendMesg(userID, receiverClass, onMessageSent) {
     setIsLoading(true);
 
     try {
-      const response = await fetchData(requestBody, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'access-token': token,
-          'client': client,
-          'expiry': expiry,
-          'uid': uid,
-        },
-      });
+      const response = await fetchData(requestBody, { method: 'POST' });
 
       if (!response.ok) {
         throw new Error(response.data.message || 'Failed to send the message.');
