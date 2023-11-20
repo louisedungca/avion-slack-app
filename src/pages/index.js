@@ -8,7 +8,6 @@ export { default as Profile } from './dashboard/components/Profile';
 export { default as Chats } from './dashboard/components/Chats';
 export { default as Channel } from './dashboard/components/Channel';
 export { default as People } from './dashboard/components//People';
-export { default as MsgThread } from './dashboard/components/MsgThread';
 export { default as ChatBox } from './dashboard/components/ChatBox';
 
 // login and signup

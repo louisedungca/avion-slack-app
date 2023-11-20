@@ -6,7 +6,7 @@ export function useFetch(url, options = {}) {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  async function fetchData() {
+  async function fetchData(requestBody) {
     try {
       setIsLoading(true);
 
@@ -16,9 +16,11 @@ export function useFetch(url, options = {}) {
       const expiry = headers && headers['expiry'];
       const uid = headers && headers['uid'];
 
+      // log req data
       console.log('Request data:', {
         method: options.method,
-        url,
+        body: JSON.stringify(requestBody),
+        url, 
         headers: {
           'Content-Type': 'application/json',
           'access-token': token,
@@ -32,6 +34,7 @@ export function useFetch(url, options = {}) {
       const response = await fetch(url, {
         ...options,
         method: options.method,
+        body: JSON.stringify(requestBody),
         headers: {
           'Content-Type': 'application/json',
           'access-token': token,
@@ -43,14 +46,15 @@ export function useFetch(url, options = {}) {
       });
       const result = await response.json();
 
-      // console.log('Response:', response);
+      // log response
       console.log('Response data:', result);
 
       if(!response.ok) {
-        throw new Error(result.message || 'Failed to fetch data.');
+        throw new Error(result.message || 'There was a problem in fetching the data.');
       }
       
       setData(result);
+      return response;
     } catch (error) {
       setError(error.message || 'An error occurred while fetching data.');
     } finally {

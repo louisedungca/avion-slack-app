@@ -1,57 +1,43 @@
-import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 import { UserCircleIcon } from '@heroicons/react/24/outline';
 import { useOutletContext, useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
 
-import { chatBoxInput, textAreaTemplate } from '../../../components';
+import { SendChat } from '../../../components';
 import { useFetch } from '../../../hooks';
-import { formatTimestamp, getMsgUrl } from '../../../utils';
+import { getMsgUrl } from '../../../utils';
 import Chats from './Chats';
 
 
 function ChatBox() {
   const users = useOutletContext();
   const { id } = useParams();
-  const { register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset } = useForm();    
   // console.log('Params ID:', id);
 
   const userID = +id;
   const user = users.find((item) => item.id === userID);
-  console.log('User:', user);
+  // console.log('User:', user);
 
   const [messages, setMessages] = useState([]);
-  const { data, error, isLoading, fetchData } = useFetch(getMsgUrl(userID), { method: 'GET' });
+  const [isMessageSent, setIsMessageSent] = useState(false);
+  const { data: mesgData, fetchData: fetchMesg } = useFetch(getMsgUrl(userID), { method: 'GET' });
 
   useEffect(() => {
-    fetchData();
-  }, [userID]);
+      fetchMesg();
+      setIsMessageSent(true);
+      
+  }, [userID, isMessageSent]);
 
   useEffect(() => {
-    if (data) {
-      setMessages(data.data);
-      console.log('Fetched Messages:', data.data);
+    if (mesgData) {
+      setMessages(mesgData.data);
+      console.log('Fetched Messages:', mesgData.data);
     }
-  }, [data]);
+  }, [mesgData]);
   
-  useEffect(() => {
+  // for checking only -- delete later
+  useEffect(() => { 
     console.log('Messages:', messages);
   }, [messages]);
-  
-  useEffect(() => {
-    if(isSubmitSuccessful) {
-      reset({ 
-        sendMessage: '', 
-      });
-    }
-
-  }, [isSubmitSuccessful]);
-
-  function onSubmit(formData) {
-    console.log(formData);
-    // send message logic
-    // display sent message logic
-  };
 
   return (
     <section className='dashcontent'>
@@ -79,22 +65,16 @@ function ChatBox() {
                 </div>    
               </div>
             ))
-          }
+          }         
         </div>
 
-        <div className='form-wrapper'>
-            <form onSubmit={handleSubmit(onSubmit)} className='chatbox-form'>              
-              {chatBoxInput.map(input => textAreaTemplate(input, register, errors))}
+        <SendChat 
+          userID={userID} 
+          onMessageSent={() => setIsMessageSent(true)}
+        />
 
-              <button
-              type="submit"
-              className='sendchat-btn'
-              >
-                <i><PaperAirplaneIcon width={20}/></i>
-              </button>
-            </form>
-          </div>        
-      </div>    
+        {/* {isMessageSent && <small className='success-message'>Message sent!</small>}     */}
+      </div>         
     </section>
   )
 }

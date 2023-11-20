@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form';
 import { inputFieldTemplate, loginInput } from '../../components';
 import { useAuth } from '../../hooks';
 
-
 function LoginPage() {
   const { register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset } = useForm();
   const auth = useAuth();

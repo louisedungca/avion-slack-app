@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Outlet } from 'react-router';
-import { DataProvider, useFetchUsers } from '../hooks';
+import { useFetchUsers } from '../hooks';
 import * as c from '../components';
 import * as p from '../pages';
 import * as l from '../layout';
@@ -26,7 +26,6 @@ const MainPage = () => {
             <c.Navbar />
             <section className='dashboard'>
               <Outlet context={users}/>
-              {/* <p.MsgThread users={users} /> */}
             </section>
           </>
         )
