@@ -6,6 +6,8 @@ export { default as People } from './general/People';
 
 // channel
 export { default as Channel } from './channel/Channel';
+export { default as ChannelBox } from './channel/ChannelBox';
+export { default as CreateChannel } from './channel/CreateChannel';
 
 // chat
 export { default as Chats } from './chats/Chats';

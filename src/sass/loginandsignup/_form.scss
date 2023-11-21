@@ -26,27 +26,27 @@
       padding: 0.2rem 0.5rem;
       font-weight: 600;
     }
-
-    .btn-main {
-      cursor: pointer;
-      color: $primaryColor;
-      font-weight: 800;
-      letter-spacing: 0.12rem;
-      text-transform: uppercase;
-      font-size: $span;
-      background: $accent;
-      border-radius: 1rem;
-      border: none;
-      outline: none;
-      margin-top: 0.5rem;
-      height: 2.2rem;
-      transition: 0.3s all ease-in-out;
-
-      &:hover {
-        background: $secondaryColor;
-        color: $white;
-        opacity: 0.8;
-      }
-    }
   }  
+}
+
+.btn-main {
+  cursor: pointer;
+  color: $primaryColor;
+  font-weight: 800;
+  letter-spacing: 0.12rem;
+  text-transform: uppercase;
+  font-size: $span;
+  background: $accent;
+  border-radius: 1rem;
+  border: none;
+  outline: none;
+  margin-top: 0.5rem;
+  height: 2.2rem;
+  transition: 0.3s all ease-in-out;
+
+  &:hover {
+    background: $secondaryColor;
+    color: $white;
+    opacity: 0.8;
+  }
 }

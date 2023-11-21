@@ -67,7 +67,7 @@ function App() {
             },
             {
               path: ':channelID',
-              element: <p.ChatBox />,
+              element: <p.ChannelBox />,
               errorElement: <p.ErrorPage />,
               loader: u.accessDashLoader,
             }

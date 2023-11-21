@@ -26,7 +26,9 @@ function SendChat({ userID, onMessageSent }) {
 
   return (
     <div className='form-wrapper'>
-      <form onSubmit={handleSubmit(onSubmit)} className='chatbox-form'>              
+      <form 
+        onSubmit={handleSubmit(onSubmit)} className='chatbox-form'
+      >              
         {chatBoxInput.map(input => textAreaTemplate(input, register, errors))}
 
         <button

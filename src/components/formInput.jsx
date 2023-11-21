@@ -27,6 +27,18 @@ export const textAreaTemplate = (input, register, errors) => (
   </div>
 );
 
+// new channel form input
+export const newChannelInput = [
+  { 
+    type: 'text', 
+    name: 'channelName', 
+    placeholder: 'Name your channel', 
+    validation: { 
+      required: 'This field is required.',
+    } 
+  },
+];
+
 // chatbox form input
 export const chatBoxInput = [
   { 
