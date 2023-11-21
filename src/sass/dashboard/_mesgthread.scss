@@ -16,7 +16,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1.2rem;
+    gap: 1.5rem;
     
     .logo {
       width: max(100px, 10%);
@@ -24,8 +24,35 @@
     }
 
     h3 {
+      font-size: $h4;
       color: $primaryColor;
       letter-spacing: 0.12rem;
+    }
+  }
+  
+  .startconvo-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    color: $primaryColor;
+    letter-spacing: 0.12rem;
+
+    .logo {
+      width: max(100px, 10%);
+      filter: $dropShadow;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: $h4;
+    }
+
+    p {
+      font-size: $h5;
     }
   }
 }

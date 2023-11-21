@@ -2,6 +2,7 @@ import { UserCircleIcon } from '@heroicons/react/24/outline';
 import { useOutletContext, useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 
+import logo from '../../assets/smileylogo.png';
 import { useFetch } from '../../hooks';
 import { getMsgUrl } from '../../utils';
 import { SendChat } from '../../components';
@@ -46,7 +47,7 @@ function ChatBox() {
         </div>
 
         <div className="mesgthread">
-            {messages && messages.length > 0 && 
+            {messages && messages.length > 0 ? 
             messages.reverse().map((message) => (
               <div 
                 key={message.id}
@@ -61,7 +62,11 @@ function ChatBox() {
                   </small>               
                 </div>    
               </div>
-            ))
+            )) : <div className="startconvo-wrapper">
+              <img src={logo} alt="logo" className="logo" />
+              <h3>You're starting a new conversation</h3>
+              <p>Type your first message below.</p>
+            </div>
           }         
         </div>
 

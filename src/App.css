@@ -420,15 +420,38 @@ aside, .aside-chats {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1.2rem;
+  gap: 1.5rem;
 }
 .chatbox.placeholder .logo {
   width: max(100px, 10%);
   filter: drop-shadow(5px 5px 10px #771b58);
 }
 .chatbox.placeholder h3 {
+  font-size: clamp(0.85rem, 0.8165rem + 0.5361vw, 1.5rem);
   color: #58094F;
   letter-spacing: 0.12rem;
+}
+.chatbox .startconvo-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  color: #58094F;
+  letter-spacing: 0.12rem;
+}
+.chatbox .startconvo-wrapper .logo {
+  width: max(100px, 10%);
+  filter: drop-shadow(5px 5px 10px #771b58);
+  margin-bottom: 1rem;
+}
+.chatbox .startconvo-wrapper h3 {
+  font-size: clamp(0.85rem, 0.8165rem + 0.5361vw, 1.5rem);
+}
+.chatbox .startconvo-wrapper p {
+  font-size: clamp(0.8rem, 0.7794rem + 0.3299vw, 1.2rem);
 }
 
 .chatbox-header {
