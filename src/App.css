@@ -103,7 +103,8 @@
   outline: none;
   border: 1.5px dotted #841E62;
 }
-.form-wrapper .form-content .input-error {
+
+.input-error {
   color: red;
   padding: 0.2rem 0.5rem;
   font-weight: 600;
@@ -329,6 +330,10 @@ aside, .aside-chats {
   width: clamp(1rem, 0.8485rem + 0.7247vw, 1.8rem);
   color: #fffff0;
   text-shadow: 1.2px 1.2px 3px #58094F;
+  cursor: pointer;
+}
+.aside-title .icon:hover {
+  opacity: 0.65;
 }
 
 .user-container {
@@ -583,15 +588,32 @@ aside, .aside-chats {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 2rem;
-  border-radius: 0.5rem;
+  gap: 0.65rem;
+  padding: 1.5rem 2rem;
+  border-radius: 1rem;
+  border: 2px dotted #58094F;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: min(450px, 70%);
   color: #58094F;
-  text-transform: capitalize;
   font-size: clamp(0.7rem, 0.6077rem + 0.3077vw, 1rem);
   letter-spacing: 0.12rem;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-header .btn-close {
+  cursor: pointer;
+  font-size: clamp(1rem, 0.8485rem + 0.7247vw, 1.8rem);
+  background: none;
+  border: none;
+  outline: none;
+  color: #841E62;
+}
+.modal-header .btn-close:hover {
+  color: #F3AA20;
 }
 
 .modal-form {

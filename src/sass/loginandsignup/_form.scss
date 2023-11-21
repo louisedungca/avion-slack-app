@@ -20,13 +20,13 @@
       outline: none;
       border: 1.5px dotted $secondaryColor;
     }
-
-    .input-error {
-      color: $warning;
-      padding: 0.2rem 0.5rem;
-      font-weight: 600;
-    }
   }  
+}
+
+.input-error {
+  color: $warning;
+  padding: 0.2rem 0.5rem;
+  font-weight: 600;
 }
 
 .btn-main {

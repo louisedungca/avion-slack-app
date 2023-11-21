@@ -32,6 +32,11 @@ aside, .aside-chats {
     width: $h3;
     color: $white;
     text-shadow: $textShadow;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.65;
+    }
   }
 }
 

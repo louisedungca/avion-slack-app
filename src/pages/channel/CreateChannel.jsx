@@ -30,10 +30,15 @@ function CreateChannel({ isOpen, onClose, onSubmit, users }) {
   }, [isSubmitSuccessful]);
 
   return (
-    <div className={`modal ${isOpen ? 'open' : ''}`} onClick={onClose}>
+    <div className={`modal ${isOpen ? 'open' : ''}`}>
       <div className="modal-content">
-        <h4 className='modal-title'>Create New Channel</h4>
-
+        <div className="modal-header">
+          <h4 className='modal-title'>Create New Channel</h4>
+          <button className="btn-close" onClick={onClose}>
+            &times;
+          </button>
+        </div>
+      
         <form 
           onSubmit={handleSubmit(onSubmit)}
           className='modal-form'
