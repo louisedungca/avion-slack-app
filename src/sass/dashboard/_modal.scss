@@ -11,13 +11,13 @@
   justify-content: center;
   align-items: center;
   z-index: 3;
+
+  &.open {
+    display: flex;
+  }
 }
 
-.modal.open {
-  display: flex;
-}
-
-.modal-content {
+.modal-wrapper {
   background:$white;
   display: flex;
   flex-direction: column;
@@ -41,12 +41,14 @@
 
   .btn-close {
     cursor: pointer;
-    font-size: $h3;    
+    display: flex;
+    align-items: center;
     background: none;
     border: none;
     outline: none;
+    width: min(30px, 20%);
     color: $secondaryColor;
-
+  
     &:hover {
       color: $accent;
     }
@@ -69,8 +71,6 @@
     width: 100%;
     font-size: $h5;
     color: $primaryColor;
-
-    
   }
 }
 

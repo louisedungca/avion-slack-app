@@ -34,7 +34,7 @@ export const newChannelInput = [
     name: 'channelName', 
     placeholder: 'Name your channel', 
     validation: { 
-      required: 'This field is required.',
+      required: 'Give your channel a name!',
     } 
   },
 ];

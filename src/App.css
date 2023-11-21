@@ -578,12 +578,11 @@ aside, .aside-chats {
   align-items: center;
   z-index: 3;
 }
-
 .modal.open {
   display: flex;
 }
 
-.modal-content {
+.modal-wrapper {
   background: #fffff0;
   display: flex;
   flex-direction: column;
@@ -606,10 +605,12 @@ aside, .aside-chats {
 }
 .modal-header .btn-close {
   cursor: pointer;
-  font-size: clamp(1rem, 0.8485rem + 0.7247vw, 1.8rem);
+  display: flex;
+  align-items: center;
   background: none;
   border: none;
   outline: none;
+  width: min(30px, 20%);
   color: #841E62;
 }
 .modal-header .btn-close:hover {

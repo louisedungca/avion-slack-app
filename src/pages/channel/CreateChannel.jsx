@@ -1,7 +1,9 @@
+import { XCircleIcon } from '@heroicons/react/24/outline';
 import React, { useEffect } from 'react';
 import AsyncSelect from "react-select/async";
 import { useForm, Controller } from 'react-hook-form';
 import { inputFieldTemplate, newChannelInput } from '../../components';
+
 
 function CreateChannel({ isOpen, onClose, onSubmit, users }) {
   const { control, register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset } = useForm();
@@ -21,21 +23,22 @@ function CreateChannel({ isOpen, onClose, onSubmit, users }) {
   };
 
   useEffect(() => {
-    if(isSubmitSuccessful) {
+    if(isSubmitSuccessful || !isOpen) {
       reset({ 
         channelName: '', 
+        channelUsers: [],
       });
     }
 
-  }, [isSubmitSuccessful]);
+  }, [isSubmitSuccessful, isOpen]);
 
   return (
     <div className={`modal ${isOpen ? 'open' : ''}`}>
-      <div className="modal-content">
+      <div className="modal-wrapper">
         <div className="modal-header">
           <h4 className='modal-title'>Create New Channel</h4>
           <button className="btn-close" onClick={onClose}>
-            &times;
+            <XCircleIcon />
           </button>
         </div>
       
