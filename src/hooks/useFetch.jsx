@@ -54,7 +54,7 @@ export function useFetch(url, options = {}) {
       }
       
       setData(result);
-      return response;
+      return { response, result };
     } catch (error) {
       setError(error.message || 'An error occurred while fetching data.');
     } finally {
@@ -62,7 +62,7 @@ export function useFetch(url, options = {}) {
     }
   };
 
-  return { data, error, isLoading, fetchData };
+  return { data, error, setError, isLoading, fetchData };
 };
 
 export function useFetchUsers() {

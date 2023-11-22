@@ -642,6 +642,13 @@ aside, .aside-chats {
   letter-spacing: 0.05rem;
 }
 
+.error-text {
+  text-align: center;
+  color: red;
+  font-weight: 600;
+  padding: 0 0.5rem;
+}
+
 .mainpage-skeleton {
   background: #fffff0;
   height: 100vh;

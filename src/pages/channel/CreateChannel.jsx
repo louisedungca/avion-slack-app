@@ -61,17 +61,17 @@ function CreateChannel({ isOpen, onClose, onSubmit, users }) {
                 placeholder='Enter email...'
                 isMulti
                 loadOptions={loadOptions} 
-                // onChange={handleSelectedUser}
               />
             )}
           />
 
           <div className="channel-guidelines">
             <small>Channel Guidelines:</small>
-            <small>Participate as yourself and don't post anything that disrespects your fellow channel members. Be kind and don't be rude or cruel.</small>
+            <small>Participate as yourself. Remember to be kind and don't be rude. Try your best to not post anything that disrespects your fellow channel members.</small>
           </div>
 
           <button className='btn-main' type="submit">Create</button>
+          {/* <small className='error-text'>{error}</small> */}
         </form>        
       </div>
     </div>

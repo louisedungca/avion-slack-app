@@ -1,24 +1,49 @@
 import { PencilSquareIcon } from '@heroicons/react/24/solid';
 import React, { useState } from 'react';
 import CreateChannel from './CreateChannel';
+import { useFetch } from '../../hooks';
+import { createChannelUrl } from '../../utils';
 
 function Channel({ users }) {
-  // console.log('@Channel:', users);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { fetchData, isLoading, error, setError } = useFetch(createChannelUrl, { method: 'POST' });
 
-  const openModal = () => {
+  function openModal() {
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
+  function closeModal() {
     setIsModalOpen(false);
   };
 
-  const onSubmit = (data) => {
-    // Handle form submission here
-    console.log(data);
-    // Close the modal or perform other actions
-    closeModal();
+  async function onSubmit(channelData) {
+    const { channelUsers, channelName } = channelData
+    console.log('channelName:', channelName);
+    console.log('channelUsers:', channelUsers);
+
+    const membersArray = channelUsers.map(member => member.value);
+    console.log('membersArray:', membersArray);
+
+    const body = {
+      name: channelName,
+      user_ids: membersArray,
+    }
+
+    try {
+      const { response, result } = await fetchData(body);
+      console.log('Create Channel Response:', response);
+      console.log('@Channel result:', result);
+
+      if(result.errors) {
+        throw new Error (result.errors || 'There was a problem in creating a new channel.');
+      }
+
+      // close modal onSubmit
+      closeModal();
+    } catch (error) {
+      setError(error);
+      console.error(error);
+    }
   };
 
   return (
@@ -28,7 +53,13 @@ function Channel({ users }) {
         <PencilSquareIcon className="icon" onClick={openModal}/>
       </div>
 
-      <CreateChannel users={users} isOpen={isModalOpen} onClose={closeModal} onSubmit={onSubmit} />
+      <CreateChannel 
+        users={users} 
+        error={error}
+        isOpen={isModalOpen} 
+        onClose={closeModal} 
+        onSubmit={onSubmit} 
+      />
     </aside>
   )
 }

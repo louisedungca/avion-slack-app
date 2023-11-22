@@ -35,6 +35,10 @@ export const newChannelInput = [
     placeholder: 'Name your channel', 
     validation: { 
       required: 'Give your channel a name!',
+      maxLength: {
+        value: 15, 
+        message: 'Channel name must only have a maximum of 15 characters' 
+      }
     } 
   },
 ];
