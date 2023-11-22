@@ -46,7 +46,7 @@ export async function channelLoader() {
     });
 
     if (!response.ok) {
-      throw new Error('Failed to fetch channels');
+      throw new Error('Failed to fetch channels list.');
     }
 
     const result = await response.json();
@@ -57,5 +57,5 @@ export async function channelLoader() {
     };
   } catch (error) {
     console.error(error);
-  }
-}
+  };
+};

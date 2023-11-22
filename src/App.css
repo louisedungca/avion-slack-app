@@ -336,7 +336,7 @@ aside, .aside-chats {
   opacity: 0.65;
 }
 
-.user-container {
+.thumbnail-container {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -344,22 +344,22 @@ aside, .aside-chats {
   padding: 0.5rem;
   overflow-y: scroll;
 }
-.user-container::-webkit-scrollbar {
+.thumbnail-container::-webkit-scrollbar {
   width: 0.3rem;
   height: 0.3rem;
 }
-.user-container::-webkit-scrollbar-track {
+.thumbnail-container::-webkit-scrollbar-track {
   background: #58094F;
   border-radius: 0.8rem;
 }
-.user-container::-webkit-scrollbar-thumb {
+.thumbnail-container::-webkit-scrollbar-thumb {
   background: #fffff0;
   border-radius: 0.3rem;
 }
-.user-container::-webkit-scrollbar-thumb:hover {
+.thumbnail-container::-webkit-scrollbar-thumb:hover {
   background: #F3AA20;
 }
-.user-container .user-wrapper {
+.thumbnail-container .thumbnail-wrapper {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -368,15 +368,21 @@ aside, .aside-chats {
   border-radius: 1rem;
   box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 }
-.user-container .user-wrapper .user-icon {
+.thumbnail-container .thumbnail-wrapper .thumbnail-icon {
   width: 40px;
   color: #58094F;
 }
-.user-container .user-wrapper .user-uid {
+.thumbnail-container .thumbnail-wrapper .thumbnail-name {
   font-size: clamp(0.75rem, 0.7268rem + 0.3711vw, 1.2rem);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding: 0 1rem;
+}
+
+.channel {
+  text-transform: uppercase;
+  color: #58094F;
 }
 
 .mainpage {

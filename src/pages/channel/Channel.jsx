@@ -1,9 +1,11 @@
 import { PencilSquareIcon } from '@heroicons/react/24/solid';
+import { Link, useLoaderData } from 'react-router-dom';
 import React, { useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
-import CreateChannel from './CreateChannel';
-import { useFetch } from '../../hooks';
+
 import { createChannelUrl } from '../../utils';
+import { CreateChannel } from '../../pages';
+import { useFetch } from '../../hooks';
+
 
 function Channel({ users }) {
   const { channels } = useLoaderData();
@@ -64,11 +66,11 @@ function Channel({ users }) {
       />
 
       {channels && channels.length > 0 && (
-          <div className="channel-list">
+          <div className="thumbnail-container">
             {channels.map(channel => (
-              <div key={channel.id} className="channel">
-                <h4>{channel.name}</h4>
-              </div>
+              <Link key={channel.id} className="thumbnail-wrapper">
+                <p className='thumbnail-name channel'>{channel.name}</p>
+              </Link>
             ))}
           </div>
         )

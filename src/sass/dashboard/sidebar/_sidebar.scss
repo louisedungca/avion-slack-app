@@ -40,7 +40,7 @@ aside, .aside-chats {
   }
 }
 
-.user-container {
+.thumbnail-container {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -67,7 +67,7 @@ aside, .aside-chats {
     background: $accent;
   }
 
-  .user-wrapper {
+  .thumbnail-wrapper {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -79,17 +79,22 @@ aside, .aside-chats {
     border-radius: 1rem;
     box-shadow: $boxShadow1;
 
-    .user-icon {
+    .thumbnail-icon {
       width: 40px;
       color: $primaryColor;
     }
 
-    .user-uid {
-      font-size: clamp(0.75rem, 0.7268rem + 0.3711vw, 1.2rem);
+    .thumbnail-name {
+      font-size: $h6;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      padding: 0 1rem;
     }
   }
 }
 
+.channel {
+  text-transform: uppercase;
+  color: $primaryColor;
+}
