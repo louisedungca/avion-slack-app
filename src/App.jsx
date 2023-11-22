@@ -57,19 +57,19 @@ function App() {
           path: 'channels',
           element: <l.ChannelLayout />,
           errorElement: <p.ErrorPage />,
-          loader: u.accessDashLoader,
+          loader: u.channelLoader,
           children: [
             {
               index: true,
               element: <c.Placeholder type={'channel'} />,
               errorElement: <p.ErrorPage />,
-              loader: u.accessDashLoader,
+              loader: u.channelLoader,
             },
             {
               path: ':channelID',
               element: <p.ChannelBox />,
               errorElement: <p.ErrorPage />,
-              loader: u.accessDashLoader,
+              loader: u.channelLoader,
             }
           ],
         },

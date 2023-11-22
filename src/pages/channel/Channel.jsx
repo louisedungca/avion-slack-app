@@ -1,10 +1,12 @@
 import { PencilSquareIcon } from '@heroicons/react/24/solid';
 import React, { useState } from 'react';
+import { useLoaderData } from 'react-router-dom';
 import CreateChannel from './CreateChannel';
 import { useFetch } from '../../hooks';
 import { createChannelUrl } from '../../utils';
 
 function Channel({ users }) {
+  const { channels } = useLoaderData();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { fetchData, isLoading, error, setError } = useFetch(createChannelUrl, { method: 'POST' });
 
@@ -60,6 +62,17 @@ function Channel({ users }) {
         onClose={closeModal} 
         onSubmit={onSubmit} 
       />
+
+      {channels && channels.length > 0 && (
+          <div className="channel-list">
+            {channels.map(channel => (
+              <div key={channel.id} className="channel">
+                <h4>{channel.name}</h4>
+              </div>
+            ))}
+          </div>
+        )
+      }      
     </aside>
   )
 }
