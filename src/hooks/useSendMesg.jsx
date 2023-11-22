@@ -45,4 +45,3 @@ const { sendMessage, isLoading, error } = useSendMesg(userID, 'User', onMessageS
 const { sendMessage, isLoading, error } = useSendMesg(channelID, 'Channel', onMessageSent);
 
 */
-

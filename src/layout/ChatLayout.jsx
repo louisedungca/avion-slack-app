@@ -4,6 +4,7 @@ import { Chats } from '../pages';
 
 function ChatLayout() {
   const users = useOutletContext();
+  console.log('@ChatsLayout - users:', users);
 
   return (
     <section className='dashcontent'>

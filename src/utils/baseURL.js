@@ -12,6 +12,8 @@ export const sendMsgUrl = `${baseUrl}/api/v1/messages`;
 // Retrieve Message
 export const getMsgUrl = (id) => `${baseUrl}/api/v1/messages?receiver_id=${id}&receiver_class=User`;
 
+export const getChnlMsgUrl = (id) => `${baseUrl}/api/v1/messages?receiver_id=${id}&receiver_class=Channel`;
+
 // Create Channel with members
 export const createChannelUrl = `${baseUrl}/api/v1/channels`;
 

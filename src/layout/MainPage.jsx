@@ -16,6 +16,8 @@ const MainPage = () => {
     return <p.ErrorPage/>
   }
 
+  console.log('@Main - users', users);
+
   return (
     <main className='mainpage'>
       {

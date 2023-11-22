@@ -63,13 +63,13 @@ function App() {
               index: true,
               element: <c.Placeholder type={'channel'} />,
               errorElement: <p.ErrorPage />,
-              loader: u.channelLoader,
+              loader: u.accessDashLoader,
             },
             {
-              path: ':channelID',
+              path: ':channel_id',
               element: <p.ChannelBox />,
               errorElement: <p.ErrorPage />,
-              loader: u.channelLoader,
+              loader: u.accessDashLoader,
             }
           ],
         },
