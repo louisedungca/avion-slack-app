@@ -19,9 +19,9 @@ function SendChat({ userID, receiverClass, onMessageSent }) {
 
   }, [isSubmitSuccessful]);
 
-  function onSubmit(formData) {
+  async function onSubmit(formData) {
     const { sendMessage } = formData;
-    sendMesg(sendMessage);   
+    await sendMesg(sendMessage);   
   };
 
   return (

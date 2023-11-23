@@ -25,7 +25,7 @@ export function useSendMesg(userID, receiverClass, onMessageSent) {
         throw new Error(response.data?.message || 'Failed to send the message.');
       }
 
-      // onMessageSent();
+      onMessageSent();
     } catch (error) {
       console.error('Error in sending the message:', error);
       setError(error.message || 'Failed to send the message.');
