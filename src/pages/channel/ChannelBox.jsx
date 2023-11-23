@@ -19,6 +19,7 @@ function ChannelBox() {
   console.log('loggedin user id:', loggedInUser.id);
 
   const [messages, setMessages] = useState([]);
+  const [showProfile, setShowProfile] = useState(false);
   const { data: mesgData, fetchData: fetchMesg } = useFetch(getChnlMsgUrl(channelID), { method: 'GET' });
 
   useEffect(() => {
@@ -46,7 +47,7 @@ function ChannelBox() {
             <p className='user-uid'>{channelDetails.name}</p> 
           </div>
           <div className="header-right">
-            <i className='info-icon'><InformationCircleIcon /></i>
+            <i className='info-icon' onClick={() => setShowProfile(!showProfile)}><InformationCircleIcon /></i>
           </div>         
         </div>
 
@@ -82,11 +83,13 @@ function ChannelBox() {
         />
       </div>
 
-      <c.Profile 
-        users={users}
-        channelDetails={channelDetails}
-        loggedInUser={loggedInUser}
-      />     
+      {showProfile && (
+        <c.Profile 
+          users={users}
+          channelDetails={channelDetails}
+          loggedInUser={loggedInUser}
+        />
+      )}
     </section>
   )
 }

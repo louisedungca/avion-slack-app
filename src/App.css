@@ -498,6 +498,9 @@ aside, .aside-chats {
   align-self: center;
   color: #58094F;
 }
+.info-icon:hover {
+  color: #F3AA20;
+}
 
 .header-left, .header-right {
   display: flex;
@@ -648,7 +651,7 @@ aside, .aside-chats {
   border-top: 2px dotted #58094F;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.8rem;
   width: 100%;
   height: 100%;
   padding: 0.5rem;
@@ -657,13 +660,6 @@ aside, .aside-chats {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-.profile-content .content-title .content-icon {
-  cursor: pointer;
-  width: min(10%, 20px);
-  display: flex;
-  align-self: center;
-  color: #58094F;
 }
 .profile-content .content-title small {
   color: #841E62;
@@ -676,24 +672,24 @@ aside, .aside-chats {
   flex-direction: column;
   gap: 0.2rem;
 }
-.profile-content .member {
+.profile-content .member, .profile-content .owner {
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 0.2rem;
   border-radius: 0.5rem;
+  color: #58094F;
   transition: 0.3s all ease-in-out;
 }
-.profile-content .member h5 {
-  font-size: clamp(0.7rem, 0.6077rem + 0.3077vw, 1rem);
-  font-weight: 400;
-  color: #fffff0;
-}
-.profile-content .member:hover {
+.profile-content .member:hover, .profile-content .owner:hover {
   background: #F3AA20;
   color: #fffff0;
   opacity: 0.8;
+}
+.profile-content .member small, .profile-content .owner small {
+  font-style: italic;
+  color: #771b58;
 }
 
 .modal {
@@ -733,7 +729,8 @@ aside, .aside-chats {
   justify-content: space-between;
   align-items: center;
 }
-.modal-header .btn-close {
+
+.btn-close {
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -743,7 +740,7 @@ aside, .aside-chats {
   width: min(30px, 20%);
   color: #841E62;
 }
-.modal-header .btn-close:hover {
+.btn-close:hover {
   color: #F3AA20;
 }
 

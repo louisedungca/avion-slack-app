@@ -47,7 +47,7 @@
   border-top: 2px dotted $primaryColor;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.8rem;
   width: 100%;
   height: 100%;
   padding: 0.5rem;
@@ -56,14 +56,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    .content-icon {
-      cursor: pointer;
-      width: min(10%, 20px);
-      display: flex;
-      align-self: center;
-      color: $primaryColor; 
-    }
 
     small {
       color: $secondaryColor;
@@ -79,26 +71,26 @@
     gap: 0.2rem;
   }
 
-  .member {
+  .member, .owner {
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 0.2rem;
     border-radius: 0.5rem;
-    // background: $gray;
+    color: $primaryColor;
     transition: 0.3s all ease-in-out;
-
-    h5 {
-      font-size: $span;
-      font-weight: 400;
-      color: $white;
-    }
 
     &:hover {
       background: $accent;
       color: $white;
       opacity: 0.8;
     }
+
+    small {
+      font-style: italic;
+      color: $supplementTwo;
+    }
   }
+  
 }

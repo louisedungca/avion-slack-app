@@ -5,17 +5,20 @@ import { useFetchChannelData } from '../hooks';
 import { Link } from 'react-router-dom';
 
 function Profile({ users, channelDetails, loggedInUser }) {
-  console.log('@Profile - channelDetails', channelDetails);
-  console.log('@Profile - loggedin user id:', loggedInUser);
-  console.log('@Profile - users:', users);
+  // console.log('@Profile - channelOwner', channelOwnerID);
+  // console.log('@Profile - loggedin user id:', loggedInUser);
+  // console.log('@Profile - users:', users);
 
   const channelID = +channelDetails.id;
+  const channelOwnerID = +channelDetails.owner_id;
+
+  const [ownerDetails, setOwnerDetails] = useState([]);
   const [memberDetails, setMemberDetails] = useState([]);
   const { channelData, error, isLoading, fetchData } = useFetchChannelData(channelID);
 
   useEffect(() => {
     fetchData();
-  },[]);
+  },[channelDetails]);
 
   if (error) {
     return <p.ErrorPage/>
@@ -23,17 +26,18 @@ function Profile({ users, channelDetails, loggedInUser }) {
 
   useEffect(() => {
     if (channelData && channelData.channel_members) {
-      const membersID = channelData.channel_members.map(member => member.user_id);
-
-      const details = membersID.map(memberID => {
-        const user = users.find(item => item.id === memberID);
-        return user;
-      });
+      const ownerDetails = users.find(item => item.id === channelOwnerID);
+      const details = channelData.channel_members
+        .filter(member => member.user_id !== channelOwnerID)
+        .map(member => users.find(item => item.id === member.user_id));
 
       console.log('@Profile - member details:', details);
+      console.log('@Profile - owner details:', ownerDetails);
+  
       setMemberDetails(details);
+      setOwnerDetails(ownerDetails);
     }
-  }, [channelData, users]);
+  }, [channelData, users, channelOwnerID]);
 
   return (
     <section className='profile'>
@@ -45,9 +49,13 @@ function Profile({ users, channelDetails, loggedInUser }) {
       <div className="profile-content">
         <div className="content-title">
           <small>Who's in here</small>
-          <i className='content-icon'><UserPlusIcon /></i>
+          <i className='info-icon'><UserPlusIcon /></i>
         </div>
         <div className="memberslist">
+          <div className="owner">
+            <i className='info-icon'><UserCircleIcon /></i>
+            <span>{ownerDetails.uid} <small>(Creator)</small> </span>     
+          </div>
           {memberDetails.map((member, index) => (
             <Link key={index} className='member'>
               <i className='info-icon'><UserCircleIcon /></i>

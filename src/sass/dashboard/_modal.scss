@@ -38,20 +38,20 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
 
-  .btn-close {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    background: none;
-    border: none;
-    outline: none;
-    width: min(30px, 20%);
-    color: $secondaryColor;
-  
-    &:hover {
-      color: $accent;
-    }
+.btn-close {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  outline: none;
+  width: min(30px, 20%);
+  color: $secondaryColor;
+
+  &:hover {
+    color: $accent;
   }
 }
 
