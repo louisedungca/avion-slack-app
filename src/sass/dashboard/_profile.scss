@@ -1,0 +1,14 @@
+@use '../roots' as *;
+
+.profile {
+  // border: 2px dotted pink;
+  height: 100%;
+  width: 35%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background: $white;
+  border-radius: 2.5rem;
+  padding: 1.5rem;
+  box-shadow: $boxShadow2;
+}

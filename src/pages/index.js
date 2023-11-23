@@ -1,7 +1,6 @@
 // general
 export { default as ErrorPage } from './general/ErrorPage';
 export { default as WelcomePage } from './general/WelcomePage';
-export { default as Profile } from './general/Profile';
 export { default as People } from './general/People';
 
 // channel

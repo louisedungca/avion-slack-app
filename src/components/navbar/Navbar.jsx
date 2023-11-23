@@ -24,7 +24,7 @@ function Navbar() {
 
         <div className="lower-items">
           <NavLink
-            to={'profile'}
+            // to={'profile'}
             className={'lower-item usericon'}
           >
             <i className="navbar-icons"><UserIcon /></i>

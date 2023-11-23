@@ -4,8 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { useOutletContext, useParams } from 'react-router-dom';
 
 import { getChnlMsgUrl, getLocalStorage } from '../../utils';
-import { SendChat } from '../../components';
 import { useFetch } from '../../hooks';
+import * as c from '../../components';
 
 function ChannelBox() {
   const loggedInUser = getLocalStorage('UserData');
@@ -75,12 +75,16 @@ function ChannelBox() {
             }         
         </div>
 
-        <SendChat 
+        <c.SendChat 
           userID={channelID} 
           receiverClass={'Channel'}
           onMessageSent={() => fetchMesg()}          
         />
       </div>
+
+      <c.Profile 
+      
+      />     
     </section>
   )
 }

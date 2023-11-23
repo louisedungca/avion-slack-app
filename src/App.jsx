@@ -79,12 +79,12 @@ function App() {
           errorElement: <p.ErrorPage />,
           loader: u.accessDashLoader,
         },
-        {
-          path: 'profile',
-          element: <p.Profile />,
-          errorElement: <p.ErrorPage />,
-          loader: u.accessDashLoader,
-        },
+        // {
+        //   path: 'profile',
+        //   element: <p.Profile />,
+        //   errorElement: <p.ErrorPage />,
+        //   loader: u.accessDashLoader,
+        // },
       ],
     },
   ]);

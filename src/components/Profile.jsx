@@ -2,9 +2,9 @@ import React from 'react';
 
 function Profile() {
   return (
-    <div>
+    <section className='profile'>
       This is the Profile Page.
-    </div>
+    </section>
   )
 }
 
