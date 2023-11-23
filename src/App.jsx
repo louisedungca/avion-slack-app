@@ -57,7 +57,7 @@ function App() {
           path: 'channels',
           element: <l.ChannelLayout />,
           errorElement: <p.ErrorPage />,
-          loader: u.channelLoader,
+          loader: u.accessDashLoader,
           children: [
             {
               index: true,

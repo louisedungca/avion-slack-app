@@ -5,18 +5,17 @@ import { useOutletContext, useParams } from 'react-router-dom';
 import logo from '../../assets/smileylogo.png';
 import { SendChat } from '../../components';
 import { useFetch } from '../../hooks';
-import { getChnlMsgUrl } from '../../utils';
+import { getChnlMsgUrl, getLocalStorage } from '../../utils';
 
 function ChannelBox() {
   const { users, channels } = useOutletContext();
-   console.log('@ChannelBox - channels:', channels);
-  // console.log('@ChannelBox - users:', users);
-
+  // console.log('@ChannelBox - channels:', channels);
   const { channel_id } = useParams();
-  const channelID = +channel_id;
-  
+  const channelID = +channel_id;  
   const channelDetails = channels.find(item => item.id === channelID);
   console.log('channelDetails', channelDetails);
+  const loggedInUser = getLocalStorage('UserData');
+  console.log('loggedin user id:', loggedInUser.id);
 
   const [messages, setMessages] = useState([]);
   const { data: mesgData, fetchData: fetchMesg } = useFetch(getChnlMsgUrl(channelID), { method: 'GET' });
@@ -48,20 +47,21 @@ function ChannelBox() {
         <div className="mesgthread">
           {messages && messages.length > 0 ? 
             messages.reverse().map((message) => (
-              <div 
-                key={message.id}
-                // className={`message-box ${message.sender.id === userID ? 'left' : ''} ${message.receiver.id === userID ? 'right' : ''}`}
-              >
-                <div className='message'>
-                  <p>{message.body}</p>  
-
-                  {/* Delete later */}
-                  {/* <small>Receiver: {message.receiver.email} (ID: {message.receiver.id})</small>   
-                  <small>Sender: {message.sender.email} (ID: {message.sender.id})
-                  </small>                */}
-                </div>    
-              </div>
-            )) : <div className="startconvo-wrapper">
+              <>
+                <div 
+                  key={message.id}
+                  className={`message-box ${message.sender.id === loggedInUser.id ? 'right' : 'left'}`}
+                >
+                  <div className='message'>
+                    <p>{message.body}</p>  
+                  </div>    
+                </div>
+                
+                <small className={`message-box ${message.sender.id === loggedInUser.id ? 'right' : 'left'}`}>
+                  {message.sender.uid}
+                </small>
+              </>              
+            )) : <div className="startconvo-wrapper"> 
                   <img src={logo} alt="logo" className="logo" />
                   <h3>You're starting a new conversation</h3>
                   <p>Type your first message below.</p>

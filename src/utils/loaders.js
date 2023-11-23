@@ -1,5 +1,5 @@
 import { redirect } from "react-router-dom";
-import { channelUsersUrl, getLocalStorage } from "../utils";
+import { usersChannelUrl, getLocalStorage } from "../utils";
 
 // for signup and login page
 export function isLoggedInLoader() {
@@ -34,7 +34,7 @@ export async function channelLoader() {
   }
 
   try {
-    const response = await fetch(channelUsersUrl, {
+    const response = await fetch(usersChannelUrl, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
