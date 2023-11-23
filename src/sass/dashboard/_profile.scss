@@ -21,6 +21,7 @@
   align-self: center;
   flex-direction: column;
   gap: 1rem;
+  letter-spacing: 0.12rem;
 
   .user-icon {
     width: max(100px, 10%);
@@ -56,12 +57,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
+    
     small {
       color: $secondaryColor;
       text-transform: uppercase;
       letter-spacing: 0.12rem;
       font-weight: 600;
+      letter-spacing: 0.2rem;
     }
   }
 

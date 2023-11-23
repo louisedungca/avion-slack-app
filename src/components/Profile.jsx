@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 function Profile({ users, channelDetails, loggedInUser }) {
   // console.log('@Profile - channelOwner', channelOwnerID);
-  // console.log('@Profile - loggedin user id:', loggedInUser);
+  console.log('@Profile - loggedin user id:', loggedInUser);
   // console.log('@Profile - users:', users);
 
   const channelID = +channelDetails.id;
@@ -52,12 +52,19 @@ function Profile({ users, channelDetails, loggedInUser }) {
           <i className='info-icon'><UserPlusIcon /></i>
         </div>
         <div className="memberslist">
-          <div className="owner">
+          <Link 
+            to={`/c/chats/${ownerDetails.id}`}
+            className="owner"
+          >
             <i className='info-icon'><UserCircleIcon /></i>
             <span>{ownerDetails.uid} <small>(Creator)</small> </span>     
-          </div>
+          </Link>
           {memberDetails.map((member, index) => (
-            <Link key={index} className='member'>
+            <Link 
+              to={`/c/chats/${member.id}`}
+              key={index} 
+              className='member'
+            >
               <i className='info-icon'><UserCircleIcon /></i>
               <span>{member.uid}</span>
             </Link>
