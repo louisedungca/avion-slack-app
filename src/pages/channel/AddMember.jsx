@@ -3,13 +3,10 @@ import AsyncSelect from "react-select/async";
 import { useForm, Controller } from 'react-hook-form';
 import { XCircleIcon } from '@heroicons/react/24/outline';
 
-
 function AddMember({ isOpen, onClose, onSubmit, users, channelData }) {
   console.log('@AddMember - channelData', channelData);
   const { control, handleSubmit, formState: { isSubmitSuccessful }, reset } = useForm();
-
   const membersID = channelData.channel_members.map(member => member.user_id);
-
   const options = users
     .filter(user => !membersID.includes(user.id))
     .map((user) => ({
@@ -36,6 +33,7 @@ function AddMember({ isOpen, onClose, onSubmit, users, channelData }) {
 
   }, [isSubmitSuccessful, isOpen]);
 
+  
   return (
     <div className={`modal ${isOpen ? 'open' : ''}`}>
       <div className="modal-wrapper">
@@ -50,7 +48,6 @@ function AddMember({ isOpen, onClose, onSubmit, users, channelData }) {
           onSubmit={handleSubmit(onSubmit)}
           className='modal-form'
         >
-          {/* Select users */}
           <Controller
             name="channelUsers"
             control={control}
@@ -59,14 +56,12 @@ function AddMember({ isOpen, onClose, onSubmit, users, channelData }) {
               <AsyncSelect 
                 {...field}
                 placeholder='Enter email...'
-                isMulti
                 loadOptions={loadOptions} 
               />
             )}
           />
 
           <button className='btn-main' type="submit">Add</button>
-          {/* <small className='error-text'>{error}</small> */}
         </form>        
       </div>
     </div>

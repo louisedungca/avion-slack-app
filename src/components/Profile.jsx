@@ -1,27 +1,29 @@
+import { UserCircleIcon, UserPlusIcon } from '@heroicons/react/24/outline';
 import logo from '../assets/smileylogo.png';
 import React, { useEffect, useState } from 'react';
-import { UserCircleIcon, UserPlusIcon } from '@heroicons/react/24/outline';
-import { useFetchChannelData } from '../hooks';
 import { Link } from 'react-router-dom';
+
+import { useFetch, useFetchChannelData } from '../hooks';
 import { AddMember } from '../pages';
+import { addMemberUrl } from '../utils';
 
 function Profile({ users, channelDetails }) {
-  // console.log('@Profile - channelOwner', channelOwnerID);
-  // console.log('@Profile - users:', users);
-
   const channelID = +channelDetails.id;
   const channelOwnerID = +channelDetails.owner_id;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [ownerDetails, setOwnerDetails] = useState([]);
   const [memberDetails, setMemberDetails] = useState([]);
-  const { channelData, error, fetchData } = useFetchChannelData(channelID);
+  const [newMember, setNewMember] = useState(null);
+
+  const { channelData, error: fetchChannelError, fetchData: fetchChannelData } = useFetchChannelData(channelID);
+  const { fetchData: fetchAddMemberData, error: fetchAddMemberError, setError } = useFetch(addMemberUrl, { method: 'POST' });
 
   useEffect(() => {
-    fetchData();
+    fetchChannelData();
   },[channelDetails]);
 
-  if (error) {
+  if (fetchChannelError) {
     return <p.ErrorPage/>
   }
 
@@ -35,10 +37,15 @@ function Profile({ users, channelDetails }) {
       console.log('@Profile - member details:', membersDetails);
       console.log('@Profile - owner details:', ownerDetails);
   
-      setMemberDetails(membersDetails);
       setOwnerDetails(ownerDetails);
+
+      if (newMember) {
+        setMemberDetails([...membersDetails, newMember]);
+      } else {
+        setMemberDetails(membersDetails);
+      }
     }
-  }, [users, channelData, channelOwnerID]);
+  }, [users, channelData, channelOwnerID, newMember]);
 
   function openModal() {
     setIsModalOpen(true);
@@ -46,6 +53,30 @@ function Profile({ users, channelDetails }) {
 
   function closeModal() {
     setIsModalOpen(false);
+  };
+
+  async function onSubmit(formData) {
+    const newMemberID = formData.channelUsers.value;
+    const body = {
+      id: +channelData.id,
+      member_id: +newMemberID,
+    };
+
+    try {
+      const { response, result } = await fetchAddMemberData(body);
+      console.log('Create Channel Response:', response);
+      console.log('@Channel result:', result);
+
+      if(result.error) {
+        throw new Error (result.error || 'There was a problem in adding new member(s).');
+      }
+
+      setNewMember(users.find(item => item.id === +newMemberID));
+      closeModal();
+    } catch (error) {
+      setError(fetchAddMemberError);
+      console.error(fetchAddMemberError);
+    }
   };
 
   return (
@@ -86,10 +117,9 @@ function Profile({ users, channelDetails }) {
           channelData={channelData}
           isOpen={isModalOpen}
           onClose={closeModal}
-          // onSubmit={/* your submit handler */
+          onSubmit={onSubmit} 
         />
       )}
-      
     </section>
   )
 }

@@ -1,4 +1,4 @@
-import { PencilSquareIcon } from '@heroicons/react/24/solid';
+import { PlusCircleIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 
@@ -6,12 +6,9 @@ import { createChannelUrl } from '../../utils';
 import { CreateChannel } from '../../pages';
 import { useFetch } from '../../hooks';
 
-
 function Channel({ users, channels }) {
-  // console.log('@Channels - channels:', channels);
-  // console.log('@Channels - users:', users);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { fetchData, isLoading, error, setError } = useFetch(createChannelUrl, { method: 'POST' });
+  const { fetchData, error, setError } = useFetch(createChannelUrl, { method: 'POST' });
 
   function openModal() {
     setIsModalOpen(true);
@@ -21,8 +18,9 @@ function Channel({ users, channels }) {
     setIsModalOpen(false);
   };
 
-  async function onSubmit(channelData) {
-    const { channelUsers, channelName } = channelData
+  async function onSubmit(formData) {
+    const { channelUsers, channelName } = formData;
+    console.log('@CreateChannel - formData:', formData);
     console.log('channelName:', channelName);
     console.log('channelUsers:', channelUsers);
 
@@ -43,7 +41,6 @@ function Channel({ users, channels }) {
         throw new Error (result.errors || 'There was a problem in creating a new channel.');
       }
 
-      // close modal onSubmit
       closeModal();
     } catch (error) {
       setError(error);
@@ -55,7 +52,7 @@ function Channel({ users, channels }) {
     <aside className='aside-channel'>
       <div className="aside-title">
         <h3>Channels</h3>
-        <PencilSquareIcon className="icon" onClick={openModal}/>
+        <PlusCircleIcon className="icon" onClick={openModal}/>
       </div>
 
       <CreateChannel 

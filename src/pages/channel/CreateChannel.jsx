@@ -6,7 +6,7 @@ import * as c from '../../components'
 
 
 function CreateChannel({ isOpen, onClose, onSubmit, users }) {
-  console.log('@CreateChannels - users', users);
+  // console.log('@CreateChannels - users', users);
   const { control, register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset } = useForm();
 
   const options = users.map((user) => ({
