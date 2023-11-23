@@ -83,7 +83,9 @@ function ChannelBox() {
       </div>
 
       <c.Profile 
-      
+        users={users}
+        channelDetails={channelDetails}
+        loggedInUser={loggedInUser}
       />     
     </section>
   )
