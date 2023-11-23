@@ -1,20 +1,21 @@
-import { UserGroupIcon } from '@heroicons/react/24/outline';
+import { InformationCircleIcon, UserGroupIcon } from '@heroicons/react/24/outline';
+import logo from '../../assets/smileylogo.png';
 import React, { useEffect, useState } from 'react';
 import { useOutletContext, useParams } from 'react-router-dom';
 
-import logo from '../../assets/smileylogo.png';
+import { getChnlMsgUrl, getLocalStorage } from '../../utils';
 import { SendChat } from '../../components';
 import { useFetch } from '../../hooks';
-import { getChnlMsgUrl, getLocalStorage } from '../../utils';
 
 function ChannelBox() {
-  const { users, channels } = useOutletContext();
-  // console.log('@ChannelBox - channels:', channels);
+  const loggedInUser = getLocalStorage('UserData');
+  const { users, channels } = useOutletContext();  
   const { channel_id } = useParams();
   const channelID = +channel_id;  
-  const channelDetails = channels.find(item => item.id === channelID);
+  const channelDetails = channels.find(item => item.id === channelID) || [];
+
+  console.log('@ChannelBox - channels:', channels);
   console.log('channelDetails', channelDetails);
-  const loggedInUser = getLocalStorage('UserData');
   console.log('loggedin user id:', loggedInUser.id);
 
   const [messages, setMessages] = useState([]);
@@ -29,7 +30,7 @@ function ChannelBox() {
       setMessages(mesgData.data);
       console.log('Fetched Channel Messages:', mesgData.data);
     }
-  }, [mesgData]);
+  }, [mesgData]); 
 
   // for checking only -- delete later
   useEffect(() => { 
@@ -40,8 +41,13 @@ function ChannelBox() {
     <section className='dashcontent'>
       <div className="chatbox">
         <div className="chatbox-header">
-          <i className='user-icon'><UserGroupIcon /></i>
-          <p className='user-uid'>{channelDetails.name}</p>     
+          <div className="header-left">
+            <i className='user-icon'><UserGroupIcon /></i>
+            <p className='user-uid'>{channelDetails.name}</p> 
+          </div>
+          <div className="header-right">
+            <i className='info-icon'><InformationCircleIcon /></i>
+          </div>         
         </div>
 
         <div className="mesgthread">

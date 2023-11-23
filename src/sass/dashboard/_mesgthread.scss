@@ -64,6 +64,7 @@
   height: 8vh;
   display: flex;
   align-self: center;
+  justify-content: space-between;
   gap: 0.5rem;
   padding: 0.5rem;
 
@@ -83,9 +84,22 @@
     color: $primaryColor;
     letter-spacing: 0.2rem;
   }
+
+  .info-icon {
+    width: 25px;
+    display: flex;
+    align-self: center;
+    color: $primaryColor;
+  }
 }
 
-// Message thread container
+.header-left, .header-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
 .mesgthread {
   // border: 2px dotted darkblue;
   width: 100%;

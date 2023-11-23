@@ -1,4 +1,4 @@
-import { UserCircleIcon } from '@heroicons/react/24/outline';
+import { InformationCircleIcon, StarIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 import { useOutletContext, useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 
@@ -42,8 +42,13 @@ function ChatBox() {
     <section className='dashcontent'>
       <div className='chatbox'>
         <div className="chatbox-header">
+        <div className="header-left">
           <i className='user-icon'><UserCircleIcon /></i>
           <p className='user-uid'>{user.uid}</p>     
+        </div>
+        <div className="header-right">
+          <i className='info-icon'><StarIcon/></i>
+        </div>     
         </div>
 
         <div className="mesgthread">

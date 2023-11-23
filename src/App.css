@@ -471,6 +471,7 @@ aside, .aside-chats {
   height: 8vh;
   display: flex;
   align-self: center;
+  justify-content: space-between;
   gap: 0.5rem;
   padding: 0.5rem;
 }
@@ -488,6 +489,19 @@ aside, .aside-chats {
   font-size: clamp(0.7rem, 0.6077rem + 0.3077vw, 1rem);
   color: #58094F;
   letter-spacing: 0.2rem;
+}
+.chatbox-header .info-icon {
+  width: 25px;
+  display: flex;
+  align-self: center;
+  color: #58094F;
+}
+
+.header-left, .header-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 
 .mesgthread {
