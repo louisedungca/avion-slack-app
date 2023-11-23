@@ -301,9 +301,10 @@
 }
 
 aside, .aside-chats {
-  width: max(120px, 25vw);
+  width: max(220px, 35%);
   height: 100%;
   padding: 1rem;
+  padding-left: 0.5rem;
 }
 
 .aside-title {
@@ -360,6 +361,8 @@ aside, .aside-chats {
   background: #F3AA20;
 }
 .thumbnail-container .thumbnail-wrapper {
+  width: 100%;
+  height: min(3.5rem, 8vh);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -378,6 +381,9 @@ aside, .aside-chats {
   overflow: hidden;
   text-overflow: ellipsis;
   padding: 0 1rem;
+}
+.thumbnail-container .thumbnail-wrapper.active {
+  opacity: 0.65;
 }
 
 .channel {
@@ -688,6 +694,10 @@ aside, .aside-chats {
   background: #F3AA20;
   color: #fffff0;
   opacity: 0.8;
+}
+.profile-content .member span, .profile-content .owner span {
+  font-size: small;
+  font-weight: 600;
 }
 .profile-content .member small, .profile-content .owner small {
   font-style: italic;

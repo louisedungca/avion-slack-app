@@ -89,10 +89,14 @@
       opacity: 0.8;
     }
 
+    span {
+      font-size: small;
+      font-weight: 600;
+    }
+
     small {
       font-style: italic;
       color: $supplementTwo;
     }
   }
-  
 }

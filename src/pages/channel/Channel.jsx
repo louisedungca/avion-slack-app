@@ -1,5 +1,5 @@
 import { PlusCircleIcon } from '@heroicons/react/24/outline';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import React, { useState } from 'react';
 
 import { createChannelUrl } from '../../utils';
@@ -66,14 +66,14 @@ function Channel({ users, channels }) {
       {channels && channels.length > 0 && (
           <div className="thumbnail-container">
             {channels.reverse().map(channel => (
-              <Link 
+              <NavLink 
                 key={channel.id} 
                 to={`${channel.id}`}
                 className="thumbnail-wrapper"
               >
                 <p className='thumbnail-name channel'>{channel.name}</p>
                 <small>({channel.id})</small>
-              </Link>
+              </NavLink>
             ))}
           </div>
         )

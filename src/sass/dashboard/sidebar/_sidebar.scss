@@ -1,10 +1,10 @@
 @use '../../roots' as *;
 
 aside, .aside-chats {
-  // border: 2px solid pink;  
-  width: max(120px, 25vw);
+  width: max(220px, 35%);
   height: 100%;
   padding: 1rem;
+  padding-left: 0.5rem;
 }
 
 .aside-title {
@@ -69,6 +69,8 @@ aside, .aside-chats {
   }
 
   .thumbnail-wrapper {
+    width: 100%;
+    height: min(3.5rem, 8vh);
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -91,6 +93,10 @@ aside, .aside-chats {
       overflow: hidden;
       text-overflow: ellipsis;
       padding: 0 1rem;
+    }
+
+    &.active {
+      opacity: 0.65;
     }
   }
 }

@@ -34,8 +34,8 @@ function Profile({ users, channelDetails }) {
         .filter(member => member.user_id !== channelOwnerID)
         .map(member => users.find(item => item.id === member.user_id));
 
-      console.log('@Profile - member details:', membersDetails);
-      console.log('@Profile - owner details:', ownerDetails);
+      // console.log('@Profile - member details:', membersDetails);
+      // console.log('@Profile - owner details:', ownerDetails);
   
       setOwnerDetails(ownerDetails);
 
