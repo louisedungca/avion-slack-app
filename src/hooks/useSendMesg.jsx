@@ -19,11 +19,13 @@ export function useSendMesg(userID, receiverClass, onMessageSent) {
     try {
       const response = await fetchData(requestBody, { method: 'POST' });
 
+      console.log('SendChat res:', response);
+
       if (!response.ok) {
-        throw new Error(response.data.message || 'Failed to send the message.');
+        throw new Error(response.data?.message || 'Failed to send the message.');
       }
 
-      onMessageSent();
+      // onMessageSent();
     } catch (error) {
       console.error('Error in sending the message:', error);
       setError(error.message || 'Failed to send the message.');
@@ -34,14 +36,3 @@ export function useSendMesg(userID, receiverClass, onMessageSent) {
 
   return { sendMesg, isLoading, error };
 }
-
-/*
-Usage:
-
-// for dm
-const { sendMessage, isLoading, error } = useSendMesg(userID, 'User', onMessageSent);
-
-// for channel
-const { sendMessage, isLoading, error } = useSendMesg(channelID, 'Channel', onMessageSent);
-
-*/

@@ -4,9 +4,9 @@ import { useForm } from 'react-hook-form';
 import { chatBoxInput, textAreaTemplate } from './formInput';
 import { useSendMesg } from '../hooks';
 
-function SendChat({ userID, onMessageSent }) {
+function SendChat({ userID, receiverClass, onMessageSent }) {
   const { register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset } = useForm();  
-  const { sendMesg } = useSendMesg(userID, 'User', onMessageSent);
+  const { sendMesg } = useSendMesg(userID, receiverClass, onMessageSent);
 
   useEffect(() => {
     if(isSubmitSuccessful) {

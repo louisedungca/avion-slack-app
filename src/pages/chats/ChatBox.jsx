@@ -72,8 +72,8 @@ function ChatBox() {
 
         <SendChat 
           userID={userID} 
-          onMessageSent={() => fetchMesg()}
-          type={'User'}
+          receiverClass={'User'}
+          onMessageSent={() => fetchMesg()}          
         />
 
         {/* {isMessageSent && <small className='success-message'>Message sent!</small>}     */}

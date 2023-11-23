@@ -71,8 +71,8 @@ function ChannelBox() {
 
         <SendChat 
           userID={channelID} 
-          onMessageSent={() => fetchMesg()}
-          type={'Channel'}
+          receiverClass={'Channel'}
+          onMessageSent={() => fetchMesg()}          
         />
       </div>
     </section>
