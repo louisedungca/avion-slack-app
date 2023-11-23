@@ -40,13 +40,12 @@ function CreateChannel({ isOpen, onClose, users }) {
   };
 
   const onSubmit = async (formData) => {
-    const { channelUsers, channelName } = formData;
-    console.log('@CreateChannel - formData:', formData);
-    console.log('channelName:', channelName);
-    console.log('channelUsers:', channelUsers);
-
+    const { channelUsers, channelName } = formData; 
     const membersArray = channelUsers.map((member) => member.value);
-    console.log('membersArray:', membersArray);
+    // console.log('@CreateChannel - formData:', formData);
+    // console.log('channelName:', channelName);
+    // console.log('channelUsers:', channelUsers);
+    // console.log('membersArray:', membersArray);
 
     const body = {
       name: channelName,
@@ -102,14 +101,17 @@ function CreateChannel({ isOpen, onClose, users }) {
               />
             )}
           />
-          <small className='input-error' >{errors.channelUsers && 'You need at least one member to create a channel.'}</small>
+          {errors.channelUsers && <small className='input-error' >You need at least one member to create a channel.</small>}
 
           <div className="channel-guidelines">
             <small>Channel Guidelines:</small>
-            <small>Participate as yourself. Remember to be kind and don't be rude. Try your best to not post anything that disrespects your fellow channel members.</small>
+            <small>
+              Participate as yourself. Remember to be kind and don't be rude. Try your best to not post anything that disrespects your fellow channel members.
+            </small>
           </div>
 
           <button className='btn-main' type="submit">Create</button>
+
           {error && <small className='error-text'>{error.message}</small>}          
         </form>        
       </div>
