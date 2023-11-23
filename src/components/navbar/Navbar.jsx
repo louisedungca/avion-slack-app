@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { NavbarData } from '../../components';
-import { ArrowLeftOnRectangleIcon, UserCircleIcon, UserIcon } from '@heroicons/react/24/solid';
+import { ArrowLeftOnRectangleIcon, UserIcon } from '@heroicons/react/24/solid';
 
 function Navbar() {
   return (
@@ -23,22 +23,15 @@ function Navbar() {
         </div>
 
         <div className="lower-items">
-          <NavLink
-            // to={'profile'}
-            className={'lower-item usericon'}
-          >
+          <div className={'lower-item usericon'}>
             <i className="navbar-icons"><UserIcon /></i>
-          </NavLink>
+          </div>
 
-          <Link
-            className={'lower-item logouticon'}
-          >
-             <i className="navbar-icons"><ArrowLeftOnRectangleIcon /></i>
-            
-          </Link>
+          <div className={'lower-item logouticon'}>
+             <i className="navbar-icons"><ArrowLeftOnRectangleIcon /></i>            
+          </div>
         </div>
-      </div>
-      
+      </div>      
     </nav>
   )
 }

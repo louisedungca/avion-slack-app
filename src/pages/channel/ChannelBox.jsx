@@ -53,21 +53,17 @@ function ChannelBox() {
 
         <div className="mesgthread">
           {messages && messages.length > 0 ? 
-            messages.reverse().map((message) => (
-              <>
-                <div 
-                  key={message.id}
-                  className={`message-box ${message.sender.id === loggedInUser.id ? 'right' : 'left'}`}
-                >
+            messages.reverse().map((message) => (              
+              <div key={message.id}>
+                <small className={`message-box ${message.sender.id === loggedInUser.id ? 'right' : 'left'}`}>
+                  {message.sender.uid}
+                </small>
+                <div className={`message-box ${message.sender.id === loggedInUser.id ? 'right' : 'left'}`}>
                   <div className='message'>
                     <p>{message.body}</p>  
                   </div>    
                 </div>
-                
-                <small className={`message-box ${message.sender.id === loggedInUser.id ? 'right' : 'left'}`}>
-                  {message.sender.uid}
-                </small>
-              </>              
+              </div>              
             )) : <div className="startconvo-wrapper"> 
                   <img src={logo} alt="logo" className="logo" />
                   <h3>You're starting a new conversation</h3>
@@ -87,7 +83,6 @@ function ChannelBox() {
         <c.Profile 
           users={users}
           channelDetails={channelDetails}
-          loggedInUser={loggedInUser}
         />
       )}
     </section>

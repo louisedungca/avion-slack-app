@@ -3,18 +3,19 @@ import React, { useEffect, useState } from 'react';
 import { UserCircleIcon, UserPlusIcon } from '@heroicons/react/24/outline';
 import { useFetchChannelData } from '../hooks';
 import { Link } from 'react-router-dom';
+import { AddMember } from '../pages';
 
-function Profile({ users, channelDetails, loggedInUser }) {
+function Profile({ users, channelDetails }) {
   // console.log('@Profile - channelOwner', channelOwnerID);
-  console.log('@Profile - loggedin user id:', loggedInUser);
   // console.log('@Profile - users:', users);
 
   const channelID = +channelDetails.id;
   const channelOwnerID = +channelDetails.owner_id;
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [ownerDetails, setOwnerDetails] = useState([]);
   const [memberDetails, setMemberDetails] = useState([]);
-  const { channelData, error, isLoading, fetchData } = useFetchChannelData(channelID);
+  const { channelData, error, fetchData } = useFetchChannelData(channelID);
 
   useEffect(() => {
     fetchData();
@@ -27,29 +28,36 @@ function Profile({ users, channelDetails, loggedInUser }) {
   useEffect(() => {
     if (channelData && channelData.channel_members) {
       const ownerDetails = users.find(item => item.id === channelOwnerID);
-      const details = channelData.channel_members
+      const membersDetails = channelData.channel_members
         .filter(member => member.user_id !== channelOwnerID)
         .map(member => users.find(item => item.id === member.user_id));
 
-      console.log('@Profile - member details:', details);
+      console.log('@Profile - member details:', membersDetails);
       console.log('@Profile - owner details:', ownerDetails);
   
-      setMemberDetails(details);
+      setMemberDetails(membersDetails);
       setOwnerDetails(ownerDetails);
     }
-  }, [channelData, users, channelOwnerID]);
+  }, [users, channelData, channelOwnerID]);
+
+  function openModal() {
+    setIsModalOpen(true);
+  };
+
+  function closeModal() {
+    setIsModalOpen(false);
+  };
 
   return (
     <section className='profile'>
       <div className="profile-header">
-        {/* <i className='user-icon'><UserGroupIcon /></i> */}
         <img src={logo} alt="logo" className='user-icon' />
         <p className='user-uid'>{channelDetails.name}</p> 
       </div>
       <div className="profile-content">
         <div className="content-title">
           <small>Who's in here</small>
-          <i className='info-icon'><UserPlusIcon /></i>
+          <i className='info-icon'><UserPlusIcon onClick={openModal}/></i>
         </div>
         <div className="memberslist">
           <Link 
@@ -71,6 +79,16 @@ function Profile({ users, channelDetails, loggedInUser }) {
           ))}
         </div>
       </div>
+
+      {isModalOpen && (
+        <AddMember
+          users={users}
+          channelData={channelData}
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          // onSubmit={/* your submit handler */
+        />
+      )}
       
     </section>
   )
