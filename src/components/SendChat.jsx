@@ -1,7 +1,7 @@
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { chatBoxInput, textAreaTemplate } from './formInput';
+import * as c from '../components';
 import { useSendMesg } from '../hooks';
 
 function SendChat({ userID, receiverClass, onMessageSent }) {
@@ -29,7 +29,7 @@ function SendChat({ userID, receiverClass, onMessageSent }) {
       <form 
         onSubmit={handleSubmit(onSubmit)} className='chatbox-form'
       >              
-        {chatBoxInput.map(input => textAreaTemplate(input, register, errors))}
+        {c.chatBoxInput.map(input => c.textAreaTemplate(input, register, errors))}
 
         <button
         type="submit"
