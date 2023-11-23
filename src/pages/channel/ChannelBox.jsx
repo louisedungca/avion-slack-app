@@ -19,6 +19,7 @@ function ChannelBox() {
   console.log('loggedin user id:', loggedInUser.id);
 
   const [messages, setMessages] = useState([]);
+  const [reverseMesg, setReverseMesg] = useState([]);
   const [showProfile, setShowProfile] = useState(false);
   const { data: mesgData, fetchData: fetchMesg } = useFetch(getChnlMsgUrl(channelID), { method: 'GET' });
 
@@ -27,16 +28,17 @@ function ChannelBox() {
   }, [channelID]);
 
   useEffect(() => {
-    if (mesgData) {
+    if (mesgData && mesgData.data) {
       setMessages(mesgData.data);
+      setReverseMesg([...mesgData.data].reverse());
       console.log('Fetched Channel Messages:', mesgData.data);
     }
-  }, [mesgData]); 
+  }, [mesgData]);
 
   // for checking only -- delete later
   useEffect(() => { 
     console.log('Channel Messages:', messages);
-  }, [messages]);
+  }, [messages.length]);
 
   return (
     <section className='dashcontent'>
@@ -52,8 +54,8 @@ function ChannelBox() {
         </div>
 
         <div className="mesgthread">
-          {messages && messages.length > 0 ? 
-            messages.reverse().map((message) => (              
+          {reverseMesg && reverseMesg.length > 0 ? 
+            reverseMesg.map((message) => (              
               <div key={message.id}>
                 <small className={`message-box ${message.sender.id === loggedInUser.id ? 'right' : 'left'}`}>
                   {message.sender.uid}

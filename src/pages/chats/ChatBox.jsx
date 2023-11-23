@@ -1,4 +1,4 @@
-import { InformationCircleIcon, StarIcon, UserCircleIcon } from '@heroicons/react/24/outline';
+import { StarIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 import { useOutletContext, useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 
@@ -18,6 +18,7 @@ function ChatBox() {
   // console.log('User:', user);
 
   const [messages, setMessages] = useState([]);
+  const [reverseMesg, setReverseMesg] = useState([]);
   // const [isMessageSent, setIsMessageSent] = useState(false);
   const { data: mesgData, fetchData: fetchMesg } = useFetch(getMsgUrl(userID), { method: 'GET' });
 
@@ -27,16 +28,17 @@ function ChatBox() {
   }, [userID]);
 
   useEffect(() => {
-    if (mesgData) {
+    if (mesgData && mesgData.data) {
       setMessages(mesgData.data);
-      console.log('Fetched Messages:', mesgData.data);
+      setReverseMesg([...mesgData.data].reverse());
+      console.log('Fetched Channel Messages:', mesgData.data);
     }
   }, [mesgData]);
   
   // for checking only -- delete later
   useEffect(() => { 
     console.log('Messages:', messages);
-  }, [messages]);
+  }, [messages.length]);
 
   return (
     <section className='dashcontent'>
@@ -52,8 +54,8 @@ function ChatBox() {
         </div>
 
         <div className="mesgthread">
-            {messages && messages.length > 0 ? 
-            messages.reverse().map((message) => (
+          {reverseMesg && reverseMesg.length > 0 ? 
+            reverseMesg.map((message) => (
               <div 
                 key={message.id}
                 className={`message-box ${message.sender.id === userID ? 'left' : ''} ${message.receiver.id === userID ? 'right' : ''}`}
@@ -62,9 +64,9 @@ function ChatBox() {
                   <p>{message.body}</p>  
 
                   {/* Delete later */}
-                  <small>Receiver: {message.receiver.email} (ID: {message.receiver.id})</small>   
+                  {/* <small>Receiver: {message.receiver.email} (ID: {message.receiver.id})</small>   
                   <small>Sender: {message.sender.email} (ID: {message.sender.id})
-                  </small>               
+                  </small>*/}
                 </div>    
               </div>
             )) : <div className="startconvo-wrapper">
