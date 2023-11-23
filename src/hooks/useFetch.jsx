@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { allUsersUrl, getLocalStorage, usersChannelUrl } from "../utils";
+import { allUsersUrl, channelDetailUrl, getLocalStorage, usersChannelUrl } from "../utils";
 
 export function useFetch(url, options = {}) {
   const [data, setData] = useState([]);
@@ -66,7 +66,7 @@ export function useFetch(url, options = {}) {
 };
 
 export function useFetchUsers() {
-  const { data, error, isLoading, fetchData } = useFetch(allUsersUrl, { method: 'GET', });
+  const { data, error, isLoading, fetchData } = useFetch(allUsersUrl, { method: 'GET' });
   const users = data?.data || [];
 
   return { users, error, isLoading, fetchData };
@@ -78,4 +78,11 @@ export function useFetchChannels() {
   const channels = data?.data || [];
 
   return { channels, error, isLoading, fetchData };
+};
+
+export function useFetchChannelData(channelID) {
+  const { data, error, isLoading, fetchData } = useFetch(channelDetailUrl(channelID), { method: 'GET' });
+  const channelData = data?.data || [];
+
+  return { channelData, error, isLoading, fetchData };
 };

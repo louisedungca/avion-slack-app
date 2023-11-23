@@ -45,6 +45,9 @@
 .profile-content{
   // border: 2px dotted pink;
   border-top: 2px dotted $primaryColor;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   width: 100%;
   height: 100%;
   padding: 0.5rem;
@@ -55,10 +58,11 @@
     justify-content: space-between;
 
     .content-icon {
+      cursor: pointer;
       width: min(10%, 20px);
       display: flex;
       align-self: center;
-      color: $primaryColor;
+      color: $primaryColor; 
     }
 
     small {
@@ -66,6 +70,35 @@
       text-transform: uppercase;
       letter-spacing: 0.12rem;
       font-weight: 600;
+    }
+  }
+
+  .memberslist {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .member {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.2rem;
+    border-radius: 0.5rem;
+    // background: $gray;
+    transition: 0.3s all ease-in-out;
+
+    h5 {
+      font-size: $span;
+      font-weight: 400;
+      color: $white;
+    }
+
+    &:hover {
+      background: $accent;
+      color: $white;
+      opacity: 0.8;
     }
   }
 }

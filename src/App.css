@@ -490,7 +490,9 @@ aside, .aside-chats {
   color: #58094F;
   letter-spacing: 0.2rem;
 }
-.chatbox-header .info-icon {
+
+.info-icon {
+  cursor: pointer;
   width: 25px;
   display: flex;
   align-self: center;
@@ -644,6 +646,9 @@ aside, .aside-chats {
 
 .profile-content {
   border-top: 2px dotted #58094F;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   width: 100%;
   height: 100%;
   padding: 0.5rem;
@@ -654,6 +659,7 @@ aside, .aside-chats {
   justify-content: space-between;
 }
 .profile-content .content-title .content-icon {
+  cursor: pointer;
   width: min(10%, 20px);
   display: flex;
   align-self: center;
@@ -664,6 +670,30 @@ aside, .aside-chats {
   text-transform: uppercase;
   letter-spacing: 0.12rem;
   font-weight: 600;
+}
+.profile-content .memberslist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.profile-content .member {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.2rem;
+  border-radius: 0.5rem;
+  transition: 0.3s all ease-in-out;
+}
+.profile-content .member h5 {
+  font-size: clamp(0.7rem, 0.6077rem + 0.3077vw, 1rem);
+  font-weight: 400;
+  color: #fffff0;
+}
+.profile-content .member:hover {
+  background: #F3AA20;
+  color: #fffff0;
+  opacity: 0.8;
 }
 
 .modal {
