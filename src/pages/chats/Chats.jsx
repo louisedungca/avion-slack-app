@@ -1,4 +1,4 @@
-import { PencilSquareIcon } from "@heroicons/react/24/solid";
+import { PencilSquareIcon, StarIcon } from "@heroicons/react/24/solid";
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import AsyncSelect from "react-select/async";
@@ -55,16 +55,19 @@ function Chats({ users }) {
       </div>
       {selectedUser ? ` Selected User: ${selectedUser.label} (ID: ${selectedUser.value})` : ''}
 
-      <div className="pinned-users">
+      <div className="sidelist">
         <h5>Favorites</h5>
         {favorites && favorites.length > 0 &&
           favorites.map(fave => (
             <NavLink 
-              className="favorites"
+              className='sidelist-item'
               key={fave.id}
               to={`${fave.id}`}
             >
-              {fave.uid}
+              <i className='info-icon'><StarIcon/></i>
+              <span className="thumbnail-name">
+                {fave.uid.split('@')[0]}
+              </span>              
             </NavLink>
           ))
         }

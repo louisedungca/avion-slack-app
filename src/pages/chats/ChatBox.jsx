@@ -8,16 +8,14 @@ import { useFetch } from '../../hooks';
 import { deleteItem, formatTimestamp, getLocalStorage, getMsgUrl, setLocalStorage } from '../../utils';
 import { SendChat } from '../../components';
 
-
 function ChatBox() {
   const users = useOutletContext();
   const { id } = useParams();
   const userID = +id;
+  const user = users.find((item) => item.id === userID) || [];
+  
   const favorites = getLocalStorage('Favorites') || [];
   const [isFavorite, setIsFavorite] = useState(() => favorites.some((item) => item.id === userID));
-  const user = users.find((item) => item.id === userID) || [];
-  // console.log('Params ID:', id);
-  // console.log('User:', user);
 
   const [messages, setMessages] = useState([]);
   const [reverseMesg, setReverseMesg] = useState([]);

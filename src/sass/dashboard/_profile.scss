@@ -44,13 +44,12 @@
 }
 
 .profile-content{
-  // border: 2px dotted pink;
   border-top: 2px dotted $primaryColor;
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
   width: 100%;
-  height: 100%;
+  // height: 100%;
   padding: 0.5rem;
 
   .content-title{
@@ -68,6 +67,7 @@
   }
 
   .memberslist {
+    // border: 2px dotted pink;  
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
