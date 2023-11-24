@@ -1,7 +1,7 @@
 import { PencilSquareIcon, StarIcon } from "@heroicons/react/24/solid";
+import AsyncSelect from "react-select/async";
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import AsyncSelect from "react-select/async";
 import { getLocalStorage } from "../../utils";
 
 function Chats({ users }) {
@@ -43,7 +43,7 @@ function Chats({ users }) {
     <aside className="aside-chats">
       <div className="aside-title">
         <h3>Chats</h3>
-        <PencilSquareIcon className="icon" onClick={handleClickNewChat}/>
+        {/* <PencilSquareIcon className="icon" onClick={handleClickNewChat}/> */}
       </div>
 
       <div className="search-user">
@@ -53,7 +53,6 @@ function Chats({ users }) {
           onChange={handleSelectedUser}
         />
       </div>
-      {/* {selectedUser ? ` Selected User: ${selectedUser.label} (ID: ${selectedUser.value})` : ''} */}
 
       <div className="favorites">
         <h5>Favorites</h5>

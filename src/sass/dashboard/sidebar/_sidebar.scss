@@ -1,7 +1,8 @@
 @use '../../roots' as *;
 
 aside, .aside-chats {
-  width: max(120px, 20%);
+  width: max(250px, 20%);
+  max-width: 250px;
   height: 100%;
   padding: 1rem;
   padding-left: 0.5rem;
@@ -38,7 +39,6 @@ aside, .aside-chats {
     cursor: pointer;
 
     &:hover {
-      // opacity: 0.65;
       color: $accent;
     }
   }
@@ -126,7 +126,6 @@ aside, .aside-chats {
 }
 
 .recentsearch {
-  // margin-top: 0.2rem;
   border-top: 2px solid $supplementOne;
   height: 40%;
   display: flex;
@@ -151,6 +150,7 @@ aside, .aside-chats {
   gap: 0.2rem;
   color: $white;
   padding: 0.5rem;
+  padding-left: 0;
   overflow-y: auto;
 
   &::-webkit-scrollbar {
