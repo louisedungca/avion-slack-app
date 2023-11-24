@@ -5,25 +5,24 @@ import React, { useEffect, useState } from 'react';
 
 import logo from '../../assets/smileylogo.png';
 import { useFetch } from '../../hooks';
-import { deleteItem, formatTimestamp, getLocalStorage, getMsgUrl, setLocalStorage } from '../../utils';
+import { formatTimestamp, getMsgUrl, setLocalStorage } from '../../utils';
 import { SendChat } from '../../components';
 
 function ChatBox() {
-  const users = useOutletContext();
+  const { users, favorites, setFavorites} = useOutletContext();
   const { id } = useParams();
   const userID = +id;
   const user = users.find((item) => item.id === userID) || [];
   
-  const favorites = getLocalStorage('Favorites') || [];
   const [isFavorite, setIsFavorite] = useState(() => favorites.some((item) => item.id === userID));
-
   const [messages, setMessages] = useState([]);
   const [reverseMesg, setReverseMesg] = useState([]);
   const { data: mesgData, fetchData: fetchMesg } = useFetch(getMsgUrl(userID), { method: 'GET' });
 
+  // console.log('@ChatBox - users:', users);
+
   useEffect(() => {
       fetchMesg();
-
   }, [userID]);
 
   useEffect(() => {
@@ -49,20 +48,17 @@ function ChatBox() {
       uid: user.uid,
     }
 
-    const favorites = getLocalStorage('Favorites') || [];
-    const isStarredUser = favorites.some(item => item.id === starredUser.id);
-
-    if(!isStarredUser) {
-      favorites.push(starredUser);
-      setLocalStorage('Favorites', favorites);
-      console.log('@Favorites - user:', starredUser);
-    } else {
-      deleteItem({ 
-        key: 'Favorites', 
-        id: user.id 
-      });
-    }
-    setIsFavorite(!isStarredUser);
+    setFavorites((prevFavorites) => {
+      const isStarredUser = prevFavorites.some((item) => item.id === starredUser.id);
+      const updatedFavorites = isStarredUser
+        ? prevFavorites.filter((item) => item.id !== starredUser.id)
+        : [...prevFavorites, starredUser];
+  
+      setLocalStorage('Favorites', updatedFavorites);
+      return updatedFavorites;
+    });
+  
+    setIsFavorite((prevIsFavorite) => !prevIsFavorite);
   };
 
   return (

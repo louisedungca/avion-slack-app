@@ -1,21 +1,16 @@
-import { PencilSquareIcon, StarIcon } from "@heroicons/react/24/solid";
+import { StarIcon } from "@heroicons/react/24/solid";
 import AsyncSelect from "react-select/async";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { getLocalStorage } from "../../utils";
 
-function Chats({ users }) {
-  const navigate = useNavigate();
-  const [favorites, setFavorites] = useState(() => getLocalStorage('Favorites') || []);
+function Chats({ users, favorites }) {
+  const navigate = useNavigate(); 
   const [selectedUser, setSelectedUser] = useState(null);
   const options = users.map((user) => ({
     value: user.id,
     label: user.uid,
   }));  
 
-  useEffect(() => {
-    setFavorites(getLocalStorage('Favorites') || []);
-  }, [favorites]);
 
   function loadOptions(searchValue, callback) {
     const filteredOptions = options.filter((user) =>
@@ -35,15 +30,10 @@ function Chats({ users }) {
     }
   };
 
-  function handleClickNewChat() {
-    // setSearchFocus(true);
-  };
-
   return (
     <aside className="aside-chats">
       <div className="aside-title">
         <h3>Chats</h3>
-        {/* <PencilSquareIcon className="icon" onClick={handleClickNewChat}/> */}
       </div>
 
       <div className="search-user">
