@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import AsyncSelect from "react-select/async";
-import { useForm, Controller } from 'react-hook-form';
 import { XCircleIcon } from '@heroicons/react/24/outline';
+import React, { useEffect } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import AsyncSelect from "react-select/async";
 
 function AddMember({ isOpen, onClose, onSubmit, users, channelData }) {
-  console.log('@AddMember - channelData', channelData);
+  // console.log('@AddMember - channelData', channelData);
   const { control, handleSubmit, formState: { isSubmitSuccessful }, reset } = useForm();
   const membersID = channelData.channel_members.map(member => member.user_id);
   const options = users
@@ -60,7 +60,6 @@ function AddMember({ isOpen, onClose, onSubmit, users, channelData }) {
               />
             )}
           />
-
           <button className='btn-main' type="submit">Add</button>
         </form>        
       </div>

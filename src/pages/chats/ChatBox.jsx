@@ -4,22 +4,20 @@ import React, { useEffect, useState } from 'react';
 
 import logo from '../../assets/smileylogo.png';
 import { useFetch } from '../../hooks';
-import { getMsgUrl } from '../../utils';
+import { formatTimestamp, getMsgUrl } from '../../utils';
 import { SendChat } from '../../components';
 
 
 function ChatBox() {
   const users = useOutletContext();
   const { id } = useParams();
-  // console.log('Params ID:', id);
-
   const userID = +id;
   const user = users.find((item) => item.id === userID) || [];
+   // console.log('Params ID:', id);
   // console.log('User:', user);
 
   const [messages, setMessages] = useState([]);
   const [reverseMesg, setReverseMesg] = useState([]);
-  // const [isMessageSent, setIsMessageSent] = useState(false);
   const { data: mesgData, fetchData: fetchMesg } = useFetch(getMsgUrl(userID), { method: 'GET' });
 
   useEffect(() => {
@@ -62,6 +60,9 @@ function ChatBox() {
               >
                 <div className='message'>
                   <p>{message.body}</p>  
+                  <span className="timestamp">
+                    {formatTimestamp(message.created_at)}
+                  </span> 
 
                   {/* Delete later */}
                   {/* <small>Receiver: {message.receiver.email} (ID: {message.receiver.id})</small>   
@@ -82,8 +83,6 @@ function ChatBox() {
           receiverClass={'User'}
           onMessageSent={() => fetchMesg()}          
         />
-
-        {/* {isMessageSent && <small className='success-message'>Message sent!</small>}     */}
       </div>         
     </section>
   )

@@ -84,6 +84,7 @@ function CreateChannel({ isOpen, onClose, users }) {
         >
           {/* Channel name */}
           {c.newChannelInput.map(input => c.inputFieldTemplate(input, register, errors))}
+          {error && <small className='input-error'>{error.message}</small>}    
 
           {/* Select users */}
           <p>Add members:</p>
@@ -110,9 +111,7 @@ function CreateChannel({ isOpen, onClose, users }) {
             </small>
           </div>
 
-          <button className='btn-main' type="submit">Create</button>
-
-          {error && <small className='error-text'>{error.message}</small>}          
+          <button className='btn-main' type="submit">Create</button>      
         </form>        
       </div>
     </div>

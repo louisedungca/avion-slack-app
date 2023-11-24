@@ -159,6 +159,10 @@
     color: $white;
     align-items: end;
   }
+
+  &.channel {
+    display: none;
+  }
 }
 
 .message {
@@ -167,6 +171,17 @@
   font-size: $span;
   display: flex;
   flex-direction: column;
+
+  small {
+    text-transform: capitalize;
+    font-weight: 700;
+  }
+}
+
+.timestamp {
+  font-size: xx-small;
+  font-style: italic;
+  opacity: 0.65;
 }
 
 // Chat input field

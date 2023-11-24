@@ -1,9 +1,9 @@
 import { InformationCircleIcon, UserGroupIcon } from '@heroicons/react/24/outline';
-import logo from '../../assets/smileylogo.png';
 import React, { useEffect, useState } from 'react';
 import { useOutletContext, useParams } from 'react-router-dom';
 
-import { getChnlMsgUrl, getLocalStorage } from '../../utils';
+import logo from '../../assets/smileylogo.png';
+import { formatTimestamp, getChnlMsgUrl, getLocalStorage } from '../../utils';
 import { useFetch } from '../../hooks';
 import * as c from '../../components';
 
@@ -14,9 +14,9 @@ function ChannelBox() {
   const channelID = +channel_id;  
   const channelDetails = channels.find(item => item.id === channelID) || [];
 
-  console.log('@ChannelBox - channels:', channels);
-  console.log('channelDetails', channelDetails);
-  console.log('loggedin user id:', loggedInUser.id);
+  // console.log('@ChannelBox - channels:', channels);
+  // console.log('channelDetails', channelDetails);
+  // console.log('loggedin user id:', loggedInUser.id);
 
   const [messages, setMessages] = useState([]);
   const [reverseMesg, setReverseMesg] = useState([]);
@@ -57,12 +57,15 @@ function ChannelBox() {
           {reverseMesg && reverseMesg.length > 0 ? 
             reverseMesg.map((message) => (              
               <div key={message.id}>
-                <small className={`message-box ${message.sender.id === loggedInUser.id ? 'right' : 'left'}`}>
-                  {message.sender.uid}
-                </small>
                 <div className={`message-box ${message.sender.id === loggedInUser.id ? 'right' : 'left'}`}>
                   <div className='message'>
+                      <small className={`message-box ${message.sender.id === loggedInUser.id ? 'right channel' : 'left'}`}>
+                        {message.sender.uid.split('@')[0]}
+                      </small>
                     <p>{message.body}</p>  
+                    <span className="timestamp">
+                      {formatTimestamp(message.created_at)}
+                    </span> 
                   </div>    
                 </div>
               </div>              

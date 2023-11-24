@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Outlet, useOutletContext } from 'react-router-dom';
 import { useFetchChannels } from '../hooks';
 import * as p from '../pages';
-import * as l from '../layout';
 
 function ChannelLayout() {
   const users = useOutletContext();
@@ -16,7 +15,7 @@ function ChannelLayout() {
     return <p.ErrorPage/>
   }
 
-  console.log('@ChanLayout - channels:', channels);
+  // console.log('@ChanLayout - channels:', channels);
   // console.log('@ChanLayout - users:', users);
 
   return (
