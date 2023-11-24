@@ -306,6 +306,9 @@ aside, .aside-chats {
   height: 100%;
   padding: 1rem;
   padding-left: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .aside-title {
@@ -392,13 +395,60 @@ aside, .aside-chats {
   color: #58094F;
 }
 
+.favorites {
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+  padding: 0.5rem;
+  color: #fffff0;
+  text-shadow: 1.2px 1.2px 3px #58094F;
+  letter-spacing: 0.12rem;
+}
+.favorites h5 {
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.recentsearch {
+  border-top: 2px solid #f9e7f3;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+  padding: 0.5rem;
+  color: #fffff0;
+  text-shadow: 1.2px 1.2px 3px #58094F;
+  letter-spacing: 0.12rem;
+}
+.recentsearch h5 {
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
 .sidelist {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
   color: #fffff0;
-  text-shadow: 1.2px 1.2px 3px #58094F;
+  padding: 0.5rem;
+  overflow-y: auto;
+}
+.sidelist::-webkit-scrollbar {
+  width: 0.3rem;
+  height: 0.3rem;
+}
+.sidelist::-webkit-scrollbar-track {
+  background: #58094F;
+  border-radius: 0.8rem;
+}
+.sidelist::-webkit-scrollbar-thumb {
+  background: #fffff0;
+  border-radius: 0.3rem;
+}
+.sidelist::-webkit-scrollbar-thumb:hover {
+  background: #F3AA20;
 }
 .sidelist .sidelist-item {
   display: flex;
@@ -407,7 +457,6 @@ aside, .aside-chats {
   padding: 0.5rem;
   border-radius: 0.8rem;
   color: #fffff0;
-  text-shadow: 1.2px 1.2px 3px #58094F;
 }
 .sidelist .sidelist-item .info-icon {
   color: #fffff0;
@@ -416,6 +465,9 @@ aside, .aside-chats {
 }
 .sidelist .sidelist-item span {
   font-size: clamp(0.7rem, 0.6077rem + 0.3077vw, 1rem);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .sidelist .sidelist-item.active {
   background: #fffff0;

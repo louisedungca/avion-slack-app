@@ -53,25 +53,32 @@ function Chats({ users }) {
           onChange={handleSelectedUser}
         />
       </div>
-      {selectedUser ? ` Selected User: ${selectedUser.label} (ID: ${selectedUser.value})` : ''}
+      {/* {selectedUser ? ` Selected User: ${selectedUser.label} (ID: ${selectedUser.value})` : ''} */}
 
-      <div className="sidelist">
+      <div className="favorites">
         <h5>Favorites</h5>
-        {favorites && favorites.length > 0 &&
-          favorites.map(fave => (
-            <NavLink 
-              className='sidelist-item'
-              key={fave.id}
-              to={`${fave.id}`}
-            >
-              <i className='info-icon'><StarIcon/></i>
-              <span className="thumbnail-name">
-                {fave.uid.split('@')[0]}
-              </span>              
-            </NavLink>
-          ))
-        }
+        <div className="sidelist">
+          {favorites && favorites.length > 0 &&
+            favorites.map(fave => (
+              <NavLink 
+                className='sidelist-item'
+                key={fave.id}
+                to={`${fave.id}`}
+              >
+                <i className='info-icon'><StarIcon/></i>
+                <span>
+                  {fave.uid.split('@')[0]}
+                </span>              
+              </NavLink>
+            ))
+          }
+        </div>
       </div>
+
+      <div className="recentsearch">
+        <h5>Recent Searches</h5>
+      </div>
+      
     </aside>      
   );  
 }
