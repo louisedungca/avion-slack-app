@@ -2,6 +2,7 @@ import { XCircleIcon } from '@heroicons/react/24/outline';
 import React, { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import AsyncSelect from "react-select/async";
+import { reactSelectStyles } from '../../utils';
 
 function AddMember({ isOpen, onClose, onSubmit, users, channelData }) {
   // console.log('@AddMember - channelData', channelData);
@@ -57,6 +58,7 @@ function AddMember({ isOpen, onClose, onSubmit, users, channelData }) {
                 {...field}
                 placeholder='Enter email...'
                 loadOptions={loadOptions} 
+                styles={reactSelectStyles}
               />
             )}
           />

@@ -3,7 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 import React, { useEffect } from 'react';
 import AsyncSelect from "react-select/async";
 
-import { createChannelUrl } from '../../utils';
+import { createChannelUrl, reactSelectStyles } from '../../utils';
 import { useFetch } from '../../hooks';
 import * as c from '../../components'
 
@@ -99,6 +99,7 @@ function CreateChannel({ isOpen, onClose, users }) {
                 placeholder='Enter email...'
                 isMulti
                 loadOptions={loadOptions} 
+                styles={reactSelectStyles}
               />
             )}
           />

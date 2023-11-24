@@ -2,6 +2,7 @@ import { StarIcon } from "@heroicons/react/24/solid";
 import AsyncSelect from "react-select/async";
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { reactSelectStyles } from "../../utils";
 
 function Chats({ users, favorites }) {
   const navigate = useNavigate(); 
@@ -10,7 +11,6 @@ function Chats({ users, favorites }) {
     value: user.id,
     label: user.uid,
   }));  
-
 
   function loadOptions(searchValue, callback) {
     const filteredOptions = options.filter((user) =>
@@ -28,6 +28,8 @@ function Chats({ users, favorites }) {
       navigate(`/c/chats/${selectedUser.value}`);
       console.log('Selected User:', selectedUser);
     }
+
+    setSelectedUser(null);
   };
 
   return (
@@ -41,6 +43,8 @@ function Chats({ users, favorites }) {
           placeholder='Enter email...'
           loadOptions={loadOptions} 
           onChange={handleSelectedUser}
+          value={selectedUser}
+          styles={reactSelectStyles}
         />
       </div>
 

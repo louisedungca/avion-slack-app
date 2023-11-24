@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet, useOutletContext } from 'react-router-dom';
-import { Chats } from '../pages';
 import { getLocalStorage } from '../utils';
+import { Chats } from '../pages';
+
 
 function ChatLayout() {
   const users = useOutletContext();
   const [favorites, setFavorites] = useState(() => getLocalStorage('Favorites') || []);
+  // console.log('@ChatsLayout - users:', users);
 
   useEffect(() => {
     setFavorites(getLocalStorage('Favorites') || []);
   }, []);
-
-  // console.log('@ChatsLayout - users:', users);
 
   return (
     <section className='dashcontent'>
