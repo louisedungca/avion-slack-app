@@ -37,5 +37,4 @@ export function formatTimestamp(timestamp) {
 <div className="timestamp">
   {formatTimestamp(message.created_at)}
 </div>    
-
 */

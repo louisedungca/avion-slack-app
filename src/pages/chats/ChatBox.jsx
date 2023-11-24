@@ -1,10 +1,11 @@
 import { StarIcon, UserCircleIcon } from '@heroicons/react/24/outline';
+import { StarIcon as StarSolidIcon } from '@heroicons/react/24/solid';
 import { useOutletContext, useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 
 import logo from '../../assets/smileylogo.png';
 import { useFetch } from '../../hooks';
-import { formatTimestamp, getMsgUrl } from '../../utils';
+import { deleteItem, formatTimestamp, getLocalStorage, getMsgUrl, setLocalStorage } from '../../utils';
 import { SendChat } from '../../components';
 
 
@@ -12,8 +13,10 @@ function ChatBox() {
   const users = useOutletContext();
   const { id } = useParams();
   const userID = +id;
+  const favorites = getLocalStorage('Favorites') || [];
+  const [isFavorite, setIsFavorite] = useState(() => favorites.some((item) => item.id === userID));
   const user = users.find((item) => item.id === userID) || [];
-   // console.log('Params ID:', id);
+  // console.log('Params ID:', id);
   // console.log('User:', user);
 
   const [messages, setMessages] = useState([]);
@@ -36,7 +39,33 @@ function ChatBox() {
   // for checking only -- delete later
   useEffect(() => { 
     console.log('Messages:', messages);
-  }, [messages.length]);
+  }, [messages]);
+
+  useEffect(() => {
+    setIsFavorite(favorites.some(item => item.id === userID));
+  }, [userID]);
+
+  function handleStarUser() {
+    const starredUser = {
+      id: user.id,
+      uid: user.uid,
+    }
+
+    const favorites = getLocalStorage('Favorites') || [];
+    const isStarredUser = favorites.some(item => item.id === starredUser.id);
+
+    if(!isStarredUser) {
+      favorites.push(starredUser);
+      setLocalStorage('Favorites', favorites);
+      console.log('@Favorites - user:', starredUser);
+    } else {
+      deleteItem({ 
+        key: 'Favorites', 
+        id: user.id 
+      });
+    }
+    setIsFavorite(!isStarredUser);
+  };
 
   return (
     <section className='dashcontent'>
@@ -47,7 +76,15 @@ function ChatBox() {
           <p className='user-uid'>{user.uid}</p>     
         </div>
         <div className="header-right">
-          <i className='info-icon'><StarIcon/></i>
+          
+          {
+            isFavorite ? (
+              <i className='info-icon'onClick={handleStarUser}><StarSolidIcon/></i>
+            ) : (
+              <i className='info-icon'onClick={handleStarUser}><StarIcon/></i>
+            )
+          }
+          
         </div>     
         </div>
 
@@ -63,11 +100,6 @@ function ChatBox() {
                   <span className="timestamp">
                     {formatTimestamp(message.created_at)}
                   </span> 
-
-                  {/* Delete later */}
-                  {/* <small>Receiver: {message.receiver.email} (ID: {message.receiver.id})</small>   
-                  <small>Sender: {message.sender.email} (ID: {message.sender.id})
-                  </small>*/}
                 </div>    
               </div>
             )) : <div className="startconvo-wrapper">

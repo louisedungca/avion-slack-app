@@ -1,16 +1,21 @@
-import React, { useState } from "react";
-import AsyncSelect from "react-select/async";
 import { PencilSquareIcon } from "@heroicons/react/24/solid";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import AsyncSelect from "react-select/async";
+import { getLocalStorage } from "../../utils";
 
 function Chats({ users }) {
   const navigate = useNavigate();
+  const [favorites, setFavorites] = useState(() => getLocalStorage('Favorites') || []);
+  const [selectedUser, setSelectedUser] = useState(null);
   const options = users.map((user) => ({
     value: user.id,
     label: user.uid,
-  }));
+  }));  
 
-  const [selectedUser, setSelectedUser] = useState(null);
+  useEffect(() => {
+    setFavorites(getLocalStorage('Favorites') || []);
+  }, [favorites]);
 
   function loadOptions(searchValue, callback) {
     const filteredOptions = options.filter((user) =>
@@ -49,6 +54,21 @@ function Chats({ users }) {
         />
       </div>
       {selectedUser ? ` Selected User: ${selectedUser.label} (ID: ${selectedUser.value})` : ''}
+
+      <div className="pinned-users">
+        <h5>Favorites</h5>
+        {favorites && favorites.length > 0 &&
+          favorites.map(fave => (
+            <NavLink 
+              className="favorites"
+              key={fave.id}
+              to={`${fave.id}`}
+            >
+              {fave.uid}
+            </NavLink>
+          ))
+        }
+      </div>
     </aside>      
   );  
 }
