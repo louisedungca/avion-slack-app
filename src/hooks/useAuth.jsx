@@ -88,6 +88,7 @@ function useProvideAuth() {
     setUser(null);
     localStorage.removeItem('UserData');
     localStorage.removeItem('Headers');
+    localStorage.removeItem('Favorites');
   };
 
   useEffect(() => {

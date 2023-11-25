@@ -1,12 +1,22 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { NavbarData } from '../../components';
 import { ArrowLeftOnRectangleIcon, UserIcon } from '@heroicons/react/24/solid';
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { NavbarData, Logout } from '../../components';
+
 
 function Navbar() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  function openModal() {
+    setIsModalOpen(true);
+  };
+
+  function closeModal() {
+    setIsModalOpen(false);
+  };
+
   return (
     <nav className='navbar'>
-
       <div className="side-item-wrapper">     
         <div className="upper-items">
           {NavbarData.map((item, index) => {
@@ -23,15 +33,25 @@ function Navbar() {
         </div>
 
         <div className="lower-items">
-          <div className={'lower-item usericon'}>
+          <div
+            className={'lower-item usericon'}
+          >
             <i className="navbar-icons"><UserIcon /></i>
           </div>
 
-          <div className={'lower-item logouticon'}>
-             <i className="navbar-icons"><ArrowLeftOnRectangleIcon /></i>            
+          <div 
+            className={'lower-item logouticon'}
+            onClick={openModal}
+          >
+             <i className="navbar-icons"><ArrowLeftOnRectangleIcon /></i>      
           </div>
         </div>
-      </div>      
+      </div>   
+
+      <Logout 
+        isOpen={isModalOpen} 
+        onClose={closeModal}
+      />      
     </nav>
   )
 }

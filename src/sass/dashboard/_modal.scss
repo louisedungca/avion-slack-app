@@ -40,6 +40,14 @@
   align-items: center;
 }
 
+.modal-title {
+  font-size: $h5;
+}
+
+.modal-text {
+  font-size: small;
+}
+
 .btn-close {
   cursor: pointer;
   display: flex;
@@ -86,4 +94,39 @@
   color: $warning;
   font-weight: 600;
   padding: 0 0.5rem;
+}
+
+.modal-btns {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+
+  .modal-btn, .modal-btn-signout{
+    cursor: pointer;
+    color: $primaryColor;
+    font-weight: 800;
+    letter-spacing: 0.12rem;
+    text-transform: uppercase;
+    font-size: $span;
+    background: $white;
+    border-radius: 1rem;
+    border: 1px solid $accent;
+    outline: none;
+    width: 100%;
+    height: 2.2rem;
+    transition: 0.3s all ease-in-out;
+
+    &:hover {
+      background: $secondaryColor;
+      color: $white;
+      opacity: 0.8;
+    } 
+  }  
+
+  .modal-btn-signout {
+    background: $accent;
+  }
 }
