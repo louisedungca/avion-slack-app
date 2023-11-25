@@ -4,16 +4,16 @@ import * as p from '../../pages';
 
 export const NavbarData =  [
   {
-    icon: <ChatBubbleLeftRightIcon />,
-    text: 'Chats',
-    link: 'chats', 
-    elementLabel: <p.Chats />,
-  },
-  {
     icon: <UserGroupIcon />,
     text: 'Channel',
     link: 'channels', 
     elementLabel: <p.Channel />,
+  },
+  {
+    icon: <ChatBubbleLeftRightIcon />,
+    text: 'Chats',
+    link: 'chats', 
+    elementLabel: <p.Chats />,
   },
   {
     icon: <BookOpenIcon />,

@@ -775,6 +775,7 @@ aside, .aside-chats {
   flex-direction: column;
   gap: 0.8rem;
   width: 100%;
+  height: 100%;
   padding: 0.5rem;
 }
 .profile-content .content-title {
@@ -790,9 +791,27 @@ aside, .aside-chats {
   letter-spacing: 0.2rem;
 }
 .profile-content .memberslist {
+  border: 2px dotted pink;
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
+  max-height: 100%;
+  overflow-y: auto;
+}
+.profile-content .memberslist::-webkit-scrollbar {
+  width: 0.3rem;
+  height: 0.3rem;
+}
+.profile-content .memberslist::-webkit-scrollbar-track {
+  background: #f9e7f3;
+  border-radius: 0.8rem;
+}
+.profile-content .memberslist::-webkit-scrollbar-thumb {
+  background: #771b58;
+  border-radius: 0.3rem;
+}
+.profile-content .memberslist::-webkit-scrollbar-thumb:hover {
+  background: #F3AA20;
 }
 .profile-content .member, .profile-content .owner {
   cursor: pointer;

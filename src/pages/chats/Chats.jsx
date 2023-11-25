@@ -68,9 +68,9 @@ function Chats({ users, favorites }) {
         </div>
       </div>
 
-      <div className="recentsearch">
+      {/* <div className="recentsearch">
         <h5>Recent Chats</h5>
-      </div>
+      </div> */}
       
     </aside>      
   );  
