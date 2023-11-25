@@ -1,16 +1,20 @@
 import { StarIcon } from "@heroicons/react/24/solid";
-import AsyncSelect from "react-select/async";
+// import AsyncSelect from "react-select/async";
+import Select from "react-select";
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { reactSelectStyles } from "../../utils";
 
-function Chats({ users, favorites }) {
+function Chats({ users, favorites, allChannelMembers }) {
   const navigate = useNavigate(); 
   const [selectedUser, setSelectedUser] = useState(null);
-  const options = users.map((user) => ({
+  const options = allChannelMembers[0].map((user) => ({
     value: user.id,
     label: user.uid,
   }));  
+
+  console.log('@Chats - allChannelMembers', allChannelMembers);
+  console.log('@Chats - options', options);
 
   function loadOptions(searchValue, callback) {
     const filteredOptions = options.filter((user) =>
@@ -35,13 +39,14 @@ function Chats({ users, favorites }) {
   return (
     <aside className="aside-chats">
       <div className="aside-title">
-        <h3>Chats</h3>
+        <h3>Direct Messages</h3>
       </div>
 
       <div className="search-user">
-        <AsyncSelect 
+        <Select 
           placeholder='Enter email...'
-          loadOptions={loadOptions} 
+          // loadOptions={loadOptions} 
+          options={options}
           onChange={handleSelectedUser}
           value={selectedUser}
           styles={reactSelectStyles}
@@ -68,10 +73,9 @@ function Chats({ users, favorites }) {
         </div>
       </div>
 
-      {/* <div className="recentsearch">
+      <div className="recentsearch">
         <h5>Recent Chats</h5>
-      </div> */}
-      
+      </div>
     </aside>      
   );  
 }

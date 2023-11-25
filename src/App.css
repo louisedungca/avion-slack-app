@@ -337,7 +337,7 @@ aside, .aside-chats {
   margin-bottom: 0.5rem;
 }
 .aside-title h3 {
-  font-size: clamp(1rem, 0.9485rem + 0.8247vw, 2rem);
+  font-size: clamp(1rem, 0.8485rem + 0.7247vw, 1.8rem);
   font-weight: 600;
   letter-spacing: 0.2rem;
   text-transform: capitalize;

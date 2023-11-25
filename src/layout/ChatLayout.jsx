@@ -5,9 +5,9 @@ import { Chats } from '../pages';
 
 
 function ChatLayout() {
-  const { users, channels } = useOutletContext();
+  const { users, channels, allChannelMembers } = useOutletContext();
   const [favorites, setFavorites] = useState(() => getLocalStorage('Favorites') || []);
-  console.log('@ChatsLayout - channels:', channels);
+  console.log('@ChatsLayout - allChannelMembers:', allChannelMembers);
 
   useEffect(() => {
     setFavorites(getLocalStorage('Favorites') || []);
@@ -15,9 +15,10 @@ function ChatLayout() {
 
   return (
     <section className='dashcontent'>
-      <Chats users={users} favorites={favorites} />
+      <Chats users={users} favorites={favorites} allChannelMembers={allChannelMembers} />
       <Outlet context={{
         users,
+        allChannelMembers,
         favorites, 
         setFavorites,
       }}/>
