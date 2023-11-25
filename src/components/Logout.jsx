@@ -1,12 +1,15 @@
 import React from 'react';
 import { useAuth } from '../hooks';
+import { useNavigate } from 'react-router-dom';
 
 function Logout({ isOpen, onClose }) {
-  const logout = useAuth();
+  const auth = useAuth();
+  const navigate = useNavigate();
 
   function handleLogout() {
-    logout();
+    auth.logout();
     onClose();
+    navigate('/login');    
   };
   
   function handleCancelLogout() {
