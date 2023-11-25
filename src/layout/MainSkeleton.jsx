@@ -11,7 +11,8 @@ function MainSkeleton() {
         <aside className="aside-skeleton">
           <Skeleton height={20} count={4}/>
         </aside>        
-        <div className="mesgbox-skeleton"></div>
+        <div className="mesgbox-skeleton">
+        </div>
       </section>
     </main>
   )

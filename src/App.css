@@ -791,7 +791,6 @@ aside, .aside-chats {
   letter-spacing: 0.2rem;
 }
 .profile-content .memberslist {
-  border: 2px dotted pink;
   display: flex;
   flex-direction: column;
   gap: 0.2rem;

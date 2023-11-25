@@ -85,4 +85,4 @@ export function useFetchChannelData(channelID) {
   const channelData = data?.data || [];
 
   return { channelData, error, isLoading, fetchData };
-};
+};  
