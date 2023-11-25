@@ -3,7 +3,7 @@ import Skeleton from 'react-loading-skeleton';
 
 function MainSkeleton() {
   return (
-    <main className='mainpage-skeleton'>
+    <main className="mainpage-skeleton">
       <nav className="navbar-skeleton">
         <Skeleton width={30} height={30} count={3}/>
       </nav>

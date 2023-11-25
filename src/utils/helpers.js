@@ -76,3 +76,7 @@ export const reactSelectStyles = {
     letterSpacing: '0.12rem',
   }),
 }
+
+/* Usage: (as props)
+styles={reactSelectStyles}
+*/

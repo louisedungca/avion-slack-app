@@ -34,7 +34,6 @@ function AddMember({ isOpen, onClose, onSubmit, users, channelData }) {
 
   }, [isSubmitSuccessful, isOpen]);
 
-  
   return (
     <div className={`modal ${isOpen ? 'open' : ''}`}>
       <div className="modal-wrapper">
