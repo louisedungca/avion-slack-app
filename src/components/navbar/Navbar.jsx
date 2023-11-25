@@ -33,9 +33,7 @@ function Navbar() {
         </div>
 
         <div className="lower-items">
-          <div
-            className={'lower-item usericon'}
-          >
+          <div className={'lower-item usericon'}>
             <i className="navbar-icons"><UserIcon /></i>
           </div>
 
@@ -43,7 +41,9 @@ function Navbar() {
             className={'lower-item logouticon'}
             onClick={openModal}
           >
-             <i className="navbar-icons"><ArrowLeftOnRectangleIcon /></i>      
+             <i className="navbar-icons">
+              <ArrowLeftOnRectangleIcon />
+            </i>      
           </div>
         </div>
       </div>   
