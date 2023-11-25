@@ -6,7 +6,6 @@ import * as c from '../components';
 import * as p from '../pages';
 import * as l from '../layout';
 
-
 const MainPage = () => {
   const { users, error, isLoading, fetchData } = useFetchUsers();
   const { channels, error: fetchChannelsError, fetchData: fetchChannels, isLoading: channelsLoading } = useFetchChannels();
@@ -14,12 +13,6 @@ const MainPage = () => {
   const channelIDs = channels.map(channel => channel.id); 
   const [channelDetails, setChannelDetails] = useState([]);
   const [allChannelMembers, setAllChannelMembers] = useState([]);
-
-  const headers = getLocalStorage ('Headers');
-  const token = headers && headers['access-token'];
-  const client = headers && headers['client'];
-  const expiry = headers && headers['expiry'];
-  const uid = headers && headers['uid'];
   
   useEffect(() => {
     fetchData();
@@ -31,24 +24,39 @@ const MainPage = () => {
   }
 
   async function fetchChannelDetails() {
-    const detailsPromises = channelIDs.map(async (channelID) => {
-      const response = await fetch(channelDetailUrl(channelID), {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'access-token': token,
-          'client': client,
-          'expiry': expiry,
-          'uid': uid,
-        },
+    const headers = getLocalStorage ('Headers');
+    const token = headers && headers['access-token'];
+    const client = headers && headers['client'];
+    const expiry = headers && headers['expiry'];
+    const uid = headers && headers['uid'];
+
+    try {
+      const channelsDetailsArray = channelIDs.map(async (channelID) => {
+        const response = await fetch(channelDetailUrl(channelID), {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'access-token': token,
+            'client': client,
+            'expiry': expiry,
+            'uid': uid,
+          },
+        });
+  
+        if (!response.ok) {
+          throw new Error(`Failed to fetch channel details for ID ${channelID}`);
+        }
+  
+        const result = await response.json();
+        return result;
       });
-
-      const result = await response.json();
-      return result;
-    });
-
-    const details = await Promise.all(detailsPromises);
-    setChannelDetails(details);
+  
+      const allDetails = await Promise.all(channelsDetailsArray);
+      setChannelDetails(allDetails);
+      console.log('@MainPage - channelsDetailsArray:', channelsDetailsArray);
+    } catch (error) {
+      console.error('There was an error in fetching channel details:', error.message);
+    }
   };
   
   useEffect(() => {  
@@ -66,7 +74,8 @@ const MainPage = () => {
 
   
   console.log('@MainPage - allChannelMembers', allChannelMembers);
-  console.log('@MainPage - channelDetails:', channelDetails);
+  console.log('@MainPage - channelDetails', channelDetails);
+  
   
   // console.log('@MainPage - users:', users);
   // console.log('@MainPage - channels:', channels);
@@ -80,7 +89,11 @@ const MainPage = () => {
           <>
             <c.Navbar />
             <section className='dashboard'>
-              <Outlet context={{ users, channels, allChannelMembers }}/>
+              <Outlet context={{ 
+                users, 
+                channels, 
+                allChannelMembers 
+              }}/>
             </section>
           </>
         )

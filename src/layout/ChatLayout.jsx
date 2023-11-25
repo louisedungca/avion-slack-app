@@ -3,7 +3,6 @@ import { Outlet, useOutletContext } from 'react-router-dom';
 import { getLocalStorage } from '../utils';
 import { Chats } from '../pages';
 
-
 function ChatLayout() {
   const { users, channels, allChannelMembers } = useOutletContext();
   const [favorites, setFavorites] = useState(() => getLocalStorage('Favorites') || []);
@@ -18,6 +17,7 @@ function ChatLayout() {
       <Chats users={users} favorites={favorites} allChannelMembers={allChannelMembers} />
       <Outlet context={{
         users,
+        channels,
         allChannelMembers,
         favorites, 
         setFavorites,

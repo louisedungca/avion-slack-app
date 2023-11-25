@@ -19,7 +19,7 @@ function Logout({ isOpen, onClose }) {
   return (
     <div className={`modal ${isOpen ? 'open' : ''}`}>
     <div className="modal-wrapper">
-      <h4 className='modal-title'>Sign out of Hola</h4>
+      <h4 className='modal-title'>Sign out of Slackify</h4>
       <span className='modal-text'>We'll sign you out and remove any pinned users or channels.</span>
 
       <div className="modal-btns">

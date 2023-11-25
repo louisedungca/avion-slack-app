@@ -3,7 +3,6 @@ import { ChatBubbleOvalLeftEllipsisIcon, StarIcon as StarSolidIcon } from '@hero
 import { useOutletContext, useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 
-import logo from '../../assets/smileylogo.png';
 import { useFetch } from '../../hooks';
 import { formatTimestamp, getMsgUrl, setLocalStorage } from '../../utils';
 import { SendChat } from '../../components';
@@ -97,7 +96,6 @@ function ChatBox() {
                 </div>    
               </div>
             )) : <div className="startconvo-wrapper">
-              {/* <img src={logo} alt="logo" className="logo" /> */}
               <i className="logo"><ChatBubbleOvalLeftEllipsisIcon /></i>
               <h3>You're starting a new conversation</h3>
               <p>Type your first message below.</p>

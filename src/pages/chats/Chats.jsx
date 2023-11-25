@@ -1,29 +1,55 @@
 import { StarIcon } from "@heroicons/react/24/solid";
-// import AsyncSelect from "react-select/async";
 import Select from "react-select";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { reactSelectStyles } from "../../utils";
+import { getLocalStorage, getMsgUrl, reactSelectStyles } from "../../utils";
 
 function Chats({ users, favorites, allChannelMembers }) {
   const navigate = useNavigate(); 
   const [selectedUser, setSelectedUser] = useState(null);
+  const [recentChats, setRecentChats] = useState([]);
   const options = allChannelMembers[0].map((user) => ({
     value: user.id,
     label: user.uid,
   }));  
-
-  console.log('@Chats - allChannelMembers', allChannelMembers);
+  
   console.log('@Chats - options', options);
 
-  function loadOptions(searchValue, callback) {
-    const filteredOptions = options.filter((user) =>
-        user.label.toLowerCase().includes(searchValue.toLowerCase())
-      );
-      setTimeout(() => {     
-        callback(filteredOptions);
-      }, 800);
-  }
+  async function fetchRecentChats() {
+    const headers = getLocalStorage('Headers');
+    const token = headers && headers['access-token'];
+    const client = headers && headers['client'];
+    const expiry = headers && headers['expiry'];
+    const uid = headers && headers['uid'];
+
+    const recentChatsPromises = options.map(async (user) => {
+      const response = await fetch(getMsgUrl(user.value), {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'access-token': token,
+          'client': client,
+          'expiry': expiry,
+          'uid': uid,
+        },
+      });
+
+      const messages = await response.json();
+      return {
+        userId: user.value,
+        messages,
+      };
+    });
+
+    const recentChatsData = await Promise.all(recentChatsPromises);
+    setRecentChats(recentChatsData);
+  };
+
+  useEffect(() => {
+    fetchRecentChats();
+  }, [options.length]);  
+
+  console.log('@Chats - recentChats:', recentChats);
 
   function handleSelectedUser(selectedUser) {
     setSelectedUser(selectedUser);
@@ -36,6 +62,28 @@ function Chats({ users, favorites, allChannelMembers }) {
     setSelectedUser(null);
   };
 
+  const filteredChats = recentChats
+    .filter(item => item.messages.data.length > 0)
+    .map(item => {
+      const userId = item.userId;
+      const lastMessage = item.messages.data[item.messages.data.length - 1];
+      const lastMessageDetails = {
+        body: lastMessage.body,
+        senderID: lastMessage.sender.id,
+        senderEmail: lastMessage.sender.uid,
+        receiverID: lastMessage.receiver.id,
+        receiverEmail: lastMessage.receiver.uid,
+      };
+    
+      return {
+        userId,
+        lastMessage: lastMessageDetails,
+      };
+    });
+  
+  console.log('@Chats - filteredChats:', filteredChats);  
+
+
   return (
     <aside className="aside-chats">
       <div className="aside-title">
@@ -45,7 +93,6 @@ function Chats({ users, favorites, allChannelMembers }) {
       <div className="search-user">
         <Select 
           placeholder='Enter email...'
-          // loadOptions={loadOptions} 
           options={options}
           onChange={handleSelectedUser}
           value={selectedUser}
