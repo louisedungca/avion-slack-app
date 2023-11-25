@@ -19,8 +19,11 @@
     gap: 1.5rem;
     
     .logo {
+      // border: 1px solid red;
       width: max(100px, 10%);
       filter: $dropShadow;
+      position: relative;
+      z-index: 1;
     }
 
     h3 {
@@ -43,7 +46,7 @@
 
     .logo {
       width: max(100px, 10%);
-      filter: $dropShadow;
+      // filter: $dropShadow;
       margin-bottom: 1rem;
     }
 

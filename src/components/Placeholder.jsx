@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from '../assets/smileylogo.png';
 
+
 function Placeholder({ type }) {
   return (
     <div className="chatbox placeholder">

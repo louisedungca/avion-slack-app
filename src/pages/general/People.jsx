@@ -3,7 +3,7 @@ import { Link, useOutletContext } from 'react-router-dom';
 import { UserCircleIcon } from '@heroicons/react/24/solid';
 
 function People() {
-  const users = useOutletContext();
+  const { users } = useOutletContext();
 
   function handleClickUser(selectedUser) {
     console.log('Selected User:', selectedUser)

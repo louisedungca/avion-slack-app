@@ -5,9 +5,9 @@ import { Chats } from '../pages';
 
 
 function ChatLayout() {
-  const users = useOutletContext();
+  const { users, channels } = useOutletContext();
   const [favorites, setFavorites] = useState(() => getLocalStorage('Favorites') || []);
-  // console.log('@ChatsLayout - users:', users);
+  console.log('@ChatsLayout - channels:', channels);
 
   useEffect(() => {
     setFavorites(getLocalStorage('Favorites') || []);

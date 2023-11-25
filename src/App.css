@@ -544,6 +544,8 @@ aside, .aside-chats {
 .chatbox.placeholder .logo {
   width: max(100px, 10%);
   filter: drop-shadow(5px 5px 10px #771b58);
+  position: relative;
+  z-index: 1;
 }
 .chatbox.placeholder h3 {
   font-size: clamp(0.85rem, 0.8165rem + 0.5361vw, 1.5rem);
@@ -563,7 +565,6 @@ aside, .aside-chats {
 }
 .chatbox .startconvo-wrapper .logo {
   width: max(100px, 10%);
-  filter: drop-shadow(5px 5px 10px #771b58);
   margin-bottom: 1rem;
 }
 .chatbox .startconvo-wrapper h3 {
@@ -846,7 +847,7 @@ aside, .aside-chats {
   background: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center;
-  z-index: 3;
+  z-index: 9;
 }
 .modal.open {
   display: flex;
@@ -863,6 +864,7 @@ aside, .aside-chats {
   border: 2px dotted #58094F;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: min(450px, 70%);
+  z-index: 999;
   color: #58094F;
   font-size: clamp(0.7rem, 0.6077rem + 0.3077vw, 1rem);
   letter-spacing: 0.12rem;

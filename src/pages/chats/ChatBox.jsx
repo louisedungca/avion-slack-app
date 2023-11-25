@@ -1,5 +1,5 @@
 import { StarIcon, UserCircleIcon } from '@heroicons/react/24/outline';
-import { StarIcon as StarSolidIcon } from '@heroicons/react/24/solid';
+import { ChatBubbleOvalLeftEllipsisIcon, StarIcon as StarSolidIcon } from '@heroicons/react/24/solid';
 import { useOutletContext, useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 
@@ -97,7 +97,8 @@ function ChatBox() {
                 </div>    
               </div>
             )) : <div className="startconvo-wrapper">
-              <img src={logo} alt="logo" className="logo" />
+              {/* <img src={logo} alt="logo" className="logo" /> */}
+              <i className="logo"><ChatBubbleOvalLeftEllipsisIcon /></i>
               <h3>You're starting a new conversation</h3>
               <p>Type your first message below.</p>
             </div>

@@ -6,6 +6,7 @@ import logo from '../../assets/smileylogo.png';
 import { formatTimestamp, getChnlMsgUrl, getLocalStorage } from '../../utils';
 import { useFetch } from '../../hooks';
 import * as c from '../../components';
+import { ChatBubbleOvalLeftEllipsisIcon } from '@heroicons/react/24/solid';
 
 function ChannelBox() {
   const loggedInUser = getLocalStorage('UserData');
@@ -70,7 +71,8 @@ function ChannelBox() {
                 </div>
               </div>              
             )) : <div className="startconvo-wrapper"> 
-                  <img src={logo} alt="logo" className="logo" />
+                  {/* <img src={logo} alt="logo" className="logo" /> */}
+                  <i className="logo"><ChatBubbleOvalLeftEllipsisIcon /></i>
                   <h3>You're starting a new conversation</h3>
                   <p>Type your first message below.</p>
                 </div>

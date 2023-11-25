@@ -22,7 +22,7 @@ function SignUpPage() {
   async function onSubmit(formData) {
     try {
       await auth.signup(formData);
-      navigate('/c/chats');
+      navigate('/c/channels');
     } catch (error) {
       console.error('Signup error:', error);
     }
