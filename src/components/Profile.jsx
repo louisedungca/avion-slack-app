@@ -17,7 +17,7 @@ function Profile({ users, channelDetails }) {
   const [newMember, setNewMember] = useState(null);
 
   const { channelData, error: fetchChannelError, fetchData: fetchChannelData } = useFetchChannelData(channelID);
-  const { fetchData: fetchAddMemberData, error: fetchAddMemberError, setError } = useFetch(addMemberUrl, { method: 'POST' });
+  const { fetchData: fetchAddMemberData, error: fetchAddMemberError, setError: setAddMemberError } = useFetch(addMemberUrl, { method: 'POST' });
 
   useEffect(() => {
     fetchChannelData();
@@ -73,9 +73,10 @@ function Profile({ users, channelDetails }) {
 
       setNewMember(users.find(item => item.id === +newMemberID));
       closeModal();
+      setAddMemberError(null);
       toastDefault(`Cool! Say hi to your new member!`);
     } catch (error) {
-      setError(fetchAddMemberError);
+      setAddMemberError(fetchAddMemberError);
       console.error(fetchAddMemberError);
       toastError('Oops! There was a problem in adding the member. Please try again.');
     }
