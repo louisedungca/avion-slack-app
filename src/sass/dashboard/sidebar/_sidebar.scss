@@ -206,4 +206,26 @@ aside, .aside-chats {
       }
     }
   }
+
+  .sidebar-item-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .sidelist-item-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .sidelist-item-mesg {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 400;
+    font-size: xx-small;
+    font-style: italic;
+  }
 }
+

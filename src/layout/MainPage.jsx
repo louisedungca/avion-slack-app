@@ -74,9 +74,7 @@ const MainPage = () => {
 
   
   console.log('@MainPage - allChannelMembers', allChannelMembers);
-  console.log('@MainPage - channelDetails', channelDetails);
-  
-  
+  console.log('@MainPage - channelDetails', channelDetails); 
   // console.log('@MainPage - users:', users);
   // console.log('@MainPage - channels:', channels);
 

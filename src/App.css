@@ -492,6 +492,24 @@ aside, .aside-chats {
 .sidelist .sidelist-item.active .info-icon {
   color: #58094F;
 }
+.sidelist .sidebar-item-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sidelist .sidelist-item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.sidelist .sidelist-item-mesg {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 400;
+  font-size: xx-small;
+  font-style: italic;
+}
 
 .mainpage {
   width: 100%;

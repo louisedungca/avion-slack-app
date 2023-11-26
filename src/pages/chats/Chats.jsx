@@ -1,4 +1,4 @@
-import { StarIcon } from "@heroicons/react/24/solid";
+import { StarIcon, FaceSmileIcon } from "@heroicons/react/24/solid";
 import Select from "react-select";
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -122,6 +122,29 @@ function Chats({ users, favorites, allChannelMembers }) {
 
       <div className="recentsearch">
         <h5>Recent Chats</h5>
+        <div className="sidelist">
+          {filteredChats && filteredChats.length > 0 &&
+            filteredChats.map(chat => (
+              <NavLink 
+                className='sidelist-item'
+                key={chat.userId}
+                to={`${chat.userId}`}
+              >
+                <div className="sidebar-item-wrapper">
+                  <i className='info-icon'><FaceSmileIcon/></i>
+                  <div className="sidelist-item-text">
+                    <small>
+                      {chat.lastMessage.receiverEmail.split('@')[0]}
+                    </small>
+                    <h6 className="sidelist-item-mesg">
+                      {chat.lastMessage.body}
+                    </h6>  
+                  </div>
+                </div>                              
+              </NavLink>
+            ))
+          } 
+        </div>
       </div>
     </aside>      
   );  
