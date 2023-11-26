@@ -78,7 +78,6 @@ function Chats({ users, favorites, allChannelMembers }) {
   
   console.log('@Chats - filteredChats:', filteredChats);  
 
-
   return (
     <aside className="aside-chats">
       <div className="aside-title">

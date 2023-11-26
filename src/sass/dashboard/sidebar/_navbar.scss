@@ -8,6 +8,7 @@
   border-radius: 0.8rem;
   position: fixed;
   box-shadow: $boxShadow1;
+  z-index: 7;
 
   .side-item-wrapper {
     display: flex;

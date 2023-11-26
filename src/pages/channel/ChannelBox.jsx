@@ -2,7 +2,6 @@ import { InformationCircleIcon, UserGroupIcon } from '@heroicons/react/24/outlin
 import React, { useEffect, useState } from 'react';
 import { useOutletContext, useParams } from 'react-router-dom';
 
-import logo from '../../assets/smileylogo.png';
 import { formatTimestamp, getChnlMsgUrl, getLocalStorage } from '../../utils';
 import { useFetch } from '../../hooks';
 import * as c from '../../components';

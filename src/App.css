@@ -276,6 +276,7 @@
   border-radius: 0.8rem;
   position: fixed;
   box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+  z-index: 7;
 }
 .navbar .side-item-wrapper {
   display: flex;
@@ -562,8 +563,6 @@ aside, .aside-chats {
 .chatbox.placeholder .logo {
   width: max(100px, 10%);
   filter: drop-shadow(5px 5px 10px #771b58);
-  position: relative;
-  z-index: 1;
 }
 .chatbox.placeholder h3 {
   font-size: clamp(0.85rem, 0.8165rem + 0.5361vw, 1.5rem);
