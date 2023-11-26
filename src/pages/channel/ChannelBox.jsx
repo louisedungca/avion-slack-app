@@ -1,11 +1,13 @@
 import { InformationCircleIcon, UserGroupIcon } from '@heroicons/react/24/outline';
+import { ChatBubbleOvalLeftEllipsisIcon } from '@heroicons/react/24/solid';
 import React, { useEffect, useState } from 'react';
 import { useOutletContext, useParams } from 'react-router-dom';
 
 import { formatTimestamp, getChnlMsgUrl, getLocalStorage } from '../../utils';
 import { useFetch } from '../../hooks';
 import * as c from '../../components';
-import { ChatBubbleOvalLeftEllipsisIcon } from '@heroicons/react/24/solid';
+import * as l from '../../layout';
+
 
 function ChannelBox() {
   const loggedInUser = getLocalStorage('UserData');
@@ -21,7 +23,7 @@ function ChannelBox() {
   const [messages, setMessages] = useState([]);
   const [reverseMesg, setReverseMesg] = useState([]);
   const [showProfile, setShowProfile] = useState(false);
-  const { data: mesgData, fetchData: fetchMesg } = useFetch(getChnlMsgUrl(channelID), { method: 'GET' });
+  const { data: mesgData, fetchData: fetchMesg, isLoading } = useFetch(getChnlMsgUrl(channelID), { method: 'GET' });
 
   useEffect(() => {
     fetchMesg();
@@ -53,30 +55,36 @@ function ChannelBox() {
           </div>         
         </div>
 
-        <div className="mesgthread">
-          {reverseMesg && reverseMesg.length > 0 ? 
-            reverseMesg.map((message) => (              
-              <div key={message.id}>
-                <div className={`message-box ${message.sender.id === loggedInUser.id ? 'right' : 'left'}`}>
-                  <div className='message'>
-                      <small className={`message-box ${message.sender.id === loggedInUser.id ? 'right channel' : 'left'}`}>
-                        {message.sender.uid.split('@')[0]}
-                      </small>
-                    <p>{message.body}</p>  
-                    <span className="timestamp">
-                      {formatTimestamp(message.created_at)}
-                    </span> 
-                  </div>    
-                </div>
-              </div>              
-            )) : <div className="startconvo-wrapper"> 
-                  {/* <img src={logo} alt="logo" className="logo" /> */}
-                  <i className="logo"><ChatBubbleOvalLeftEllipsisIcon /></i>
-                  <h3>You're starting a new conversation</h3>
-                  <p>Type your first message below.</p>
-                </div>
-            }         
-        </div>
+        {
+          isLoading ? (
+            <l.ChatboxSkeleton />
+          ) : (
+            <div className="mesgthread">
+              {reverseMesg && reverseMesg.length > 0 ? 
+                reverseMesg.map((message) => (              
+                  <div key={message.id}>
+                    <div className={`message-box ${message.sender.id === loggedInUser.id ? 'right' : 'left'}`}>
+                      <div className='message'>
+                          <small className={`message-box ${message.sender.id === loggedInUser.id ? 'right channel' : 'left'}`}>
+                            {message.sender.uid.split('@')[0]}
+                          </small>
+                        <p>{message.body}</p>  
+                        <span className="timestamp">
+                          {formatTimestamp(message.created_at)}
+                        </span> 
+                      </div>    
+                    </div>
+                  </div>              
+                )) : <div className="startconvo-wrapper"> 
+                      {/* <img src={logo} alt="logo" className="logo" /> */}
+                      <i className="logo"><ChatBubbleOvalLeftEllipsisIcon /></i>
+                      <h3>You're starting a new conversation</h3>
+                      <p>Type your first message below.</p>
+                    </div>
+                }         
+            </div>
+          )
+        }
 
         <c.SendChat 
           userID={channelID} 
