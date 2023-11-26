@@ -35,7 +35,7 @@ const Error = () => {
         </button>
 
         <button 
-          onClick={() => {navigate('/')}}
+          onClick={() => {navigate('/c/channels')}}
         >
           <HomeIcon width={20}/>
         </button>
