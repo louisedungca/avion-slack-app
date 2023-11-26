@@ -76,7 +76,7 @@ const MainPage = () => {
     fetchChannelDetails();    
   }, [channels.length, Outlet]);
   
-  // console.log('@MainPage - users:', users);
+  // console.log('@MainPage - fetchChannels:', fetchChannels);
   // console.log('@MainPage - channels:', channels);
 
   return (
@@ -94,6 +94,7 @@ const MainPage = () => {
                 allChannelMembers,
                 isDetailsLoading, 
                 fetchChannelDetails,
+                fetchChannels,
               }}/>
             </section>
           </>

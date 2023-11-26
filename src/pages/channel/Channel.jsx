@@ -1,11 +1,19 @@
 import { PlusCircleIcon } from '@heroicons/react/24/outline';
 import { StarIcon } from '@heroicons/react/24/solid';
 import { NavLink } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CreateChannel } from '../../pages';
 
-function Channel({ users, channels, favorites }) {
+function Channel({ users, channels, favorites, fetchChannels }) {
+  // console.log('@Channel - fetchChannels:', fetchChannels);
+  const [reverseChannel, setReverseChannel] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    if(channels && channels.length > 0) {
+      setReverseChannel([...channels].reverse());
+    }
+  }, [channels.length]);
 
   function openModal() {
     setIsModalOpen(true);
@@ -26,6 +34,7 @@ function Channel({ users, channels, favorites }) {
         users={users} 
         isOpen={isModalOpen} 
         onClose={closeModal} 
+        fetchChannels={fetchChannels}
       />
 
       <div className="favorites">
@@ -51,14 +60,13 @@ function Channel({ users, channels, favorites }) {
         <h5>All Channels</h5>
         {channels && channels.length > 0 && (
           <div className="thumbnail-container">
-            {channels.reverse().map(channel => (
+            {reverseChannel.map(channel => (
               <NavLink 
                 key={channel.id} 
                 to={`${channel.id}`}
                 className="thumbnail-wrapper"
               >
                 <p className='thumbnail-name channel'>{channel.name}</p>
-                {/* <small>({channel.id})</small> */}
               </NavLink>
             ))}
           </div>

@@ -6,8 +6,10 @@ import AsyncSelect from "react-select/async";
 import { createChannelUrl, reactSelectStyles, toastDefault, toastError } from '../../utils';
 import { useFetch } from '../../hooks';
 import * as c from '../../components'
+import { useNavigate } from 'react-router-dom';
 
-function CreateChannel({ isOpen, onClose, users }) {
+function CreateChannel({ isOpen, onClose, users, fetchChannels }) {
+  const navigate = useNavigate();
   const { control, register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset } = useForm();
   const { fetchData, error, setError } = useFetch(createChannelUrl, { method: 'POST' });
 
@@ -62,13 +64,17 @@ function CreateChannel({ isOpen, onClose, users }) {
       }
 
       onClose();
+      fetchChannels();
       toastDefault(`Channel ${result.data.name} created!`);
+      navigate(`/c/channels/${result.data.id}`);
     } catch (error) {
       setError(error);
       console.error('createChannelError:', error);
       toastError('Oops! There was a problem creating the channel. Please try again.');
     }
   };
+
+  // console.log('@CreateChannel - fetchChannels:', fetchChannels); 
 
   return (
     <div className={`modal ${isOpen ? 'open' : ''}`}>

@@ -45,10 +45,12 @@ aside, .aside-chats {
 }
 
 .thumbnail-container {
+  // border: 1px solid white;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  max-height: 85vh;
+  max-height: 100%;
+  margin-top: 0.25rem;
   padding: 0.5rem;
   overflow-y: scroll;
 
@@ -129,7 +131,7 @@ aside, .aside-chats {
 
 .recents {
   border-top: 2px solid $supplementOne;
-  height: 55%;
+  height: 60%;
   display: flex;
   flex-direction: column;
   gap: 0.12rem;
@@ -212,7 +214,6 @@ aside, .aside-chats {
   }
 
   .sidebar-item-wrapper {
-    // border: 1px solid white;
     display: flex;
     align-items: center;
     gap: 0.5rem;
