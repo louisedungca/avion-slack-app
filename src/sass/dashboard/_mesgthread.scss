@@ -171,6 +171,7 @@
   font-size: $span;
   display: flex;
   flex-direction: column;
+  max-width: 55%;
 
   small {
     text-transform: capitalize;

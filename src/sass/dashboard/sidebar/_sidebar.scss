@@ -148,6 +148,7 @@ aside, .aside-chats {
 .sidelist {
   // border: 1px solid red;
   width: 100%;
+  max-width: 230px;
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
@@ -211,18 +212,28 @@ aside, .aside-chats {
   }
 
   .sidebar-item-wrapper {
+    // border: 1px solid white;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    width: min(170px, 100%);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .sidelist-item-text {
     display: flex;
     flex-direction: column;
     gap: 0.15rem;
+    width: min(170px, 100%);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .sidelist-item-mesg {
+    width: min(170px, 100%);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

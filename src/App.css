@@ -445,6 +445,7 @@ aside, .aside-chats {
 
 .sidelist {
   width: 100%;
+  max-width: 230px;
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
@@ -500,13 +501,22 @@ aside, .aside-chats {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  width: min(170px, 100%);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .sidelist .sidelist-item-text {
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
+  width: min(170px, 100%);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .sidelist .sidelist-item-mesg {
+  width: min(170px, 100%);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -697,6 +707,7 @@ aside, .aside-chats {
   font-size: clamp(0.7rem, 0.6077rem + 0.3077vw, 1rem);
   display: flex;
   flex-direction: column;
+  max-width: 55%;
 }
 .message small {
   text-transform: capitalize;
