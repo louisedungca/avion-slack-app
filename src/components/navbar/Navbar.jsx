@@ -1,4 +1,4 @@
-import { ArrowLeftOnRectangleIcon, UserIcon } from '@heroicons/react/24/solid';
+import { ArrowLeftOnRectangleIcon } from '@heroicons/react/24/solid';
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { NavbarData, Logout } from '../../components';
@@ -33,10 +33,6 @@ function Navbar() {
         </div>
 
         <div className="lower-items">
-          <div className={'lower-item usericon'}>
-            <i className="navbar-icons"><UserIcon /></i>
-          </div>
-
           <div 
             className={'lower-item logouticon'}
             onClick={openModal}
@@ -46,12 +42,12 @@ function Navbar() {
             </i>      
           </div>
         </div>
-      </div>   
+      </div>  
 
       <Logout 
         isOpen={isModalOpen} 
         onClose={closeModal}
-      />      
+      />     
     </nav>
   )
 }

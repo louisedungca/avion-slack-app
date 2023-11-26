@@ -13,9 +13,8 @@ function ChatBox() {
   const { id } = useParams();
   const userID = +id;
   const user = users.find((item) => item.id === userID) || [];
-  // console.log('@ChatBox - users:', users);
-  
   const [isFavorite, setIsFavorite] = useState(() => favorites.some((item) => item.id === userID));
+
   const [messages, setMessages] = useState([]);
   const [reverseMesg, setReverseMesg] = useState([]);
   const { data: mesgData, fetchData: fetchMesg, isLoading } = useFetch(getMsgUrl(userID), { method: 'GET' });
@@ -33,9 +32,9 @@ function ChatBox() {
   }, [mesgData]);
   
   // for checking only -- delete later
-  useEffect(() => { 
-    console.log('Messages:', messages);
-  }, [messages]);
+  // useEffect(() => { 
+  //   console.log('Messages:', messages);
+  // }, [messages]);
 
   useEffect(() => {
     setIsFavorite(favorites.some(item => item.id === userID));
@@ -59,6 +58,8 @@ function ChatBox() {
   
     setIsFavorite((prevIsFavorite) => !prevIsFavorite);
   };
+
+  // console.log('@ChatBox - users:', users);
 
   return (
     <section className='dashcontent'>

@@ -15,10 +15,10 @@ export const NavbarData =  [
     link: 'chats', 
     elementLabel: <p.Chats />,
   },
-  {
-    icon: <BookOpenIcon />,
-    text: 'People',
-    link: 'people', 
-    elementLabel: <p.People />,
-  },
+  // {
+  //   icon: <BookOpenIcon />,
+  //   text: 'People',
+  //   link: 'people', 
+  //   elementLabel: <p.People />,
+  // },
 ]

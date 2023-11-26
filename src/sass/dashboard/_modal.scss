@@ -17,7 +17,31 @@
   }
 }
 
-.modal-wrapper {
+.usermodal-wrapper {
+  background:$white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 1.5rem 2rem;
+  border-radius: 1rem;
+  border: 2px dotted $primaryColor;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: min(450px, 70%);
+  z-index: 999;
+ 
+  color: $primaryColor;
+  font-size: $span;
+  letter-spacing: 0.12rem;
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  margin-left: 5rem;
+  margin-bottom: 5rem;
+}
+
+.modal-wrapper  {
   background:$white;
   display: flex;
   flex-direction: column;
