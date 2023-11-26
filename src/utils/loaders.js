@@ -5,18 +5,24 @@ import { getLocalStorage } from "../utils";
 export function isLoggedInLoader() {
   const headers = getLocalStorage('Headers') || [];
   const token = headers && headers['access-token'];
+  const client = headers && headers['client'];
+  const expiry = headers && headers['expiry'];
+  const uid = headers && headers['uid'];
     if(token) {
       return redirect("/c/channels");
   }
-  return null;
+  return { headers, token, client, expiry, uid };
 };
 
 // to access dashboard pages
 export function accessDashLoader() {
   const headers = getLocalStorage('Headers') || [];
   const token = headers && headers['access-token'];
+  const client = headers && headers['client'];
+  const expiry = headers && headers['expiry'];
+  const uid = headers && headers['uid'];
     if(!token) {
       return redirect("/login");
   }
-  return null;
+  return { headers, token, client, expiry, uid };
 };

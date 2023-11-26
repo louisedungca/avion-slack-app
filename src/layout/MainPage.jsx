@@ -1,12 +1,13 @@
-import { Outlet } from 'react-router';
+import { Outlet, useLoaderData } from 'react-router';
 import React, { useEffect, useState } from 'react';
-import { channelDetailUrl, getLocalStorage } from '../utils';
+import { channelDetailUrl } from '../utils';
 import { useFetchChannels, useFetchUsers } from '../hooks';
 import * as c from '../components';
 import * as p from '../pages';
 import * as l from '../layout';
 
 const MainPage = () => {
+  const { token, client, expiry, uid } = useLoaderData();
   const { users, error, isLoading, fetchData } = useFetchUsers();
   const { channels, error: fetchChannelsError, fetchData: fetchChannels, isLoading: channelsLoading } = useFetchChannels();
 
@@ -24,12 +25,6 @@ const MainPage = () => {
   }
 
   async function fetchChannelDetails() {
-    const headers = getLocalStorage ('Headers');
-    const token = headers && headers['access-token'];
-    const client = headers && headers['client'];
-    const expiry = headers && headers['expiry'];
-    const uid = headers && headers['uid'];
-
     try {
       const channelsDetailsArray = channelIDs.map(async (channelID) => {
         const response = await fetch(channelDetailUrl(channelID), {

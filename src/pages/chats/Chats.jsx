@@ -1,11 +1,12 @@
 import { StarIcon, FaceSmileIcon } from "@heroicons/react/24/solid";
 import Select from "react-select";
 import React, { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { getLocalStorage, getMsgUrl, reactSelectStyles } from "../../utils";
+import { NavLink, useLoaderData, useNavigate } from "react-router-dom";
+import { getMsgUrl, reactSelectStyles } from "../../utils";
 
 function Chats({ users, favorites, allChannelMembers }) {
   const navigate = useNavigate(); 
+  const { token, client, expiry, uid } = useLoaderData();
   const [selectedUser, setSelectedUser] = useState(null);
   const [recentChats, setRecentChats] = useState([]);
   const options = allChannelMembers[0].map((user) => ({
@@ -16,12 +17,6 @@ function Chats({ users, favorites, allChannelMembers }) {
   console.log('@Chats - options', options);
 
   async function fetchRecentChats() {
-    const headers = getLocalStorage('Headers');
-    const token = headers && headers['access-token'];
-    const client = headers && headers['client'];
-    const expiry = headers && headers['expiry'];
-    const uid = headers && headers['uid'];
-
     const recentChatsPromises = options.map(async (user) => {
       const response = await fetch(getMsgUrl(user.value), {
         method: 'GET',
