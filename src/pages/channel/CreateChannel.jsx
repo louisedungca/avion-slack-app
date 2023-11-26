@@ -94,19 +94,22 @@ function CreateChannel({ isOpen, onClose, users }) {
             name="channelUsers"
             control={control}
             defaultValue={[]}
-            rules={{ required: true }}
-            render={({ field }) => (
-              <AsyncSelect 
-                {...field}
-                placeholder='Enter email...'
-                isMulti
-                loadOptions={loadOptions} 
-                styles={reactSelectStyles}
-              />
+            rules={{ required: 'You need at least one member to create a channel.' }}
+            render={({ field, fieldState }) => (
+              <>
+                <AsyncSelect 
+                  {...field}
+                  placeholder='Enter email...'
+                  isMulti
+                  loadOptions={loadOptions} 
+                  styles={reactSelectStyles}
+                />
+                {fieldState?.error?.message && (
+                  <small className='input-error'>{fieldState.error.message}</small>
+                )}
+              </>
             )}
           />
-          {errors.channelUsers && <small className='input-error' >You need at least one member to create a channel.</small>}
-
           <div className="channel-guidelines">
             <small>Channel Guidelines:</small>
             <small>
