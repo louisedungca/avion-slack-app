@@ -395,11 +395,13 @@ aside, .aside-chats {
   color: #58094F;
 }
 .thumbnail-container .thumbnail-wrapper .thumbnail-name {
-  font-size: clamp(0.75rem, 0.7268rem + 0.3711vw, 1.2rem);
+  font-size: smaller;
+  font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding: 0 1rem;
+  padding: 0.35rem;
+  text-shadow: none;
 }
 .thumbnail-container .thumbnail-wrapper.active {
   opacity: 0.65;
@@ -425,7 +427,7 @@ aside, .aside-chats {
   font-weight: 400;
 }
 
-.recentsearch {
+.recents {
   border-top: 2px solid #f9e7f3;
   height: 55%;
   display: flex;
@@ -436,7 +438,7 @@ aside, .aside-chats {
   text-shadow: 1.2px 1.2px 3px #58094F;
   letter-spacing: 0.12rem;
 }
-.recentsearch h5 {
+.recents h5 {
   text-transform: uppercase;
   font-weight: 400;
 }
@@ -987,6 +989,10 @@ aside, .aside-chats {
   display: flex;
   align-items: center;
   padding: 0.5rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 7;
 }
 
 .navbar-skeleton {

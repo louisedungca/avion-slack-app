@@ -7,11 +7,12 @@ import * as l from '../layout';
 function ChatLayout() {
   const { users, channels, allChannelMembers, isDetailsLoading } = useOutletContext();
   const [favorites, setFavorites] = useState(() => getLocalStorage('Favorites') || []);
-  console.log('@ChatsLayout - allChannelMembers:', allChannelMembers);
 
   useEffect(() => {
     setFavorites(getLocalStorage('Favorites') || []);
   }, []);
+
+  console.log('@ChatsLayout - allChannelMembers:', allChannelMembers);
 
   return (
     <>

@@ -109,12 +109,11 @@ function Chats({ users, favorites, allChannelMembers }) {
                   {fave.uid.split('@')[0]}
                 </span>              
               </NavLink>
-            ))
-          }
+            ))}
         </div>
       </div>
 
-      <div className="recentsearch">
+      <div className="recents">
         <h5>Recent Chats</h5>
         <div className="sidelist">
           {filteredChats && filteredChats.length > 0 &&
@@ -136,8 +135,7 @@ function Chats({ users, favorites, allChannelMembers }) {
                   </div>
                 </div>                              
               </NavLink>
-            ))
-          } 
+            ))} 
         </div>
       </div>
     </aside>      

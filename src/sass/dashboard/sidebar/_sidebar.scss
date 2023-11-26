@@ -91,11 +91,13 @@ aside, .aside-chats {
     }
 
     .thumbnail-name {
-      font-size: $h6;
+      font-size: smaller;
+      font-weight: 600;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      padding: 0 1rem;
+      padding: 0.35rem;
+      text-shadow: none;
     }
 
     &.active {
@@ -125,7 +127,7 @@ aside, .aside-chats {
   }
 }
 
-.recentsearch {
+.recents {
   border-top: 2px solid $supplementOne;
   height: 55%;
   display: flex;
@@ -144,6 +146,7 @@ aside, .aside-chats {
 }
 
 .sidelist {
+  // border: 1px solid red;
   width: 100%;
   display: flex;
   flex-direction: column;
