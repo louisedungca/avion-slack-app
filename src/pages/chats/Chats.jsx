@@ -9,7 +9,7 @@ function Chats({ users, favorites, allChannelMembers }) {
   const { token, client, expiry, uid } = useLoaderData();
   const [selectedUser, setSelectedUser] = useState(null);
   const [recentChats, setRecentChats] = useState([]);
-  const options = allChannelMembers[0].map((user) => ({
+  const options = (allChannelMembers[0] || []).map((user) => ({
     value: user.id,
     label: user.uid,
   }));  

@@ -47,29 +47,30 @@ const MainPage = () => {
       });
   
       const allDetails = await Promise.all(channelsDetailsArray);
-      setChannelDetails(allDetails);
       console.log('@MainPage - channelsDetailsArray:', channelsDetailsArray);
+
+      setChannelDetails(allDetails);
+      console.log('@MainPage - channelDetails', channelDetails); 
+
+      if(allDetails && channelDetails.length > 0) {
+        const allMembersSet = new Set(channelDetails.flatMap(channel => 
+          channel.data.channel_members.map(member => member.user_id)
+        ));
+        const members = users.filter(user => Array.from(allMembersSet).includes(user.id));
+        
+        setAllChannelMembers([members]);
+        console.log('@MainPage - allChannelMembers', allChannelMembers);
+      }
+      
     } catch (error) {
       console.error('There was an error in fetching channel details:', error.message);
     }
   };
   
   useEffect(() => {  
-    fetchChannelDetails();
-
-    if(channelDetails && channelDetails.length > 0) {
-      const allMembersSet = new Set(channelDetails.flatMap(channel => 
-        channel.data.channel_members.map(member => member.user_id)
-      ));
-      const members = users.filter(user => Array.from(allMembersSet).includes(user.id));
-      
-      setAllChannelMembers([members]);
-    }
+    fetchChannelDetails();    
   }, [channels.length]);
-
   
-  console.log('@MainPage - allChannelMembers', allChannelMembers);
-  console.log('@MainPage - channelDetails', channelDetails); 
   // console.log('@MainPage - users:', users);
   // console.log('@MainPage - channels:', channels);
 
