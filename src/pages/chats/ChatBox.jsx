@@ -6,19 +6,19 @@ import React, { useEffect, useState } from 'react';
 import { useFetch } from '../../hooks';
 import { formatTimestamp, getMsgUrl, setLocalStorage } from '../../utils';
 import { SendChat } from '../../components';
+import * as l from '../../layout';
 
 function ChatBox() {
   const { users, favorites, setFavorites} = useOutletContext();
   const { id } = useParams();
   const userID = +id;
   const user = users.find((item) => item.id === userID) || [];
+  // console.log('@ChatBox - users:', users);
   
   const [isFavorite, setIsFavorite] = useState(() => favorites.some((item) => item.id === userID));
   const [messages, setMessages] = useState([]);
   const [reverseMesg, setReverseMesg] = useState([]);
-  const { data: mesgData, fetchData: fetchMesg } = useFetch(getMsgUrl(userID), { method: 'GET' });
-
-  // console.log('@ChatBox - users:', users);
+  const { data: mesgData, fetchData: fetchMesg, isLoading } = useFetch(getMsgUrl(userID), { method: 'GET' });
 
   useEffect(() => {
       fetchMesg();
@@ -81,27 +81,33 @@ function ChatBox() {
         </div>     
         </div>
 
-        <div className="mesgthread">
-          {reverseMesg && reverseMesg.length > 0 ? 
-            reverseMesg.map((message) => (
-              <div 
-                key={message.id}
-                className={`message-box ${message.sender.id === userID ? 'left' : ''} ${message.receiver.id === userID ? 'right' : ''}`}
-              >
-                <div className='message'>
-                  <p>{message.body}</p>  
-                  <span className="timestamp">
-                    {formatTimestamp(message.created_at)}
-                  </span> 
-                </div>    
-              </div>
-            )) : <div className="startconvo-wrapper">
-              <i className="logo"><ChatBubbleOvalLeftEllipsisIcon /></i>
-              <h3>You're starting a new conversation</h3>
-              <p>Type your first message below.</p>
+        {
+          isLoading ? (
+            <l.ChatboxSkeleton />
+          ) : (
+            <div className="mesgthread">
+              {reverseMesg && reverseMesg.length > 0 ? 
+                reverseMesg.map((message) => (
+                  <div 
+                    key={message.id}
+                    className={`message-box ${message.sender.id === userID ? 'left' : ''} ${message.receiver.id === userID ? 'right' : ''}`}
+                  >
+                    <div className='message'>
+                      <p>{message.body}</p>  
+                      <span className="timestamp">
+                        {formatTimestamp(message.created_at)}
+                      </span> 
+                    </div>    
+                  </div>
+                )) : <div className="startconvo-wrapper">
+                  <i className="logo"><ChatBubbleOvalLeftEllipsisIcon /></i>
+                  <h3>You're starting a new conversation</h3>
+                  <p>Type your first message below.</p>
+                </div>
+              }         
             </div>
-          }         
-        </div>
+          )
+        }
 
         <SendChat 
           userID={userID} 

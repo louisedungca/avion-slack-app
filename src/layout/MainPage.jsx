@@ -14,6 +14,7 @@ const MainPage = () => {
   const channelIDs = channels.map(channel => channel.id); 
   const [channelDetails, setChannelDetails] = useState([]);
   const [allChannelMembers, setAllChannelMembers] = useState([]);
+  const [isDetailsLoading , setIsDetailsLoading] = useState(false);
   
   useEffect(() => {
     fetchData();
@@ -26,6 +27,8 @@ const MainPage = () => {
 
   async function fetchChannelDetails() {
     try {
+      setIsDetailsLoading(true);
+      
       const channelsDetailsArray = channelIDs.map(async (channelID) => {
         const response = await fetch(channelDetailUrl(channelID), {
           method: 'GET',
@@ -64,12 +67,14 @@ const MainPage = () => {
       
     } catch (error) {
       console.error('There was an error in fetching channel details:', error.message);
+    } finally {
+      setIsDetailsLoading(false);
     }
   };
   
   useEffect(() => {  
     fetchChannelDetails();    
-  }, [channels.length]);
+  }, [channels.length, Outlet]);
   
   // console.log('@MainPage - users:', users);
   // console.log('@MainPage - channels:', channels);
@@ -77,7 +82,7 @@ const MainPage = () => {
   return (
     <main className='mainpage'>
       {
-        isLoading ? (
+        isLoading || channelsLoading ? (
           <l.MainSkeleton />
         ) : (
           <>
@@ -86,7 +91,8 @@ const MainPage = () => {
               <Outlet context={{ 
                 users, 
                 channels, 
-                allChannelMembers 
+                allChannelMembers,
+                isDetailsLoading, 
               }}/>
             </section>
           </>
