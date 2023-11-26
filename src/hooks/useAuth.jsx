@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { getLocalStorage, setLocalStorage, loginUrl, signupUrl } from "../utils";
+import { getLocalStorage, setLocalStorage, loginUrl, signupUrl, toastError, toastDefault } from "../utils";
 
 const AuthContext = createContext();
 
@@ -51,8 +51,16 @@ function useProvideAuth() {
 
       setLocalStorage('Headers', headersObject);
       handleAuth(data);
+      
+      // toast
+      if (url === loginUrl) {
+        toastDefault('Hey, welcome back!');
+      } else if (url === signupUrl) {
+        toastDefault('Welcome to Slackify!');
+      }
     } catch (error) {
       setError(error.message || 'An error occurred while fetching data.');
+      toastError('Please try again.');
     };
   };
 
@@ -89,6 +97,8 @@ function useProvideAuth() {
     localStorage.removeItem('UserData');
     localStorage.removeItem('Headers');
     localStorage.removeItem('Favorites');
+
+    toastDefault('See you again soon!');
   };
 
   useEffect(() => {

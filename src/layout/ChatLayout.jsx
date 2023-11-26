@@ -5,11 +5,15 @@ import * as p from '../pages';
 import * as l from '../layout';
 
 function ChatLayout() {
-  const { users, channels, allChannelMembers, isDetailsLoading } = useOutletContext();
+  const { users, channels, allChannelMembers, isDetailsLoading, fetchChannelDetails } = useOutletContext();
   const [favorites, setFavorites] = useState(() => getLocalStorage('Favorites') || []);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setFavorites(getLocalStorage('Favorites') || []);
+
+    console.log('@ChatsLayout - Calling fetchChannelDetails');
+    fetchChannelDetails().then(() => setIsLoading(false));
   }, []);
 
   console.log('@ChatsLayout - allChannelMembers:', allChannelMembers);
@@ -17,7 +21,7 @@ function ChatLayout() {
   return (
     <>
     {
-      isDetailsLoading ? (
+      isLoading || isDetailsLoading ? (
         <l.MainSkeleton />
       ) : (
         <section className='dashcontent'>

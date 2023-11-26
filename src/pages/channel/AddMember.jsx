@@ -2,11 +2,13 @@ import { XCircleIcon } from '@heroicons/react/24/outline';
 import React, { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import AsyncSelect from "react-select/async";
-import { reactSelectStyles } from '../../utils';
+import { addMemberUrl, reactSelectStyles } from '../../utils';
+import { useFetch } from '../../hooks';
 
 function AddMember({ isOpen, onClose, onSubmit, users, channelData }) {
   // console.log('@AddMember - channelData', channelData);
   const { control, handleSubmit, formState: { isSubmitSuccessful }, reset } = useForm();
+  const { fetchData: fetchAddMemberData, error: fetchAddMemberError, setError } = useFetch(addMemberUrl, { method: 'POST' });
   const membersID = channelData.channel_members.map(member => member.user_id);
   const options = users
     .filter(user => !membersID.includes(user.id))
@@ -32,14 +34,45 @@ function AddMember({ isOpen, onClose, onSubmit, users, channelData }) {
       });
     }
 
+    clearError();
   }, [isSubmitSuccessful, isOpen]);
+
+  function clearError(){
+    setError(null);
+  };
+
+  async function onSubmit(formData) {
+    const newMemberID = formData.channelUsers.value;
+    const body = {
+      id: +channelData.id,
+      member_id: +newMemberID,
+    };
+
+    try {
+      const { response, result } = await fetchAddMemberData(body);
+      console.log('Create Channel Response:', response);
+      console.log('@Channel result:', result);
+
+      if(result.error) {
+        throw new Error (result.error || 'There was a problem in adding new member(s).');
+      }
+
+      setNewMember(users.find(item => item.id === +newMemberID));
+      closeModal();
+      toastDefault(`Cool! Say hi to your new member!`);
+    } catch (error) {
+      setError(fetchAddMemberError);
+      console.error(fetchAddMemberError);
+      toastError('Oops! There was a problem in adding the member. Please try again.');
+    }
+  };
 
   return (
     <div className={`modal ${isOpen ? 'open' : ''}`}>
       <div className="modal-wrapper">
         <div className="modal-header">
           <h4 className='modal-title'>Add Member</h4>
-          <button className="btn-close" onClick={onClose}>
+          <button className="btn-close" onClick={() => {onClose(); clearError(); }}>
             <XCircleIcon />
           </button>
         </div>
@@ -52,6 +85,7 @@ function AddMember({ isOpen, onClose, onSubmit, users, channelData }) {
             name="channelUsers"
             control={control}
             defaultValue={[]}
+            rules={{ required: true }}
             render={({ field }) => (
               <AsyncSelect 
                 {...field}
@@ -61,6 +95,8 @@ function AddMember({ isOpen, onClose, onSubmit, users, channelData }) {
               />
             )}
           />
+
+          {error &&  <small className='input-error' >You need to choose one user to add.</small>}
           <button className='btn-main' type="submit">Add</button>
         </form>        
       </div>

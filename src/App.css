@@ -9,10 +9,28 @@
 }
 
 .App {
-  border: 2px dotted palevioletred;
   width: 100%;
   max-width: 100vw;
   height: 100vh;
+}
+
+.toast-default {
+  background: #f9e7f3;
+  color: #58094F;
+  font-size: clamp(0.7rem, 0.6077rem + 0.3077vw, 1rem);
+  font-weight: 600;
+  width: 20vw;
+  padding: 1rem;
+}
+
+.toast-error {
+  background: #8B0000;
+  color: #fffff0;
+  font-size: clamp(0.7rem, 0.6077rem + 0.3077vw, 1rem);
+  font-weight: 600;
+  text-shadow: 1.2px 1.2px 3px #58094F;
+  width: 20vw;
+  padding: 1rem;
 }
 
 .error-page {

@@ -93,6 +93,7 @@ const MainPage = () => {
                 channels, 
                 allChannelMembers,
                 isDetailsLoading, 
+                fetchChannelDetails,
               }}/>
             </section>
           </>

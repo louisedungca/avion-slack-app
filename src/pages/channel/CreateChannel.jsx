@@ -3,7 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 import React, { useEffect } from 'react';
 import AsyncSelect from "react-select/async";
 
-import { createChannelUrl, reactSelectStyles } from '../../utils';
+import { createChannelUrl, reactSelectStyles, toastDefault, toastError } from '../../utils';
 import { useFetch } from '../../hooks';
 import * as c from '../../components'
 
@@ -39,7 +39,7 @@ function CreateChannel({ isOpen, onClose, users }) {
     setError(null);
   };
 
-  const onSubmit = async (formData) => {
+  async function onSubmit(formData) {
     const { channelUsers, channelName } = formData; 
     const membersArray = channelUsers.map((member) => member.value);
     // console.log('@CreateChannel - formData:', formData);
@@ -62,9 +62,11 @@ function CreateChannel({ isOpen, onClose, users }) {
       }
 
       onClose();
+      toastDefault(`Channel ${result.data.name} created!`);
     } catch (error) {
       setError(error);
       console.error('createChannelError:', error);
+      toastError('Oops! There was a problem creating the channel. Please try again.');
     }
   };
 

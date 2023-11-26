@@ -1,4 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import React from 'react';
 import './App.css';
 import * as l from './layout';
@@ -14,6 +16,7 @@ function App() {
       path: '/',
       element: <p.WelcomePage />,
       errorElement: <p.ErrorPage />,
+      loader: u.isLoggedInLoader,
     },
     {
       path: 'signup',
@@ -91,7 +94,8 @@ function App() {
 
   return (
     <h.AuthProvider>
-      <RouterProvider router={router} />    
+      <RouterProvider router={router} />   
+      <ToastContainer /> 
     </h.AuthProvider>
   );
 }

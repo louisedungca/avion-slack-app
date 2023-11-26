@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { useFetch, useFetchChannelData } from '../hooks';
 import { AddMember } from '../pages';
-import { addMemberUrl } from '../utils';
+import { addMemberUrl, toastDefault, toastError } from '../utils';
 
 function Profile({ users, channelDetails }) {
   const channelID = +channelDetails.id;
@@ -73,9 +73,11 @@ function Profile({ users, channelDetails }) {
 
       setNewMember(users.find(item => item.id === +newMemberID));
       closeModal();
+      toastDefault(`Cool! Say hi to your new member!`);
     } catch (error) {
       setError(fetchAddMemberError);
       console.error(fetchAddMemberError);
+      toastError('Oops! There was a problem in adding the member. Please try again.');
     }
   };
 
