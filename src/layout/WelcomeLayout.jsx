@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 
-import * as c from '../components';
-
 function WelcomeLayout() {
   const navigate = useNavigate();
 
@@ -13,7 +11,6 @@ function WelcomeLayout() {
 
   return (
     <main className='mainpage'>
-      <c.WelcomeNavbar />   
       <Outlet />   
     </main>
   )
