@@ -15,7 +15,7 @@ function ChatBox() {
   const user = users.find((item) => item.id === userID) || [];
   const [isFavorite, setIsFavorite] = useState(() => favorites.some((item) => item.id === userID));
   // console.log('@ChatBox - users:', users);
-  const [messages, setMessages] = useState([]);
+  // const [messages, setMessages] = useState([]);
   const [reverseMesg, setReverseMesg] = useState([]);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
 
@@ -36,10 +36,10 @@ function ChatBox() {
         return isFiltered(mesg.id);
       });
   
-      setMessages(filteredMesgs);
+      // setMessages(filteredMesgs);
       setReverseMesg([...filteredMesgs].reverse());
       console.log('Fetched Channel Messages:', mesgData.data);
-      console.log('Fetched Channel uniqueMessages:', filteredMesgs);
+      console.log('Fetched Channel filteredMesgs:', filteredMesgs);
     }
   }, [mesgData]);
 
