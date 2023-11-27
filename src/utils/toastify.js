@@ -1,5 +1,6 @@
 import { toast } from "react-toastify";
 
+// default toast
 export const toastDefault = (text) => {
   toast(text, {
     position: "top-center",
