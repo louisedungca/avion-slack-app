@@ -1,14 +1,23 @@
-import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { NavbarData } from '../../components';
-import { ArrowLeftOnRectangleIcon, UserCircleIcon } from '@heroicons/react/24/solid';
+import { ArrowLeftOnRectangleIcon } from '@heroicons/react/24/solid';
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { NavbarData, Logout } from '../../components';
+
 
 function Navbar() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  function openModal() {
+    setIsModalOpen(true);
+  };
+
+  function closeModal() {
+    setIsModalOpen(false);
+  };
+
   return (
     <nav className='navbar'>
-
-      <div className="side-item-wrapper">       
-
+      <div className="side-item-wrapper">     
         <div className="upper-items">
           {NavbarData.map((item, index) => {
             return (
@@ -24,25 +33,21 @@ function Navbar() {
         </div>
 
         <div className="lower-items">
-          <NavLink
-            to={'profile'}
-            className={'lower-item usericon'}
-          >
-            {/* <div className="img-wrapper">
-              <img src={profile} alt="profile picture" className="client-navbar-img" />
-            </div> */}
-            <i className="navbar-icons"><UserCircleIcon /></i>
-          </NavLink>
-
-          <Link
+          <div 
             className={'lower-item logouticon'}
+            onClick={openModal}
           >
-             <i className="navbar-icons"><ArrowLeftOnRectangleIcon /></i>
-            
-          </Link>
+             <i className="navbar-icons">
+              <ArrowLeftOnRectangleIcon />
+            </i>      
+          </div>
         </div>
-      </div>
-      
+      </div>  
+
+      <Logout 
+        isOpen={isModalOpen} 
+        onClose={closeModal}
+      />     
     </nav>
   )
 }

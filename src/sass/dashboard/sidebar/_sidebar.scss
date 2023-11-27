@@ -1,8 +1,246 @@
 @use '../../roots' as *;
 
 aside, .aside-chats {
-  border: 2px dotted whitesmoke;
-  width: max(120px, 25vw);
+  width: max(250px, 20%);
+  max-width: 250px;
   height: 100%;
   padding: 1rem;
+  padding-left: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
+
+.aside-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: $white;
+  font-size: $h2;
+  font-weight: 600;
+  letter-spacing: 0.2rem;
+  text-transform: capitalize;
+  text-shadow: $textShadow;
+  margin-bottom: 0.5rem;
+
+  h3 {
+    font-size: $h3;
+    font-weight: 600;
+    letter-spacing: 0.2rem;
+    text-transform: capitalize;
+    color: $white;
+    text-shadow: $textShadow;
+  }
+
+  .icon {
+    width: $h3;
+    color: $white;
+    text-shadow: $textShadow;
+    cursor: pointer;
+
+    &:hover {
+      color: $accent;
+    }
+  }
+}
+
+.thumbnail-container {
+  // border: 1px solid white;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 100%;
+  margin-top: 0.25rem;
+  padding: 0.5rem;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 0.3rem;
+    height: 0.3rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $primaryColor;
+    border-radius: 0.8rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $white;
+    border-radius: 0.3rem;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: $accent;
+  }
+
+  .thumbnail-wrapper {
+    width: 100%;
+    height: min(3.5rem, 8vh);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;    
+    background: linear-gradient(65deg,
+    rgba(255, 255, 240, 0.65),
+    $white,
+    );
+    border-radius: 1rem;
+    box-shadow: $boxShadow1;
+
+    .thumbnail-icon {
+      width: 40px;
+      color: $primaryColor;
+    }
+
+    .thumbnail-name {
+      font-size: smaller;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 0.35rem;
+      text-shadow: none;
+    }
+
+    &.active {
+      opacity: 0.65;
+    }
+  }
+}
+
+.channel {
+  text-transform: uppercase;
+  color: $primaryColor;
+}
+
+.favorites {
+  height: 25%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+  padding: 0.5rem;
+  color: $white;
+  text-shadow: $textShadow;
+  letter-spacing: 0.12rem;
+
+  h5 {
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+}
+
+.recents {
+  border-top: 2px solid $supplementOne;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+  padding: 0.5rem;
+  color: $white;
+  text-shadow: $textShadow;
+  letter-spacing: 0.12rem;
+
+  h5 {
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  
+}
+
+.sidelist {
+  // border: 1px solid red;
+  width: 100%;
+  max-width: 230px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  color: $white;
+  padding: 0.5rem;
+  padding-left: 0;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 0.3rem;
+    height: 0.3rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $primaryColor;
+    border-radius: 0.8rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $white;
+    border-radius: 0.3rem;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: $accent;
+  }
+
+
+  .sidelist-item{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 0.8rem;
+    color: $white;
+
+    .info-icon {
+      color: $white;
+      text-shadow: $textShadow;
+      width: 1rem;
+    }
+
+    span {
+      font-size: $span;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &.active {
+      background: $white;
+      color: $primaryColor;
+      text-shadow: none;
+      font-weight: 700;
+
+      .info-icon {
+        color: $primaryColor;
+        
+      }
+    }
+  }
+
+  .sidebar-item-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: min(170px, 100%);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sidelist-item-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    width: min(170px, 100%);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sidelist-item-mesg {
+    width: min(170px, 100%);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 400;
+    font-size: xx-small;
+    font-style: italic;
+  }
+}
+
