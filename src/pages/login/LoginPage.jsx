@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link, useNavigate, } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-import { WelcomeNavbar, inputFieldTemplate, loginInput } from '../../components';
+import { inputFieldTemplate, loginInput } from '../../components';
 import { useAuth } from '../../hooks';
 
 function LoginPage() {
@@ -29,7 +29,6 @@ function LoginPage() {
 
   return (
     <section className='login-page'>
-      <WelcomeNavbar />
       <div className='page-leftbox'>
         <h1>Say hello to your people now.</h1>
 

@@ -10,8 +10,8 @@ export function isLoggedInLoader() {
   const uid = headers && headers['uid'];
     if(token) {
       return redirect("/c/channels");
-  }
-  return { headers, token, client, expiry, uid };
+    }
+    return { headers, token, client, expiry, uid };
 };
 
 // to access dashboard pages
@@ -23,6 +23,6 @@ export function accessDashLoader() {
   const uid = headers && headers['uid'];
     if(!token) {
       return redirect("/login");
-  }
-  return { headers, token, client, expiry, uid };
+    }
+    return { headers, token, client, expiry, uid };
 };
