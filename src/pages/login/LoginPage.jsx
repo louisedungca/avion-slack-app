@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { Link, useNavigate, } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
+import { WelcomeNavbar, inputFieldTemplate, loginInput } from '../../components';
 import { useAuth } from '../../hooks';
-import * as c from '../../components';
 
 function LoginPage() {
   const { register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset } = useForm();
@@ -29,13 +29,14 @@ function LoginPage() {
 
   return (
     <section className='login-page'>
-      <c.WelcomeNavbar /> 
+      <WelcomeNavbar />
       <div className='page-leftbox'>
         <h1>Say hello to your people now.</h1>
 
         <div className='form-wrapper'>
           <form onSubmit={handleSubmit(onSubmit)} className='form-content'>
-            {c.loginInput.map(input => c.inputFieldTemplate(input, register, errors))}
+            
+            {loginInput.map(input => inputFieldTemplate(input, register, errors))}
 
             <button
              type="submit"
