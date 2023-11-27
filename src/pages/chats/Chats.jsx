@@ -1,55 +1,14 @@
 import { StarIcon, FaceSmileIcon } from "@heroicons/react/24/solid";
-import { NavLink, useLoaderData, useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import Select from "react-select";
 
-import { getMsgUrl, reactSelectStyles } from "../../utils";
+import { reactSelectStyles } from "../../utils";
 import * as l from '../../layout';
 
-function Chats({ users, favorites, allChannelMembers }) {
-  const navigate = useNavigate(); 
-  const { token, client, expiry, uid } = useLoaderData();
+function Chats({ favorites, options, isFetchChatLoading, filteredChats }) {
+  const navigate = useNavigate();   
   const [selectedUser, setSelectedUser] = useState(null);
-  const [recentChats, setRecentChats] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const options = (allChannelMembers[0] || []).map((user) => ({
-    value: user.id,
-    label: user.uid,
-  }));  
-  
-  // console.log('@Chats - options', options);
-
-  async function fetchRecentChats() {
-    setIsLoading(true);
-    const recentChatsPromises = options.map(async (user) => {
-      const response = await fetch(getMsgUrl(user.value), {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'access-token': token,
-          'client': client,
-          'expiry': expiry,
-          'uid': uid,
-        },
-      });
-
-      const messages = await response.json();
-      return {
-        userId: user.value,
-        messages,
-      };
-    });
-
-    const recentChatsData = await Promise.all(recentChatsPromises);
-    setRecentChats(recentChatsData);
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    fetchRecentChats();
-  }, [options.length]);  
-
-  console.log('@Chats - recentChats:', recentChats);
 
   function handleSelectedUser(selectedUser) {
     setSelectedUser(selectedUser);
@@ -61,27 +20,6 @@ function Chats({ users, favorites, allChannelMembers }) {
 
     setSelectedUser(null);
   };
-
-  const filteredChats = recentChats
-    .filter(item => item.messages.data.length > 0)
-    .map(item => {
-      const userID = item.userId;
-      const lastMessage = item.messages.data[item.messages.data.length - 1];
-      const lastMessageDetails = {
-        body: lastMessage.body,
-        senderID: lastMessage.sender.id,
-        senderEmail: lastMessage.sender.uid,
-        receiverID: lastMessage.receiver.id,
-        receiverEmail: lastMessage.receiver.uid,
-      };
-    
-      return {
-        userID,
-        lastMessage: lastMessageDetails,
-      };
-    });
-  
-  console.log('@Chats - filteredChats:', filteredChats);  
 
   return (
     <aside className="aside-chats">
@@ -121,7 +59,7 @@ function Chats({ users, favorites, allChannelMembers }) {
       <div className="recents">
         <h5>Recent Chats</h5>
         <div className="sidelist">
-          {isLoading ? (
+          {isFetchChatLoading ? (
             <l.SidebarSkeleton />                        
             ) : (
               filteredChats && filteredChats.length > 0 &&

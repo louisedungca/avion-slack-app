@@ -9,7 +9,7 @@ import { SendChat } from '../../components';
 import * as l from '../../layout';
 
 function ChatBox() {
-  const { users, favorites, setFavorites} = useOutletContext();
+  const { users, favorites, setFavorites, fetchRecentChats } = useOutletContext();
   const { id } = useParams();
   const userID = +id;
   const user = users.find((item) => item.id === userID) || [];
@@ -19,7 +19,7 @@ function ChatBox() {
   const [reverseMesg, setReverseMesg] = useState([]);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
 
-  const { data: mesgData, fetchData: fetchMesg, isLoading } = useFetch(getMsgUrl(userID), { method: 'GET' });
+  const { data: mesgData, fetchData: fetchMesg } = useFetch(getMsgUrl(userID), { method: 'GET' });
 
   useEffect(() => {
     setIsFirstLoad(true);
@@ -29,16 +29,19 @@ function ChatBox() {
   useEffect(() => {
     if (mesgData && mesgData.data) {
       setIsFirstLoad(false);
-      setMessages(mesgData.data);
-      setReverseMesg([...mesgData.data].reverse());
+
+      const filteredMesgs = mesgData.data.filter((mesg, index, array) => {
+        const isFiltered = (id) => array.findIndex((item) => item.id === id) === index;
+  
+        return isFiltered(mesg.id);
+      });
+  
+      setMessages(filteredMesgs);
+      setReverseMesg([...filteredMesgs].reverse());
       console.log('Fetched Channel Messages:', mesgData.data);
+      console.log('Fetched Channel uniqueMessages:', filteredMesgs);
     }
   }, [mesgData]);
-  
-  // for checking only
-  useEffect(() => { 
-    console.log('Messages:', messages);
-  }, [messages]);
 
   useEffect(() => {
     setIsFavorite(favorites.some(item => item.id === userID));
@@ -65,7 +68,10 @@ function ChatBox() {
 
   function handleOnMesgSent() {
     fetchMesg();
+    fetchRecentChats();
     setIsFirstLoad(false);
+
+    console.log('@Chatbox: fetch:', fetchRecentChats());
   };
 
   return (
@@ -95,9 +101,9 @@ function ChatBox() {
           ) : (
             <div className="mesgthread">
               {reverseMesg && reverseMesg.length > 0 ? 
-                reverseMesg.map((message) => (
+                reverseMesg.map((message, index) => (
                   <div 
-                    key={message.id}
+                    key={index}
                     className={`message-box ${message.sender.id === userID ? 'left' : ''} ${message.receiver.id === userID ? 'right' : ''}`}
                   >
                     <div className='message'>
