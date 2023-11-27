@@ -22,6 +22,7 @@
   width: 20vw;
   padding: 1rem;
   border-radius: 1rem;
+  z-index: 99;
 }
 
 .toast-error {
@@ -33,6 +34,7 @@
   width: 20vw;
   padding: 1rem;
   border-radius: 1rem;
+  z-index: 99;
 }
 
 .error-page {
@@ -107,7 +109,7 @@
 
 .welcomenav {
   border-bottom: 1px solid #f7f1f3;
-  background: rgba(255, 255, 240, 0.75);
+  background: rgba(255, 255, 240, 0.9);
   width: 100%;
   height: 10vh;
   position: fixed;
@@ -117,6 +119,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 1rem 2rem;
+  z-index: 9;
 }
 .welcomenav .welcomenav-btns {
   display: flex;
@@ -161,6 +164,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  cursor: pointer;
 }
 .logonav .logo-img {
   height: max(50px, 5vh);

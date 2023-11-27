@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { Link, useNavigate, } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-import { inputFieldTemplate, signupInput } from '../../components/';
 import { useAuth } from '../../hooks';
+import * as c from '../../components';
 
 function SignUpPage() {
   const { register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset } = useForm();
@@ -30,13 +30,14 @@ function SignUpPage() {
 
   return (
     <section className='signup-page'>
+      <c.WelcomeNavbar /> 
       <div className='page-leftbox'></div>
       <div className="page-rightbox">
         <h1>Bring people together.</h1>
 
         <div className='form-wrapper'>
           <form onSubmit={handleSubmit(onSubmit)} className='form-content'>
-            {signupInput.map((input) => inputFieldTemplate(input, register, errors))}
+            {c.signupInput.map((input) => c.inputFieldTemplate(input, register, errors))}
 
             <button type="submit" className='btn-main'>
               Create Account
