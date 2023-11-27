@@ -1,22 +1,26 @@
 import { StarIcon, FaceSmileIcon } from "@heroicons/react/24/solid";
-import Select from "react-select";
-import React, { useEffect, useState } from "react";
 import { NavLink, useLoaderData, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import Select from "react-select";
+
 import { getMsgUrl, reactSelectStyles } from "../../utils";
+import * as l from '../../layout';
 
 function Chats({ users, favorites, allChannelMembers }) {
   const navigate = useNavigate(); 
   const { token, client, expiry, uid } = useLoaderData();
   const [selectedUser, setSelectedUser] = useState(null);
   const [recentChats, setRecentChats] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const options = (allChannelMembers[0] || []).map((user) => ({
     value: user.id,
     label: user.uid,
   }));  
   
-  console.log('@Chats - options', options);
+  // console.log('@Chats - options', options);
 
   async function fetchRecentChats() {
+    setIsLoading(true);
     const recentChatsPromises = options.map(async (user) => {
       const response = await fetch(getMsgUrl(user.value), {
         method: 'GET',
@@ -38,6 +42,7 @@ function Chats({ users, favorites, allChannelMembers }) {
 
     const recentChatsData = await Promise.all(recentChatsPromises);
     setRecentChats(recentChatsData);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -116,26 +121,30 @@ function Chats({ users, favorites, allChannelMembers }) {
       <div className="recents">
         <h5>Recent Chats</h5>
         <div className="sidelist">
-          {filteredChats && filteredChats.length > 0 &&
-            filteredChats.map(chat => (
-              <NavLink 
-                className='sidelist-item'
-                key={chat.userId}
-                to={`${chat.userId}`}
-              >
-                <div className="sidebar-item-wrapper">
-                  <i className='info-icon'><FaceSmileIcon/></i>
-                  <div className="sidelist-item-text">
-                    <small>
-                      {chat.lastMessage.receiverEmail.split('@')[0]}
-                    </small>
-                    <h6 className="sidelist-item-mesg">
-                      {chat.lastMessage.body}
-                    </h6>  
-                  </div>
-                </div>                              
-              </NavLink>
-            ))} 
+          {isLoading ? (
+            <l.SidebarSkeleton />                        
+            ) : (
+              filteredChats && filteredChats.length > 0 &&
+                filteredChats.map(chat => (
+                  <NavLink 
+                    className='sidelist-item'
+                    key={chat.userId}
+                    to={`${chat.userId}`}
+                  >
+                    <div className="sidebar-item-wrapper">
+                      <i className='info-icon'><FaceSmileIcon/></i>
+                      <div className="sidelist-item-text">
+                        <small>
+                          {chat.lastMessage.receiverEmail.split('@')[0]}
+                        </small>
+                        <h6 className="sidelist-item-mesg">
+                          {chat.lastMessage.body}
+                        </h6>  
+                      </div>
+                    </div>                              
+                  </NavLink>
+                ))
+              )}          
         </div>
       </div>
     </aside>      

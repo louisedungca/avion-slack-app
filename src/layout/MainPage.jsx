@@ -90,7 +90,8 @@ const MainPage = () => {
             <section className='dashboard'>
               <Outlet context={{ 
                 users, 
-                channels, 
+                channels,         
+                channelsLoading,       
                 allChannelMembers,
                 isDetailsLoading, 
                 fetchChannelDetails,

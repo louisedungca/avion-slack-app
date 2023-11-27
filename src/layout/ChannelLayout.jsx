@@ -5,7 +5,7 @@ import * as p from '../pages';
 import * as l from '../layout';
 
 function ChannelLayout() {
-  const { users, channels, isDetailsLoading, fetchChannels } = useOutletContext();  
+  const { users, channels, isDetailsLoading, fetchChannels, channelsLoading } = useOutletContext();  
   const [favorites, setFavorites] = useState(() => getLocalStorage('FaveChannels') || []);
   // console.log('@ChanLayout - fetchChannels:', fetchChannels);
 
@@ -25,6 +25,7 @@ function ChannelLayout() {
             channels={channels}
             favorites={favorites}  
             fetchChannels={fetchChannels}
+            channelsLoading={channelsLoading}
           />
           <Outlet context={{ 
             users, 

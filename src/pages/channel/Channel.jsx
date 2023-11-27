@@ -3,8 +3,9 @@ import { StarIcon } from '@heroicons/react/24/solid';
 import { NavLink } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { CreateChannel } from '../../pages';
+import * as l from '../../layout';
 
-function Channel({ users, channels, favorites, fetchChannels }) {
+function Channel({ users, channels, favorites, fetchChannels, channelsLoading }) {
   // console.log('@Channel - fetchChannels:', fetchChannels);
   const [reverseChannel, setReverseChannel] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -58,19 +59,22 @@ function Channel({ users, channels, favorites, fetchChannels }) {
 
       <div className="recents">
         <h5>All Channels</h5>
-        {channels && channels.length > 0 && (
-          <div className="thumbnail-container">
-            {reverseChannel.map(channel => (
-              <NavLink 
-                key={channel.id} 
-                to={`${channel.id}`}
-                className="thumbnail-wrapper"
-              >
-                <p className='thumbnail-name channel'>{channel.name}</p>
-              </NavLink>
+        {channelsLoading ? (
+            <l.SidebarSkeleton /> 
+          ) : (
+            channels && channels.length > 0 && (
+              <div className="thumbnail-container">
+                {reverseChannel.map(channel => (
+                  <NavLink 
+                    key={channel.id} 
+                    to={`${channel.id}`}
+                    className="thumbnail-wrapper"
+                  >
+                    <p className='thumbnail-name channel'>{channel.name}</p>
+                  </NavLink>
+                ))}
+              </div>
             ))}
-          </div>
-        )} 
       </div>  
     </aside>
   )

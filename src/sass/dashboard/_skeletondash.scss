@@ -80,3 +80,16 @@
     align-items: flex-end;
   }
 }
+
+// Sidebar Skeleton
+.sidelist-skeleton {
+  width: 100%;
+  max-width: 230px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.sidelist-item-skeleton {
+  padding-left: 1rem;
+}
