@@ -32,7 +32,7 @@ function SignUpPage() {
     <section className='signup-page'>
       <div className='page-leftbox'></div>
       <div className="page-rightbox">
-        <h1>Hello, hello!</h1>
+        <h1>Bring people together.</h1>
 
         <div className='form-wrapper'>
           <form onSubmit={handleSubmit(onSubmit)} className='form-content'>

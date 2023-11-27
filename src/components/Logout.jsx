@@ -22,7 +22,7 @@ function Logout({ isOpen, onClose }) {
     <div className={`modal ${isOpen ? 'open' : ''}`}>
       <div className="modal-wrapper">
         <h4 className='modal-title'>Sign out of Slackify</h4>
-        <span className='modal-text'>We'll sign you out as {uid} (id: {id}).</span>
+        <span className='modal-text'>We'll sign you out as {uid}.</span>
         <small>This will also remove all of your pinned users or channels.</small>
 
         <div className="modal-btns">
