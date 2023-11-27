@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { getLocalStorage } from '../utils';
 
 function Logout({ isOpen, onClose }) {
-  const { uid, id } = getLocalStorage('UserData');
+  const { uid } = getLocalStorage('UserData') || [];
   const auth = useAuth();
   const navigate = useNavigate();
 
