@@ -136,6 +136,7 @@
 }
 
 .message-box {
+  // border: 2px dotted pink;
   width: 100%;
 }
 
@@ -175,6 +176,11 @@
   small {
     text-transform: capitalize;
     font-weight: 700;
+  }
+  
+  p {
+    width: 100%;
+    overflow-wrap: break-word;
   }
 }
 

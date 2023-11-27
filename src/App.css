@@ -731,6 +731,10 @@ aside, .aside-chats {
   text-transform: capitalize;
   font-weight: 700;
 }
+.message p {
+  width: 100%;
+  overflow-wrap: break-word;
+}
 
 .timestamp {
   font-size: xx-small;

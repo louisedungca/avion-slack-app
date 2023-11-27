@@ -65,7 +65,7 @@ function Chats({ users, favorites, allChannelMembers }) {
   const filteredChats = recentChats
     .filter(item => item.messages.data.length > 0)
     .map(item => {
-      const userId = item.userId;
+      const userID = item.userId;
       const lastMessage = item.messages.data[item.messages.data.length - 1];
       const lastMessageDetails = {
         body: lastMessage.body,
@@ -76,7 +76,7 @@ function Chats({ users, favorites, allChannelMembers }) {
       };
     
       return {
-        userId,
+        userID,
         lastMessage: lastMessageDetails,
       };
     });
@@ -128,23 +128,34 @@ function Chats({ users, favorites, allChannelMembers }) {
                 filteredChats.map(chat => (
                   <NavLink 
                     className='sidelist-item'
-                    key={chat.userId}
-                    to={`${chat.userId}`}
+                    key={chat.userID}
+                    to={`${chat.userID}`}
                   >
                     <div className="sidebar-item-wrapper">
                       <i className='info-icon'><FaceSmileIcon/></i>
                       <div className="sidelist-item-text">
-                        <small>
-                          {chat.lastMessage.receiverEmail.split('@')[0]}
-                        </small>
-                        <h6 className="sidelist-item-mesg">
-                          {chat.lastMessage.body}
-                        </h6>  
+                        {chat.userID === chat.lastMessage.receiverID ? (
+                          <small>
+                            {chat.lastMessage.receiverEmail.split('@')[0]}
+                          </small>
+                        ) : (
+                          <small>
+                            {chat.lastMessage.senderEmail.split('@')[0]}
+                          </small>
+                        )}                        
+                        {chat.userID === chat.lastMessage.receiverID ? (
+                            <h6 className="sidelist-item-mesg">
+                              You: {chat.lastMessage.body}
+                            </h6>
+                        ) : (
+                          <h6 className="sidelist-item-mesg">
+                            {chat.lastMessage.body}
+                          </h6>
+                        )}                          
                       </div>
                     </div>                              
                   </NavLink>
-                ))
-              )}          
+                )))}          
         </div>
       </div>
     </aside>      
