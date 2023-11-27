@@ -1,10 +1,17 @@
-import React from 'react';
-import WelcomeNavbar from '../components/navbar/WelcomeNavbar';
+import React, { useEffect } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 function WelcomeLayout() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate('/login');
+  }, []);
+
+
   return (
     <main className='mainpage'>
-      <WelcomeNavbar />      
+      <Outlet />   
     </main>
   )
 }
