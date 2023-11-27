@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { getLocalStorage, loginUrl, setLocalStorage, signupUrl } from "../utils";
+import { getLocalStorage, setLocalStorage, loginUrl, signupUrl, toastError, toastDefault } from "../utils";
 
 const AuthContext = createContext();
 
@@ -21,102 +21,73 @@ function useProvideAuth() {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
 
-  // for login fetch
+  async function handleRequest(url, options = {} ) {
+    try {
+      // log req data
+      console.log('Request data:', {
+        method: options.method,
+        body: JSON.stringify(options.body),
+        url, 
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      const response = await fetch(url, {
+        ...options,
+        method: options.method,
+        body: JSON.stringify(options.body),
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      const headersArray = Array.from(response.headers.entries());
+      const headersObject = Object.fromEntries(headersArray);
+
+      if (!response.ok) {
+        const errorResponse = await response.json();
+        throw new Error(errorResponse.message || 'There was a problem in fetching the data.');
+      }
+
+      const data = await response.json();
+      console.log('Response data(Sign in/up):', data);
+
+      setLocalStorage('Headers', headersObject);
+      handleAuth(data);
+      
+      // toast
+      if (url === loginUrl) {
+        toastDefault('Hey, welcome back!');
+      } else if (url === signupUrl) {
+        toastDefault('Welcome to Slackify!');
+      }
+    } catch (error) {
+      setError(error.message || 'An error occurred while fetching data.');
+      toastError('Please try again.');
+    };
+  };
+
   async function login(formData) {
     const { userEmail, userPassword } = formData;
-    const requestBody = {
-      email: userEmail,
-      password: userPassword,
-    };
 
-    console.log('Request body:', JSON.stringify(requestBody));
-
-    try {
-      const response = await fetch(loginUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
-      });
-
-      console.log('Response status:', response.status);
-
-      const headersArray = Array.from(response.headers.entries());
-      const headersObject = Object.fromEntries(headersArray);
-      console.log('Headers object:', headersObject);
-
-      if (response.status === 404) {
-        setError("This page doesn't exist.");
-      } else if (response.status === 401) {
-        setError('Invalid username or password.');
-      } else if (!response.ok) {      
-        const errorResponse = await response.json(); 
-        setError(errorResponse.message);
-      } else {
-        const data = await response.json();
-        console.log('Response data:', data); 
-        console.log('Headers:', headersObject);
-
-        setLocalStorage('Headers', headersObject);
-        console.log("DATA:", data);
-        handleAuth(data);
-      }
-      
-    } catch (error) {
-      console.error('Login error:', error);
-    }
+    await handleRequest(loginUrl, { 
+      method: 'POST', 
+      body: { 
+        email: userEmail, 
+        password: userPassword 
+      }});
   };
 
-  // for signup fetch 
   async function signup(formData) {
     const { userEmail, userPassword, confirmPassword } = formData;
-    const requestBody = {
-      email: userEmail,
-      password: userPassword,
-      password_confirmation: confirmPassword,
-    };
 
-    console.log('Request body:', JSON.stringify(requestBody));
-
-    try {
-      const response = await fetch(signupUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
-      });
-
-      console.log('Response status:', response.status);
-
-      const headersArray = Array.from(response.headers.entries());
-      const headersObject = Object.fromEntries(headersArray);
-      console.log('Headers object:', headersObject);
-
-      if (response.status === 404) {
-        setError("This page doesn't exist.");
-      } else if (response.status === 422) {
-        setError('Account exists. Choose another email to create a new account.');
-      } else if (!response.ok) {      
-        const errorResponse = await response.json(); 
-        setError(errorResponse.message);
-      } else {
-        const data = await response.json();
-        console.log('Response data:', data); 
-        console.log('Headers:', headersObject);
-
-        setLocalStorage('Headers', headersObject);
-        console.log("DATA:", data);
-        handleAuth(data);
-      }
-      
-    } catch (error) {
-      console.error('Signup error:', error);
-    }
+    await handleRequest(signupUrl, { 
+      method: 'POST', 
+      body: { 
+        email: userEmail, 
+        password: userPassword, 
+        password_confirmation: confirmPassword 
+      }});
   };
 
-  function handleAuth(data) {     
+  function handleAuth(data) {
     setUser(data.data);
     setLocalStorage('UserData', data.data);
   };
@@ -125,24 +96,20 @@ function useProvideAuth() {
     setUser(null);
     localStorage.removeItem('UserData');
     localStorage.removeItem('Headers');
+    localStorage.removeItem('Favorites');
+
+    toastDefault('See you again soon!');
   };
 
   useEffect(() => {
     const currentUser = getLocalStorage('UserData');
     const headers = getLocalStorage('Headers');
     const token = headers && headers['access-token'];
-    console.log('Access Token:', token);
 
     if (currentUser && token) {
       setUser(currentUser);
     }
   }, []);
 
-  return {
-    user, 
-    error,
-    login,
-    signup,
-    logout,
-  };
+  return { user, error, login, signup, logout };
 };

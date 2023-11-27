@@ -3,6 +3,7 @@
 
 // General Pages
 @use './sass/general/errorpage';
+@use './sass/general/welcomenav';
 
 // Login and Signup
 @use './sass/loginandsignup/loginpage';
@@ -13,3 +14,8 @@
 @use './sass/dashboard/sidebar/sidebar';
 @use './sass/dashboard/dashboard';
 @use './sass/dashboard/mesgthread';
+@use './sass/dashboard/profile';
+
+// Extra
+@use './sass/dashboard/modal';
+@use './sass/dashboard/skeletondash';

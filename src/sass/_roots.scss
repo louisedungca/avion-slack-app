@@ -4,13 +4,27 @@
 $fontMain: 'Nunito', sans-serif;
 
 $h1: clamp(2.5rem, 2.3711rem + 2.0619vw, 5rem);
+$h2: clamp(1rem, 0.9485rem + 0.8247vw, 2rem);
+$h3: clamp(1rem, 0.8485rem + 0.7247vw, 1.8rem);
+$h4: clamp(0.85rem, 0.8165rem + 0.5361vw, 1.5rem);
+$h5: clamp(0.8rem, 0.7794rem + 0.3299vw, 1.2rem);
+$h6: clamp(0.75rem, 0.7268rem + 0.3711vw, 1.2rem);
 $span: clamp(0.7rem, 0.6077rem + 0.3077vw, 1rem);
 
 // Colors
 $primaryColor: #58094F;
 $secondaryColor: #841E62;
 $accent: #F3AA20;
-$supplementOne: #346B6D;
-$supplementTwo: #2A445E;
+$supplementOne: #f9e7f3; 
+$supplementTwo: #771b58;
 $white: #fffff0;
+$gray: #f7f1f3;
 $warning: red;
+$bloodred: #8B0000;
+
+$textShadow: 1.2px 1.2px 3px  $primaryColor;
+$boxShadow1: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+$boxShadow2: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, 
+rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, 
+rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+$dropShadow: drop-shadow(5px 5px 10px $supplementTwo);

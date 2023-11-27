@@ -1,14 +1,16 @@
 // general
 export { default as ErrorPage } from './general/ErrorPage';
-export { default as WelcomePage } from './general/WelcomePage';
+export { default as People } from './general/People';
 
-// dashboard
-export { default as Dashboard } from './dashboard/Dashboard';
-export { default as Profile } from './dashboard/components/Profile';
-export { default as Chats } from './dashboard/components/Chats';
-export { default as Channel } from './dashboard/components/Channel';
-export { default as People } from './dashboard/components//People';
-export { default as MsgThread } from './dashboard/components/MsgThread';
+// channel
+export { default as Channel } from './channel/Channel';
+export { default as ChannelBox } from './channel/ChannelBox';
+export { default as CreateChannel } from './channel/CreateChannel';
+export { default as AddMember } from './channel/AddMember';
+
+// chat
+export { default as Chats } from './chats/Chats';
+export { default as ChatBox } from './chats/ChatBox';
 
 // login and signup
 export { default as LoginPage } from './login/LoginPage';
