@@ -14,27 +14,31 @@ function ChatBox() {
   const userID = +id;
   const user = users.find((item) => item.id === userID) || [];
   const [isFavorite, setIsFavorite] = useState(() => favorites.some((item) => item.id === userID));
-
+  // console.log('@ChatBox - users:', users);
   const [messages, setMessages] = useState([]);
   const [reverseMesg, setReverseMesg] = useState([]);
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
+
   const { data: mesgData, fetchData: fetchMesg, isLoading } = useFetch(getMsgUrl(userID), { method: 'GET' });
 
   useEffect(() => {
+    setIsFirstLoad(true);
       fetchMesg();
   }, [userID]);
 
   useEffect(() => {
     if (mesgData && mesgData.data) {
+      setIsFirstLoad(false);
       setMessages(mesgData.data);
       setReverseMesg([...mesgData.data].reverse());
       console.log('Fetched Channel Messages:', mesgData.data);
     }
   }, [mesgData]);
   
-  // for checking only -- delete later
-  // useEffect(() => { 
-  //   console.log('Messages:', messages);
-  // }, [messages]);
+  // for checking only
+  useEffect(() => { 
+    console.log('Messages:', messages);
+  }, [messages]);
 
   useEffect(() => {
     setIsFavorite(favorites.some(item => item.id === userID));
@@ -59,7 +63,10 @@ function ChatBox() {
     setIsFavorite((prevIsFavorite) => !prevIsFavorite);
   };
 
-  // console.log('@ChatBox - users:', users);
+  function handleOnMesgSent() {
+    fetchMesg();
+    setIsFirstLoad(false);
+  };
 
   return (
     <section className='dashcontent'>
@@ -83,7 +90,7 @@ function ChatBox() {
         </div>
 
         {
-          isLoading ? (
+          isFirstLoad ? (
             <l.ChatboxSkeleton />
           ) : (
             <div className="mesgthread">
@@ -113,7 +120,7 @@ function ChatBox() {
         <SendChat 
           userID={userID} 
           receiverClass={'User'}
-          onMessageSent={() => fetchMesg()}          
+          onMessageSent={handleOnMesgSent}          
         />
       </div>         
     </section>

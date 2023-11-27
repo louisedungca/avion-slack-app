@@ -15,30 +15,32 @@ function ChannelBox() {
   const { channel_id } = useParams();
   const channelID = +channel_id;  
   const channelDetails = channels.find(item => item.id === channelID) || [];
-
-  // console.log('@ChannelBox - channels:', channels);
-  console.log('@ChannelBox - channelDetails', channelDetails);
-  // console.log('loggedin user id:', loggedInUser.id);
-
   const [isFavorite, setIsFavorite] = useState(() => favorites.some((item) => item.id === channelID));
+  // console.log('@ChannelBox - channels:', channels);
+  // console.log('@ChannelBox - channelDetails', channelDetails);
+  // console.log('loggedin user id:', loggedInUser.id);
   const [messages, setMessages] = useState([]);
   const [reverseMesg, setReverseMesg] = useState([]);
   const [showProfile, setShowProfile] = useState(false);
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
+  
   const { data: mesgData, fetchData: fetchMesg, isLoading } = useFetch(getChnlMsgUrl(channelID), { method: 'GET' });
 
   useEffect(() => {
+    setIsFirstLoad(true);
     fetchMesg();
   }, [channelID]);
 
   useEffect(() => {
     if (mesgData && mesgData.data) {
+      setIsFirstLoad(false);
       setMessages(mesgData.data);
       setReverseMesg([...mesgData.data].reverse());
       console.log('Fetched Channel Messages:', mesgData.data);
     }
   }, [mesgData]);
 
-  // for checking only -- delete later
+  // for checking only
   useEffect(() => { 
     console.log('Channel Messages:', messages);
   }, [messages.length]);
@@ -66,6 +68,11 @@ function ChannelBox() {
     setIsFavorite((prevIsFavorite) => !prevIsFavorite);
   };
 
+  function handleOnMesgSent() {
+    fetchMesg();
+    setIsFirstLoad(false);
+  };
+
   return (
     <section className='dashcontent'>
       <div className="chatbox">
@@ -87,7 +94,7 @@ function ChannelBox() {
         </div>
 
         {
-          isLoading ? (
+          isFirstLoad ? (
             <l.ChatboxSkeleton />
           ) : (
             <div className="mesgthread">
@@ -106,13 +113,13 @@ function ChannelBox() {
                       </div>    
                     </div>
                   </div>              
-                )) : <div className="startconvo-wrapper"> 
-                      {/* <img src={logo} alt="logo" className="logo" /> */}
-                      <i className="logo"><ChatBubbleOvalLeftEllipsisIcon /></i>
-                      <h3>You're starting a new conversation</h3>
-                      <p>Type your first message below.</p>
-                    </div>
-                }         
+                )) : (
+                  <div className="startconvo-wrapper"> 
+                    <i className="logo"><ChatBubbleOvalLeftEllipsisIcon /></i>
+                    <h3>You're starting a new conversation</h3>
+                    <p>Type your first message below.</p>
+                  </div>
+                )}         
             </div>
           )
         }
@@ -120,7 +127,7 @@ function ChannelBox() {
         <c.SendChat 
           userID={channelID} 
           receiverClass={'Channel'}
-          onMessageSent={() => fetchMesg()}          
+          onMessageSent={handleOnMesgSent}     
         />
       </div>
 

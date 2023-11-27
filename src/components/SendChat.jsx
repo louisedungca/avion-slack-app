@@ -16,7 +16,6 @@ function SendChat({ userID, receiverClass, onMessageSent }) {
 
       onMessageSent();
     }
-
   }, [isSubmitSuccessful]);
 
   async function onSubmit(formData) {
