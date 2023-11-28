@@ -16,7 +16,7 @@ function WelcomeNavbar() {
           className='welcome-btn outline'
           onClick={() => {navigate('/signup')}}
         >
-          Create Account
+          Signup
         </button>
 
         <button 

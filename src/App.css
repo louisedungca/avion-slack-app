@@ -140,7 +140,7 @@
   outline: none;
   padding: 0.5rem 1rem;
   height: 2.2rem;
-  width: 40%;
+  width: 50%;
   transition: 0.3s all ease-in-out;
 }
 .welcomenav .welcomenav-btns .welcome-btn:hover {
@@ -151,7 +151,7 @@
 .welcomenav .welcomenav-btns .welcome-btn.outline {
   background: transparent;
   border: 2px solid #F3AA20;
-  width: 60%;
+  width: 50%;
 }
 .welcomenav .welcomenav-btns .welcome-btn.outline:hover {
   border: none;
@@ -239,6 +239,7 @@
   justify-content: center;
   flex-direction: column;
   gap: 1rem;
+  z-index: 3;
 }
 .login-page .page-leftbox h1 {
   color: #58094F;
@@ -307,6 +308,7 @@
   justify-content: center;
   flex-direction: column;
   gap: 1rem;
+  z-index: 3;
 }
 .signup-page .page-rightbox h1 {
   color: #58094F;
