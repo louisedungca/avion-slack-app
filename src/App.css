@@ -164,7 +164,6 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  cursor: pointer;
 }
 .logonav .logo-img {
   height: max(50px, 5vh);
