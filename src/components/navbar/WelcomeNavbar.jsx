@@ -21,7 +21,7 @@ function WelcomeNavbar() {
 
         <button 
           className='welcome-btn'
-          onClick={() => {navigate('/login')}}
+          onClick={() => {navigate('/')}}
         >
           Login
         </button>

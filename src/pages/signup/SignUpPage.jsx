@@ -61,7 +61,7 @@ function SignUpPage() {
 
         <small className='error-text'>{error}</small>
 
-        <Link to={'/login'} className='afterform-text'>
+        <Link to={'/'} className='afterform-text'>
           <p>Already have an account? Sign in here.</p>
         </Link>
       </div>

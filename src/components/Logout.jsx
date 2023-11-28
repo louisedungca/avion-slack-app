@@ -11,7 +11,7 @@ function Logout({ isOpen, onClose }) {
   function handleLogout() {
     logout();
     onClose();
-    navigate('/login');    
+    navigate('/');    
   };
   
   function handleCancelLogout() {
