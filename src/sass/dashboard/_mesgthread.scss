@@ -207,6 +207,27 @@
     padding: 0.6rem 1rem;
     outline: none;
     border: 1.5px dotted $secondaryColor;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 0.3rem;
+      height: 0.3rem;
+    }
+  
+    &::-webkit-scrollbar-track {
+      background: $primaryColor;
+      border-radius: 0.8rem;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background: $white;
+      border-radius: 0.3rem;
+    }
+  
+    &::-webkit-scrollbar-thumb:hover {
+      background: $accent;
+    }
+
   }
 
   .input-error {
