@@ -1,15 +1,15 @@
 import React from 'react';
-import { useAuth } from '../hooks';
+import { useFetchAuth } from '../hooks';
 import { useNavigate } from 'react-router-dom';
 import { getLocalStorage } from '../utils';
 
 function Logout({ isOpen, onClose }) {
-  const { uid, id } = getLocalStorage('UserData');
-  const auth = useAuth();
+  const { uid } = getLocalStorage('UserData') || [];
+  const { logout } = useFetchAuth();
   const navigate = useNavigate();
 
   function handleLogout() {
-    auth.logout();
+    logout();
     onClose();
     navigate('/login');    
   };

@@ -6,11 +6,9 @@ import { useFetchAuth } from '../../hooks';
 import { signupUrl } from '../../utils';
 import * as c from '../../components';
 
-
 function SignUpPage() {
   const { register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset } = useForm();
   const { handleRequest, error } = useFetchAuth();
-  const navigate = useNavigate();
 
   useEffect(() => {
     if(isSubmitSuccessful) {
