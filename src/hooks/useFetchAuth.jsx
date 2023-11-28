@@ -52,7 +52,7 @@ export function useFetchAuth() {
 
       // toast
       if (url === loginUrl) {
-        toastDefault('Hey, welcome back to Slackify!');
+        toastDefault('Hello! Welcome back to Slackify!');
       } else if (url === signupUrl) {
         toastDefault('Welcome to Slackify!');
       } 
@@ -71,6 +71,7 @@ export function useFetchAuth() {
     localStorage.removeItem('UserData');
     localStorage.removeItem('Headers');
     localStorage.removeItem('Favorites');
+    localStorage.removeItem('FaveChannels');
 
     toastDefault('You are now signed out from Slackify. See you again soon!');
   }
