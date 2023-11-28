@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { getLocalStorage, setLocalStorage, loginUrl, signupUrl, toastError, toastDefault } from "../utils";
+import { useNavigate } from "react-router-dom";
 
 export function useFetchAuth() {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   async function handleRequest(url, options = {}) {
     try {
@@ -51,7 +53,9 @@ export function useFetchAuth() {
         toastDefault('Hey, welcome back to Slackify!');
       } else if (url === signupUrl) {
         toastDefault('Welcome to Slackify!');
-      }
+      } 
+
+      navigate('/c/channels');
     } catch (error) {
       setError(error.message);
       toastError('Oops! There was a problem with your request. Please try again.');
