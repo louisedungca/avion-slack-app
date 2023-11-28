@@ -30,29 +30,34 @@ function ChatLayout() {
   // console.log('@Chats - options', options);
 
   async function fetchRecentChats() {
-    setIsFetchChatLoading(true);
-    const recentChatsPromises = options.map(async (user) => {
-      const response = await fetch(getMsgUrl(user.value), {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'access-token': token,
-          'client': client,
-          'expiry': expiry,
-          'uid': uid,
-        },
+    try {
+      setIsFetchChatLoading(true);
+      const recentChatsPromises = options.map(async (user) => {
+        const response = await fetch(getMsgUrl(user.value), {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'access-token': token,
+            'client': client,
+            'expiry': expiry,
+            'uid': uid,
+          },
+        });
+
+        const messages = await response.json();
+        return {
+          userId: user.value,
+          messages,
+        };
       });
 
-      const messages = await response.json();
-      return {
-        userId: user.value,
-        messages,
-      };
-    });
-
     const recentChatsData = await Promise.all(recentChatsPromises);
-    setRecentChats(recentChatsData);
-    setIsFetchChatLoading(false);
+    setRecentChats(recentChatsData);    
+    } catch (error) {
+      console.error('There was an error in fetching channel details:', error.message);
+    } finally {
+      setIsFetchChatLoading(false);
+    }
   };
 
   useEffect(() => {
