@@ -1,54 +1,66 @@
-import React, { useEffect } from 'react';
-import { Link, useNavigate, } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
-import { useAuth } from '../../hooks';
-import * as c from '../../components';
+import { useFetchAuth } from "../../hooks";
+import { loginUrl } from "../../utils";
+import * as c from "../../components";
 
 function LoginPage() {
-  const { register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset } = useForm();
-  const auth = useAuth();
-  const navigate = useNavigate();
+  const { register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset, } = useForm();
+  const { handleRequest, error, isLoading } = useFetchAuth();
 
   useEffect(() => {
-    if(isSubmitSuccessful) {
-      reset({ 
-        userPassword: '', 
+    if (isSubmitSuccessful) {
+      reset({
+        userPassword: "",
       });
     }
   }, [isSubmitSuccessful]);
 
   async function onSubmit(formData) {
-    try {
-      await auth.login(formData);
-      navigate('/c/channels');
+    const { userEmail, userPassword } = formData;
+
+    try { 
+      await handleRequest(loginUrl, {
+        method: "POST",
+        body: {
+          email: userEmail,
+          password: userPassword,
+        },
+      });
+
     } catch (error) {
-      console.error('Login error:', error);
+      console.error("Login error:", error);
     }
-  };
+  }
 
   return (
-    <section className='login-page'>
-      <c.WelcomeNavbar /> 
-      <div className='page-leftbox'>
+    <section className="login-page">
+      <c.WelcomeNavbar />
+      <div className="page-leftbox">
         <h1>Say hello to your people now.</h1>
 
-        <div className='form-wrapper'>
-          <form onSubmit={handleSubmit(onSubmit)} className='form-content'>
-            {c.loginInput.map(input => c.inputFieldTemplate(input, register, errors))}
+        <div className="form-wrapper">
+          <form onSubmit={handleSubmit(onSubmit)} className="form-content">
+            {c.loginInput.map((input) =>
+              c.inputFieldTemplate(input, register, errors)
+            )}
 
-            <button
-             type="submit"
-             className='btn-main'
+            <button 
+              type="submit" 
+              className="btn-main" 
+              disabled={isLoading}
+              style={{ opacity: isLoading ? 0.65 : 1 }}
             >
               Login
             </button>
           </form>
         </div>
 
-        <small className='error-text'>{auth.error}</small>
+        <small className="error-text">{error}</small>
 
-        <Link to={'/signup'} className='afterform-text'>
+        <Link to={"/signup"} className="afterform-text">
           <p>No account yet? Sign up here.</p>
         </Link>
       </div>

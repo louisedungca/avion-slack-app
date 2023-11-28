@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
-import { Link, useNavigate, } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-import { useAuth } from '../../hooks';
+import { useFetchAuth } from '../../hooks';
+import { signupUrl } from '../../utils';
 import * as c from '../../components';
 
 function SignUpPage() {
   const { register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset } = useForm();
-  const auth = useAuth();
-  const navigate = useNavigate();
+  const { handleRequest, error, isLoading } = useFetchAuth();
 
   useEffect(() => {
     if(isSubmitSuccessful) {
@@ -20,11 +20,20 @@ function SignUpPage() {
   }, [isSubmitSuccessful]);
 
   async function onSubmit(formData) {
-    try {
-      await auth.signup(formData);
-      navigate('/c/channels');
+    const { userEmail, userPassword, confirmPassword } = formData;    
+
+    try {      
+      await handleRequest(signupUrl, {
+        method: 'POST',
+        body: {
+          email: userEmail,
+          password: userPassword,
+          password_confirmation: confirmPassword,
+        }
+      });
+
     } catch (error) {
-      console.error('Signup error:', error);
+      console.error('Login error:', error);
     }
   };
 
@@ -39,15 +48,20 @@ function SignUpPage() {
           <form onSubmit={handleSubmit(onSubmit)} className='form-content'>
             {c.signupInput.map((input) => c.inputFieldTemplate(input, register, errors))}
 
-            <button type="submit" className='btn-main'>
+            <button 
+              type="submit" 
+              className='btn-main'
+              disabled={isLoading}
+              style={{ opacity: isLoading ? 0.65 : 1 }}
+            >
               Create Account
             </button>
           </form>
         </div>
 
-        <small className='error-text'>{auth.error}</small>
+        <small className='error-text'>{error}</small>
 
-        <Link to={'/login'} className='afterform-text'>
+        <Link to={'/'} className='afterform-text'>
           <p>Already have an account? Sign in here.</p>
         </Link>
       </div>

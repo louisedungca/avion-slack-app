@@ -50,13 +50,13 @@ export function useFetch(url, options = {}) {
       console.log('Response data:', result);
 
       if(!response.ok) {
-        throw new Error(result.message || 'There was a problem in fetching the data.');
+        throw new Error(result.message || 'There was a problem with your request.');
       }
       
       setData(result);
       return { response, result };
     } catch (error) {
-      setError(error.message || 'An error occurred while fetching data.');
+      setError(error.message);
     } finally {
       setIsLoading(false);
     }

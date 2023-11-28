@@ -17,7 +17,7 @@ function Profile({ users, channelDetails }) {
   const [newMember, setNewMember] = useState(null);
 
   const { channelData, error: fetchChannelError, fetchData: fetchChannelData } = useFetchChannelData(channelID);
-  const { fetchData: fetchAddMemberData, error: fetchAddMemberError, setError: setAddMemberError } = useFetch(addMemberUrl, { method: 'POST' });
+  const { fetchData: fetchAddMemberData, error: fetchAddMemberError, setError: setAddMemberError, isLoading: addMemberLoading } = useFetch(addMemberUrl, { method: 'POST' });
 
   useEffect(() => {
     fetchChannelData();
@@ -121,6 +121,7 @@ function Profile({ users, channelDetails }) {
           isOpen={isModalOpen}
           onClose={closeModal}
           onSubmit={onSubmit} 
+          addMemberLoading={addMemberLoading}
         />
       )}
     </section>

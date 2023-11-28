@@ -22,7 +22,7 @@ export function accessDashLoader() {
   const expiry = headers && headers['expiry'];
   const uid = headers && headers['uid'];
     if(!token) {
-      return redirect("/login");
+      return redirect("/");
     }
     return { headers, token, client, expiry, uid };
 };

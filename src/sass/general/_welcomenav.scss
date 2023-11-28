@@ -60,11 +60,10 @@
 }
 
 .logonav {
-  // border: 1px solid red;
   display: flex;
   align-items: center;
   gap: 1rem;
-  cursor: pointer;
+  // cursor: pointer;
 
   .logo-img {
     height: max(50px, 5vh);
@@ -72,7 +71,7 @@
   }
 
   .brand-title {
-    color: $secondaryColor;
+    color: $secondaryColor; 
     font-size: $h4;
     font-weight: 900;
     letter-spacing: 0.1rem;

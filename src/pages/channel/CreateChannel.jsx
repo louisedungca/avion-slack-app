@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 function CreateChannel({ isOpen, onClose, users, fetchChannels }) {
   const navigate = useNavigate();
   const { control, register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset } = useForm();
-  const { fetchData, error, setError } = useFetch(createChannelUrl, { method: 'POST' });
+  const { fetchData, error, setError, isLoading } = useFetch(createChannelUrl, { method: 'POST' });
 
   const options = users.map((user) => ({
     value: user.id,
@@ -123,7 +123,14 @@ function CreateChannel({ isOpen, onClose, users, fetchChannels }) {
             </small>
           </div>
 
-          <button className='btn-main' type="submit">Create</button>      
+          <button 
+            className='btn-main' 
+            type="submit" 
+            disabled={isLoading} 
+            style={{ opacity: isLoading ? 0.65 : 1 }}
+          >
+            Create
+          </button>      
         </form>        
       </div>
     </div>

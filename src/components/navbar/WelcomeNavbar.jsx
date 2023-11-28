@@ -6,7 +6,7 @@ function WelcomeNavbar() {
   const navigate = useNavigate();
   return (
     <nav className='welcomenav'>
-      <div className="logonav" onClick={() => {navigate('/')}}>
+      <div className="logonav">
         <img src={smileylogo} alt="slackify-logo" className='logo-img'/>
         <h2 className='brand-title'>Slackify</h2>
       </div>
@@ -21,7 +21,7 @@ function WelcomeNavbar() {
 
         <button 
           className='welcome-btn'
-          onClick={() => {navigate('/login')}}
+          onClick={() => {navigate('/')}}
         >
           Login
         </button>

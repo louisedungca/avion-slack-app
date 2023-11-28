@@ -4,7 +4,7 @@ import { useForm, Controller } from 'react-hook-form';
 import AsyncSelect from "react-select/async";
 import { reactSelectStyles } from '../../utils';
 
-function AddMember({ isOpen, onClose, onSubmit, users, channelData}) {
+function AddMember({ isOpen, onClose, onSubmit, users, channelData, addMemberLoading }) {
   // console.log('@AddMember - channelData', channelData);
   const { control, handleSubmit, formState: { isSubmitSuccessful }, reset } = useForm();
   const membersID = channelData.channel_members.map(member => member.user_id);
@@ -73,7 +73,12 @@ function AddMember({ isOpen, onClose, onSubmit, users, channelData}) {
               </>
             )}
           />
-          <button className='btn-main' type="submit">Add</button>
+          <button 
+            className='btn-main' 
+            type="submit"
+            disabled={addMemberLoading}
+            style={{ opacity: addMemberLoading ? 0.65 : 1 }}
+          >Add</button>
         </form>        
       </div>
     </div>
