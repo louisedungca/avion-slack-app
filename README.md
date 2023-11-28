@@ -1,8 +1,5 @@
-# React + Vite
+# [Slackify](https://slackify-avion.vercel.app/)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Slackify is an Instant Messaging API that allows users to create channels and communicate with their channel members.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Note: This API currently uses HTTP for its endpoints. Please allow insecure content on your browser's site settings before proceeding with the live demo on Vercel.
