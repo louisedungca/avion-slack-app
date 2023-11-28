@@ -2,12 +2,14 @@ import React, { useEffect } from 'react';
 import { Link, useNavigate, } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-import { useAuth } from '../../hooks';
+import { useFetchAuth } from '../../hooks';
+import { signupUrl } from '../../utils';
 import * as c from '../../components';
+
 
 function SignUpPage() {
   const { register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset } = useForm();
-  const auth = useAuth();
+  const { handleRequest, error } = useFetchAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,11 +22,20 @@ function SignUpPage() {
   }, [isSubmitSuccessful]);
 
   async function onSubmit(formData) {
-    try {
-      await auth.signup(formData);
-      navigate('/c/channels');
+    const { userEmail, userPassword, confirmPassword } = formData;    
+
+    try {      
+      await handleRequest(signupUrl, {
+        method: 'POST',
+        body: {
+          email: userEmail,
+          password: userPassword,
+          password_confirmation: confirmPassword,
+        }
+      });
+
     } catch (error) {
-      console.error('Signup error:', error);
+      console.error('Login error:', error);
     }
   };
 
@@ -45,7 +56,7 @@ function SignUpPage() {
           </form>
         </div>
 
-        <small className='error-text'>{auth.error}</small>
+        <small className='error-text'>{error}</small>
 
         <Link to={'/login'} className='afterform-text'>
           <p>Already have an account? Sign in here.</p>

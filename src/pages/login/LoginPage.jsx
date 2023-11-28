@@ -2,12 +2,14 @@ import React, { useEffect } from 'react';
 import { Link, useNavigate, } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-import { useAuth } from '../../hooks';
+import { useFetchAuth } from '../../hooks';
+import { loginUrl } from '../../utils';
 import * as c from '../../components';
+
 
 function LoginPage() {
   const { register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset } = useForm();
-  const auth = useAuth();
+  const { handleRequest, error } = useFetchAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,9 +21,19 @@ function LoginPage() {
   }, [isSubmitSuccessful]);
 
   async function onSubmit(formData) {
-    try {
-      await auth.login(formData);
+    const { userEmail, userPassword } = formData;
+
+    try {      
+      await handleRequest(loginUrl, {
+        method: 'POST',
+        body: {
+          email: userEmail,
+          password: userPassword
+        }
+      });
+
       navigate('/c/channels');
+      
     } catch (error) {
       console.error('Login error:', error);
     }
@@ -46,7 +58,7 @@ function LoginPage() {
           </form>
         </div>
 
-        <small className='error-text'>{auth.error}</small>
+        <small className='error-text'>{error}</small>
 
         <Link to={'/signup'} className='afterform-text'>
           <p>No account yet? Sign up here.</p>
