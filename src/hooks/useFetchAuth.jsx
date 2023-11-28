@@ -52,7 +52,7 @@ export function useFetchAuth() {
 
       // toast
       if (url === loginUrl) {
-        toastDefault('Hey, welcome back to Slackify!');
+        toastDefault('Hello! Welcome back to Slackify!');
       } else if (url === signupUrl) {
         toastDefault('Welcome to Slackify!');
       } 

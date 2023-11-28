@@ -24,10 +24,11 @@ function ChannelBox() {
   const [showProfile, setShowProfile] = useState(false);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   
-  const { data: mesgData, fetchData: fetchMesg, isLoading } = useFetch(getChnlMsgUrl(channelID), { method: 'GET' });
+  const { data: mesgData, fetchData: fetchMesg } = useFetch(getChnlMsgUrl(channelID), { method: 'GET' });
 
   useEffect(() => {
     setIsFirstLoad(true);
+    setShowProfile(false);
     fetchMesg();
   }, [channelID]);
 
