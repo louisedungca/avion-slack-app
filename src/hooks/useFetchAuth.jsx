@@ -71,6 +71,7 @@ export function useFetchAuth() {
     localStorage.removeItem('UserData');
     localStorage.removeItem('Headers');
     localStorage.removeItem('Favorites');
+    localStorage.removeItem('FaveChannels');
 
     toastDefault('You are now signed out from Slackify. See you again soon!');
   }
