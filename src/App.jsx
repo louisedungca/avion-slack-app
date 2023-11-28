@@ -1,12 +1,12 @@
+import React, { StrictMode } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import React from "react";
 import "./App.css";
+
 import * as l from "./layout";
 import * as p from "./pages";
 import * as c from "./components";
-import * as h from "./hooks";
 import * as u from "./utils";
 
 function App() {
@@ -90,10 +90,10 @@ function App() {
   ]);
 
   return (
-    <h.AuthProvider>
+    <StrictMode>
       <RouterProvider router={router} />
       <ToastContainer />
-    </h.AuthProvider>
+    </StrictMode>
   );
 }
 
