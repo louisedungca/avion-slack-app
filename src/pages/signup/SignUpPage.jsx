@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link, useNavigate, } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import { useFetchAuth } from '../../hooks';
@@ -8,7 +8,7 @@ import * as c from '../../components';
 
 function SignUpPage() {
   const { register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset } = useForm();
-  const { handleRequest, error } = useFetchAuth();
+  const { handleRequest, error, isLoading } = useFetchAuth();
 
   useEffect(() => {
     if(isSubmitSuccessful) {
@@ -48,7 +48,12 @@ function SignUpPage() {
           <form onSubmit={handleSubmit(onSubmit)} className='form-content'>
             {c.signupInput.map((input) => c.inputFieldTemplate(input, register, errors))}
 
-            <button type="submit" className='btn-main'>
+            <button 
+              type="submit" 
+              className='btn-main'
+              disabled={isLoading}
+              style={{ opacity: isLoading ? 0.65 : 1 }}
+            >
               Create Account
             </button>
           </form>

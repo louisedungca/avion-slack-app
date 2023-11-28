@@ -7,13 +7,8 @@ import { loginUrl } from "../../utils";
 import * as c from "../../components";
 
 function LoginPage() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitSuccessful },
-    reset,
-  } = useForm();
-  const { handleRequest, error } = useFetchAuth();
+  const { register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset, } = useForm();
+  const { handleRequest, error, isLoading } = useFetchAuth();
 
   useEffect(() => {
     if (isSubmitSuccessful) {
@@ -52,7 +47,12 @@ function LoginPage() {
               c.inputFieldTemplate(input, register, errors)
             )}
 
-            <button type="submit" className="btn-main">
+            <button 
+              type="submit" 
+              className="btn-main" 
+              disabled={isLoading}
+              style={{ opacity: isLoading ? 0.65 : 1 }}
+            >
               Login
             </button>
           </form>

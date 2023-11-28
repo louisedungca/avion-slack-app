@@ -5,10 +5,12 @@ import { useNavigate } from "react-router-dom";
 export function useFetchAuth() {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false); 
   const navigate = useNavigate();
 
   async function handleRequest(url, options = {}) {
     try {
+      setIsLoading(true);
       // log req data
       console.log('Request data:', {
         method: options.method,
@@ -59,6 +61,8 @@ export function useFetchAuth() {
     } catch (error) {
       setError(error.message);
       toastError('Oops! There was a problem with your request. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -72,8 +76,8 @@ export function useFetchAuth() {
   }
 
   useEffect(() => {
-    const currentUser = getLocalStorage('UserData');
-    const headers = getLocalStorage('Headers');
+    const currentUser = getLocalStorage('UserData') || [];
+    const headers = getLocalStorage('Headers') || [];
     const token = headers && headers['access-token'];
 
     if (currentUser && token) {
@@ -81,5 +85,5 @@ export function useFetchAuth() {
     }
   }, []);
 
-  return { user, error, handleRequest, setUser, logout };
+  return { user, error, isLoading, handleRequest, logout };
 }
