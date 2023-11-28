@@ -1,33 +1,17 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getLocalStorage, setLocalStorage, loginUrl, signupUrl, toastError, toastDefault } from "../utils";
 
-const AuthContext = createContext();
-
-export function AuthProvider({ children }) {
-  const auth = useProvideAuth();
-
-  return (
-    <AuthContext.Provider value={auth}>
-      {children}
-    </AuthContext.Provider>
-  );
-};
-
-export function useAuth() {
-  return useContext(AuthContext);
-};
-
-function useProvideAuth() {
+export function useFetchAuth() {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
 
-  async function handleRequest(url, options = {} ) {
+  async function handleRequest(url, options = {}) {
     try {
       // log req data
       console.log('Request data:', {
         method: options.method,
         body: JSON.stringify(options.body),
-        url, 
+        url,
         headers: { 'Content-Type': 'application/json' },
       });
 
@@ -47,19 +31,21 @@ function useProvideAuth() {
         throw new Error('Invalid username or password.');
       } else if (response.status === 422) {
         throw new Error('Account exists. Choose another email to create a new account.');
-      } else if (!response.ok) {      
-        const errorResponse = await response.json(); 
+      } else if (!response.ok) {
+        const errorResponse = await response.json();
         throw new Error(errorResponse.message);
       } else {
         const data = await response.json();
-        console.log('Response data:', data); 
+        console.log('Response data:', data);
         console.log('Headers:', headersObject);
 
         setLocalStorage('Headers', headersObject);
+        setLocalStorage('UserData', data.data);
+        setUser(data.data);
+        
         console.log('Response data(Sign in/up):', data);
-        handleAuth(data);
       }
-      
+
       // toast
       if (url === loginUrl) {
         toastDefault('Hey, welcome back to Slackify!');
@@ -69,36 +55,8 @@ function useProvideAuth() {
     } catch (error) {
       setError(error.message);
       toastError('Oops! There was a problem with your request. Please try again.');
-    };
-  };
-
-  async function login(formData) {
-    const { userEmail, userPassword } = formData;
-
-    await handleRequest(loginUrl, { 
-      method: 'POST', 
-      body: { 
-        email: userEmail, 
-        password: userPassword 
-      }});
-  };
-
-  async function signup(formData) {
-    const { userEmail, userPassword, confirmPassword } = formData;
-
-    await handleRequest(signupUrl, { 
-      method: 'POST', 
-      body: { 
-        email: userEmail, 
-        password: userPassword, 
-        password_confirmation: confirmPassword 
-      }});
-  };
-
-  function handleAuth(data) {
-    setUser(data.data);
-    setLocalStorage('UserData', data.data);
-  };
+    }
+  }
 
   function logout() {
     setUser(null);
@@ -106,8 +64,8 @@ function useProvideAuth() {
     localStorage.removeItem('Headers');
     localStorage.removeItem('Favorites');
 
-    toastDefault('See you again soon!');
-  };
+    toastDefault('You are now signed out from Slackify. See you again soon!');
+  }
 
   useEffect(() => {
     const currentUser = getLocalStorage('UserData');
@@ -119,5 +77,5 @@ function useProvideAuth() {
     }
   }, []);
 
-  return { user, error, login, signup, logout };
-};
+  return { user, error, handleRequest, setUser, logout };
+}
