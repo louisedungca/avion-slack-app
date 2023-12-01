@@ -16,7 +16,7 @@ function App() {
       element: <p.LoginPage />,
       errorElement: <p.ErrorPage />,
       loader: u.isLoggedInLoader,
-    },
+    }, 
     {
       path: "signup",
       element: <p.SignUpPage />,
